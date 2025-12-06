@@ -140,8 +140,11 @@
                             </div>
                         </div>
 
-                        <div class="notifications-grid" id="notificationsContainer">
-                            <!-- Notifications will be dynamically inserted here -->
+                        <!-- Add this container around the notifications grid -->
+                        <div class="notifications-list-container">
+                            <div class="notifications-grid" id="notificationsContainer">
+                                <!-- Notifications will be dynamically inserted here -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -540,5 +543,6 @@
         updateStats();
         filterNotifications('all');
     </script>
+
 </body>
 </html>

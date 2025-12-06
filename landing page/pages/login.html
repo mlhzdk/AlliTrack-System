@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlliTrack – Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    
+    <style>
+        /* Loading overlay styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .loading-spinner {
+            font-size: 40px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <div class="logo">
+            <i class="fas fa-circle-notch"></i>
+        </div>
+
+        <h2>Welcome Back!</h2>
+        <p class="subtitle">Let's get you signed in securely.</p>
+
+        <div class="social-btn" id="googleLoginBtn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google logo">
+            Continue with Google
+        </div>
+
+        <div class="social-btn" id="facebookLoginBtn">
+            <i class="fab fa-facebook"></i> Continue with Facebook
+        </div>
+
+        <div class="divider">or</div>
+
+        <form id="loginForm">
+            <!-- Email Field -->
+            <label for="email">Email</label>
+            <input type="email" id="email" maxlength="50" class="input-field" placeholder="Enter Your Email Address">
+            <p id="emailError" class="error-text"></p>
+
+            <!-- Password Field -->
+            <label for="password">Password</label>
+            <a class="forgot" href="#">Forgot Your Password?</a>
+            <div class="password-container">
+                <input type="password" id="password" maxlength="30" class="input-field" placeholder="Your Password">
+                <button type="button" class="toggle-password" id="togglePassword">
+                    <i class="far fa-eye"></i>
+                </button>
+            </div>
+            <p id="passwordError" class="error-text"></p>
+
+            <button class="login-btn" id="loginBtn" type="submit" disabled>Log in with Email</button>
+        </form>
+
+        <p class="footer-text">Don't Have an Account? <a href="../pages/signup.html">Sign Up</a></p>
+
+    </div>
+
+    <!-- Loading Overlay - Now properly hidden by default -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <div class="loading-text" id="loadingText">Logging in...</div>
+    </div>
+
+<script>
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginForm = document.getElementById("loginForm");
+    const togglePassword = document.getElementById("togglePassword");
+    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    const facebookLoginBtn = document.getElementById("facebookLoginBtn");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    const loadingText = document.getElementById("loadingText");
+
+    // Show loading overlay
+    function showLoading(message) {
+        console.log('Showing loading:', message); // Debug log
+        loadingText.textContent = message;
+        loadingOverlay.style.display = 'flex';
+    }
+
+    // Hide loading overlay
+    function hideLoading() {
+        console.log('Hiding loading'); // Debug log
+        loadingOverlay.style.display = 'none';
+    }
+
+    // Function to redirect to dashboard
+    function redirectToDashboard(userData) {
+        console.log('Redirecting to dashboard with user:', userData); // Debug log
+        // Store user data in localStorage (for demo purposes)
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Redirect to your actual dashboard path
+        window.location.href = '../../user dashboard/pages/index-user.html';
+    }
+
+    // Google Login
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', function() {
+            console.log('Google login clicked'); // Debug log
+            showLoading('Connecting to Google...');
+            
+            // Simulate Google OAuth flow
+            setTimeout(() => {
+                const userData = {
+                    name: "Google User",
+                    email: "user@gmail.com",
+                    provider: "Google",
+                    isLoggedIn: true,
+                    lastLogin: new Date().toISOString()
+                };
+                
+                redirectToDashboard(userData);
+            }, 1500);
+        });
+    }
+
+    // Facebook Login
+    if (facebookLoginBtn) {
+        facebookLoginBtn.addEventListener('click', function() {
+            console.log('Facebook login clicked'); // Debug log
+            showLoading('Connecting to Facebook...');
+            
+            // Simulate Facebook OAuth flow
+            setTimeout(() => {
+                const userData = {
+                    name: "Facebook User",
+                    email: "user@facebook.com",
+                    provider: "Facebook",
+                    isLoggedIn: true,
+                    lastLogin: new Date().toISOString()
+                };
+                
+                redirectToDashboard(userData);
+            }, 1500);
+        });
+    }
+
+    function validate() {
+        let emailValid = false;
+        let passwordValid = false;
+
+        // Email validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email.value.trim() === '') {
+            emailError.textContent = "Email is required.";
+            email.classList.add("error-input");
+        } 
+        else if (!emailPattern.test(email.value)) {
+            emailError.textContent = "Please enter a valid email address.";
+            email.classList.add("error-input");
+        } 
+        else {
+            emailError.textContent = "";
+            email.classList.remove("error-input");
+            emailValid = true;
+        }
+
+        // Password validation
+        if (password.value.trim() === '') {
+            passwordError.textContent = "Password is required.";
+            password.classList.add("error-input");
+        } else {
+            passwordError.textContent = "";
+            password.classList.remove("error-input");
+            passwordValid = true;
+        }
+
+        // Enable or disable login button
+        loginBtn.disabled = !(emailValid && passwordValid);
+        
+        return emailValid && passwordValid;
+    }
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+    });
+
+    // Form submission
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('Form submitted'); // Debug log
+        
+        if (!validate()) {
+            console.log('Form validation failed'); // Debug log
+            return;
+        }
+        
+        console.log('Form validation passed, showing loading'); // Debug log
+        showLoading('Logging in...');
+        loginBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            const userData = {
+                name: email.value.split('@')[0],
+                email: email.value,
+                provider: "Email",
+                isLoggedIn: true,
+                lastLogin: new Date().toISOString()
+            };
+            
+            redirectToDashboard(userData);
+        }, 1500);
+    });
+
+    // Real-time validation as user types
+    email.addEventListener("input", validate);
+    password.addEventListener("input", validate);
+    
+    // Debug: Check initial state
+    console.log('Page loaded. Loading overlay display style:', loadingOverlay.style.display);
+    console.log('Google button exists:', !!googleLoginBtn);
+    console.log('Facebook button exists:', !!facebookLoginBtn);
+</script>
+
+</body>
+</html>
