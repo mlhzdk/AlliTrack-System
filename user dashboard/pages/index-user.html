@@ -3,15 +3,92 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Admin Dashboard - AlliTrack</title>
+    <title>User Dashboard - AlliTrack</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/user-dashboard.css" />
+    
+    <style>
+        /* Authentication Check Overlay */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f3f3f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+        
+        .auth-message {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .auth-icon {
+            font-size: 48px;
+            color: #000;
+            margin-bottom: 20px;
+        }
+        
+        .auth-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .auth-subtext {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+        
+        .auth-button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .auth-button:hover {
+            background: #333;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="app">
+    <!-- Authentication Check Overlay -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-message">
+            <div class="auth-icon">
+                <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+            <div class="auth-text">Checking Authentication...</div>
+            <div class="auth-subtext">Please wait while we verify your session</div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Content (Hidden until authenticated) -->
+    <div class="app hidden" id="dashboardContent">
         <div class="shell">
             <!-- Sidebar -->
             <aside class="sidebar" role="navigation" aria-label="Main Sidebar">
@@ -73,18 +150,18 @@
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
-                            <div style="font-weight:700">User</div>
-                            <div style="font-size:.82rem;color:var(--muted)">User</div>
+                            <div style="font-weight:700" id="userNameDisplay">User</div>
+                            <div style="font-size:.82rem;color:var(--muted)" id="userEmailDisplay">user@example.com</div>
                         </div>
                         <div class="account" id="accountBtn" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar">AJ</div>
+                            <div class="avatar" id="userAvatar">AJ</div>
                             <i class="fas fa-chevron-down" style="opacity:.85"></i>
                         </div>
                         <div class="account-menu" id="accountMenu">
                             <div class="arrow"></div>
-                            <a href="#">Profile</a>
-                            <a href="#">Settings</a>
-                            <a href="#">Logout</a>
+                            <a href="../pages/profile-settings.html">Profile</a>
+                            <a href="../pages/preferences.html">Settings</a>
+                            <a href="#" id="logoutBtn">Logout</a>
                         </div>
                     </div>
                 </header>
@@ -209,9 +286,66 @@
     </div>
 
     <script>
+        // Authentication Check
+        document.addEventListener('DOMContentLoaded', function() {
+            const authOverlay = document.getElementById('authOverlay');
+            const dashboardContent = document.getElementById('dashboardContent');
+            
+            // Check if user is logged in
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            
+            // Simulate authentication check delay
+            setTimeout(() => {
+                if (!userData || !userData.isLoggedIn) {
+                    // User is not logged in, redirect to login
+                    authOverlay.innerHTML = `
+                        <div class="auth-message">
+                            <div class="auth-icon" style="color: #ff6b6b;">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="auth-text">Authentication Required</div>
+                            <div class="auth-subtext">You need to be logged in to access the dashboard</div>
+                            <button class="auth-button" onclick="window.location.href='../../landing page/pages/login.html'">Go to Login</button>
+                        </div>
+                    `;
+                } else {
+                    // User is logged in, show dashboard
+                    authOverlay.classList.add('hidden');
+                    dashboardContent.classList.remove('hidden');
+                    
+                    // Display user information
+                    const userNameDisplay = document.getElementById('userNameDisplay');
+                    const userEmailDisplay = document.getElementById('userEmailDisplay');
+                    const userAvatar = document.getElementById('userAvatar');
+                    
+                    if (userNameDisplay && userData.name) {
+                        userNameDisplay.textContent = userData.name;
+                    }
+                    
+                    if (userEmailDisplay && userData.email) {
+                        userEmailDisplay.textContent = userData.email;
+                    }
+                    
+                    if (userAvatar && userData.name) {
+                        // Get initials from name
+                        const initials = userData.name
+                            .split(' ')
+                            .map(word => word[0])
+                            .join('')
+                            .toUpperCase()
+                            .substring(0, 2);
+                        userAvatar.textContent = initials;
+                    }
+                    
+                    console.log('Welcome to AlliTrack Dashboard,', userData.name);
+                }
+            }, 1000); // 1 second delay for demo
+        });
+        
         // Account Dropdown Functionality
         const accountBtn = document.getElementById("accountBtn");
         const accountMenu = document.getElementById("accountMenu");
+        const logoutBtn = document.getElementById("logoutBtn");
 
         if (accountBtn && accountMenu) {
             accountBtn.addEventListener("click", (e) => {
@@ -234,6 +368,19 @@
                     accountMenu.classList.remove("show");
                     accountBtn.setAttribute("aria-expanded", false);
                 }
+            });
+        }
+        
+        // Logout functionality
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Clear user data from localStorage
+                localStorage.removeItem('userData');
+                
+                // Redirect to login page
+                window.location.href = '../../landing page/pages/login.html';
             });
         }
     </script>
