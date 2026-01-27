@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/system-information.css" />
+    <script src="../js/preference-manager.js" defer></script>
 </head>
 
 <body>
@@ -69,7 +71,8 @@
                 <header class="header">
                     <div class="search" role="search" aria-label="Search Tickets">
                         <i class="fas fa-search" style="opacity:.6"></i>
-                        <input id="q" placeholder="Search tickets, users, IDs..." aria-label="Search tickets, users, IDs" />
+                        <input id="q" placeholder="Search tickets, users, IDs..."
+                            aria-label="Search tickets, users, IDs" />
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
@@ -112,7 +115,7 @@
                                         <p class="section-description">Details about your AlliTrack application</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="info-cards">
                                     <div class="info-card">
                                         <div class="info-card-icon">
@@ -122,10 +125,11 @@
                                         <div class="info-card-value">v1.2.0</div>
                                         <div class="info-card-meta">Stable Release</div>
                                         <div class="info-card-description">
-                                            Current version of your AlliTrack dashboard with latest features and security updates.
+                                            Current version of your AlliTrack dashboard with latest features and
+                                            security updates.
                                         </div>
                                     </div>
-                                    
+
                                     <div class="info-card">
                                         <div class="info-card-icon">
                                             <i class="fas fa-calendar"></i>
@@ -137,7 +141,7 @@
                                             Most recent system update with performance improvements and bug fixes.
                                         </div>
                                     </div>
-                                    
+
                                     <div class="info-card">
                                         <div class="info-card-icon">
                                             <i class="fas fa-database"></i>
@@ -150,7 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Technical Details -->
                                 <div class="technical-details">
                                     <div class="technical-title">Technical Specifications</div>
@@ -194,7 +198,7 @@
                                         <p class="section-description">Important legal documents and policies</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="legal-links">
                                     <a href="../pages/help/user-terms.html" class="legal-link">
                                         <div class="legal-link-icon">
@@ -210,7 +214,7 @@
                                             <i class="fas fa-chevron-right"></i>
                                         </div>
                                     </a>
-                                    
+
                                     <a href="../pages/help/user-privacy.html" class="legal-link">
                                         <div class="legal-link-icon">
                                             <i class="fas fa-shield-alt"></i>
@@ -218,14 +222,15 @@
                                         <div class="legal-link-content">
                                             <div class="legal-link-title">Privacy Policy</div>
                                             <div class="legal-link-description">
-                                                Learn how we collect, use, and protect your personal information and data.
+                                                Learn how we collect, use, and protect your personal information and
+                                                data.
                                             </div>
                                         </div>
                                         <div class="legal-link-arrow">
                                             <i class="fas fa-chevron-right"></i>
                                         </div>
                                     </a>
-                                    
+
                                     <a href="../pages/help/user-agreement.html" class="legal-link">
                                         <div class="legal-link-icon">
                                             <i class="fas fa-handshake"></i>
@@ -247,7 +252,8 @@
                                         <div class="legal-link-content">
                                             <div class="legal-link-title">Data Processing Agreement</div>
                                             <div class="legal-link-description">
-                                                Understand how we process and protect your data in compliance with regulations.
+                                                Understand how we process and protect your data in compliance with
+                                                regulations.
                                             </div>
                                         </div>
                                         <div class="legal-link-arrow">
@@ -271,41 +277,41 @@
 
     <script>
         // Initialize the page when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Get user data from localStorage (set by dashboard login)
             const userData = JSON.parse(localStorage.getItem('userData'));
-            
+
             // Update user information in header
             updateUserDisplay(userData);
-            
+
             // Setup account functionality
             initAccount();
-            
+
             // Setup logout functionality
             setupLogout();
-            
+
             console.log('System Information page loaded for user:', userData?.name);
         });
-        
+
         // Update user display in header
         function updateUserDisplay(userData) {
             if (!userData) {
                 console.warn('No user data found in localStorage');
                 return;
             }
-            
+
             // Update user name
             const userNameElement = document.getElementById('userName');
             if (userNameElement && userData.name) {
                 userNameElement.textContent = userData.name;
             }
-            
+
             // Update user email
             const userEmailElement = document.getElementById('userEmail');
             if (userEmailElement && userData.email) {
                 userEmailElement.textContent = userData.email;
             }
-            
+
             // Update user avatar with initials
             const userAvatarElement = document.getElementById('userAvatar');
             if (userAvatarElement && userData.name) {
@@ -319,17 +325,17 @@
                 userAvatarElement.textContent = initials;
             }
         }
-        
+
         // Logout functionality
         function setupLogout() {
             const logoutBtn = document.getElementById('logoutBtn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+                logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Clear user data from localStorage (same as dashboard)
                     localStorage.removeItem('userData');
-                    
+
                     // Redirect to login page (same as dashboard)
                     window.location.href = '../../landing page/pages/index.html';
                 });
@@ -340,7 +346,7 @@
         function initAccount() {
             // Setup account dropdown
             setupAccountDropdown();
-            
+
             // Simple version check (could be expanded with API call)
             checkForUpdates();
         }
@@ -379,7 +385,15 @@
                     }
                 });
             }
+
+            // Initialize preferences manager on other pages
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.preferencesManager) {
+                    window.preferencesManager.initialize();
+                }
+            });
         }
     </script>
 </body>
+
 </html>

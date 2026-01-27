@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/profile-settings.css" />
+    <script src="../js/preference-manager.js" defer></script>
 </head>
+
 <body>
     <div class="app">
         <div class="shell">
@@ -68,7 +71,8 @@
                 <header class="header">
                     <div class="search" role="search" aria-label="Search Tickets">
                         <i class="fas fa-search" style="opacity:.6"></i>
-                        <input id="q" placeholder="Search tickets, users, IDs..." aria-label="Search tickets, users, IDs" />
+                        <input id="q" placeholder="Search tickets, users, IDs..."
+                            aria-label="Search tickets, users, IDs" />
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
@@ -119,7 +123,7 @@
                                         <p class="section-description">Update your profile picture</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="profile-photo-section">
                                     <div class="profile-photo" id="profilePhoto">
                                         <div id="profileInitials">U</div>
@@ -134,7 +138,8 @@
                                             Upload a new photo. JPG, GIF or PNG. Max size 5MB.
                                         </div>
                                         <div class="photo-actions">
-                                            <button type="button" class="btn btn-primary" onclick="document.getElementById('photoUpload').click()">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="document.getElementById('photoUpload').click()">
                                                 <i class="fas fa-upload"></i> Upload Photo
                                             </button>
                                             <button type="button" class="btn btn-secondary" onclick="removePhoto()">
@@ -143,7 +148,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                                <input type="file" id="photoUpload" accept="image/*" style="display: none;"
+                                    onchange="handlePhotoUpload(event)">
                             </div>
 
                             <!-- Personal Information -->
@@ -157,74 +163,53 @@
                                         <p class="section-description">Update your basic profile information</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="profile-form">
                                     <div class="form-grid">
                                         <div class="form-group">
                                             <label class="form-label" for="firstName">
                                                 First Name <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="text" 
-                                                id="firstName" 
-                                                class="form-input" 
-                                                placeholder="Enter your first name"
-                                                required
-                                            />
-                                            <div class="form-error" id="firstNameError">Please enter your first name</div>
+                                            <input type="text" id="firstName" class="form-input"
+                                                placeholder="Enter your first name" required />
+                                            <div class="form-error" id="firstNameError">Please enter your first name
+                                            </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label" for="lastName">
                                                 Last Name <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="text" 
-                                                id="lastName" 
-                                                class="form-input" 
-                                                placeholder="Enter your last name"
-                                                required
-                                            />
+                                            <input type="text" id="lastName" class="form-input"
+                                                placeholder="Enter your last name" required />
                                             <div class="form-error" id="lastNameError">Please enter your last name</div>
                                         </div>
-                                        
+
                                         <div class="form-group full-width">
                                             <label class="form-label" for="email">
                                                 Email Address <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="email" 
-                                                id="email" 
-                                                class="form-input" 
-                                                placeholder="Enter your email address"
-                                                required
-                                            />
-                                            <div class="form-error" id="emailError">Please enter a valid email address</div>
+                                            <input type="email" id="email" class="form-input"
+                                                placeholder="Enter your email address" required />
+                                            <div class="form-error" id="emailError">Please enter a valid email address
+                                            </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label" for="phone">
                                                 <i class="fas fa-phone"></i> Phone Number
                                             </label>
-                                            <input 
-                                                type="tel" 
-                                                id="phone" 
-                                                class="form-input" 
-                                                placeholder="Enter your phone number"
-                                            />
+                                            <input type="tel" id="phone" class="form-input"
+                                                placeholder="Enter your phone number" />
                                             <div class="form-hint">Optional</div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label" for="department">
                                                 <i class="fas fa-building"></i> Department
                                             </label>
-                                            <input 
-                                                type="text" 
-                                                id="department" 
-                                                class="form-input" 
-                                                placeholder="Enter your department"
-                                            />
+                                            <input type="text" id="department" class="form-input"
+                                                placeholder="Enter your department" />
                                             <div class="form-hint">Optional</div>
                                         </div>
                                     </div>
@@ -239,60 +224,53 @@
                                     </div>
                                     <div>
                                         <h2 class="section-title">Change Password</h2>
-                                        <p class="section-description">Update your password to keep your account secure</p>
+                                        <p class="section-description">Update your password to keep your account secure
+                                        </p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="profile-form">
                                     <div class="form-grid">
                                         <div class="form-group">
                                             <label class="form-label" for="currentPassword">
                                                 Current Password <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="password" 
-                                                id="currentPassword" 
-                                                class="form-input" 
-                                                placeholder="Enter current password"
-                                            />
-                                            <div class="form-error" id="currentPasswordError">Please enter your current password</div>
+                                            <input type="password" id="currentPassword" class="form-input"
+                                                placeholder="Enter current password" />
+                                            <div class="form-error" id="currentPasswordError">Please enter your current
+                                                password</div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label" for="newPassword">
                                                 New Password <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="password" 
-                                                id="newPassword" 
-                                                class="form-input" 
-                                                placeholder="Enter new password"
-                                            />
+                                            <input type="password" id="newPassword" class="form-input"
+                                                placeholder="Enter new password" />
                                             <div class="password-strength" id="passwordStrength">
                                                 <div class="strength-bar">
                                                     <div class="strength-fill"></div>
                                                 </div>
                                                 <div class="strength-text">Password strength</div>
                                             </div>
-                                            <div class="form-error" id="newPasswordError">Please enter a new password</div>
+                                            <div class="form-error" id="newPasswordError">Please enter a new password
+                                            </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label" for="confirmPassword">
                                                 Confirm Password <span class="required">*</span>
                                             </label>
-                                            <input 
-                                                type="password" 
-                                                id="confirmPassword" 
-                                                class="form-input" 
-                                                placeholder="Confirm new password"
-                                            />
-                                            <div class="form-error" id="confirmPasswordError">Passwords do not match</div>
+                                            <input type="password" id="confirmPassword" class="form-input"
+                                                placeholder="Confirm new password" />
+                                            <div class="form-error" id="confirmPasswordError">Passwords do not match
+                                            </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-hint">
-                                        <i class="fas fa-info-circle"></i> Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.
+                                        <i class="fas fa-info-circle"></i> Password must be at least 8 characters long
+                                        and include uppercase, lowercase, numbers, and special characters.
                                     </div>
                                 </div>
                             </div>
@@ -321,44 +299,44 @@
 
     <script>
         // Initialize the page when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Get user data from localStorage (set by dashboard login)
             const userData = JSON.parse(localStorage.getItem('userData'));
-            
+
             // Update user information in header
             updateUserDisplay(userData);
-            
+
             // Load profile data from localStorage
             loadProfileData();
-            
+
             // Initialize form functionality
             initForm();
-            
+
             // Setup logout functionality
             setupLogout();
-            
+
             console.log('Profile Settings page loaded for user:', userData?.name);
         });
-        
+
         // Update user display in header
         function updateUserDisplay(userData) {
             if (!userData) {
                 console.warn('No user data found in localStorage');
                 return;
             }
-            
+
             // Update user name
             const userNameElement = document.getElementById('userName');
             if (userNameElement && userData.name) {
                 userNameElement.textContent = userData.name;
             }
-            
+
             // Update user email
             const userEmailElement = document.getElementById('userEmail');
             if (userEmailElement && userData.email) {
                 userEmailElement.textContent = userData.email;
             }
-            
+
             // Update user avatar with initials
             const userAvatarElement = document.getElementById('userAvatar');
             if (userAvatarElement && userData.name) {
@@ -372,17 +350,17 @@
                 userAvatarElement.textContent = initials;
             }
         }
-        
+
         // Logout functionality
         function setupLogout() {
             const logoutBtn = document.getElementById('logoutBtn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+                logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Clear user data from localStorage (same as dashboard)
                     localStorage.removeItem('userData');
-                    
+
                     // Redirect to login page (same as dashboard)
                     window.location.href = '../../landing page/pages/index.html';
                 });
@@ -395,13 +373,13 @@
             if (profileForm) {
                 profileForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    
+
                     if (validateForm()) {
                         saveProfile();
                     }
                 });
             }
-            
+
             // Password strength checker
             const newPasswordInput = document.getElementById('newPassword');
             if (newPasswordInput) {
@@ -409,7 +387,7 @@
                     checkPasswordStrength(e.target.value);
                 });
             }
-            
+
             // Setup account dropdown
             setupAccountDropdown();
         }
@@ -424,29 +402,29 @@
             profileImage = document.getElementById('profileImage');
             profileInitials = document.getElementById('profileInitials');
             passwordStrength = document.getElementById('passwordStrength');
-            
+
             // Get user data from localStorage
             const userData = JSON.parse(localStorage.getItem('userData') || '{}');
             const savedProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
-            
+
             // Get name parts for form
             let firstName = 'User';
             let lastName = '';
             let email = userData.email || 'user@example.com';
-            
+
             if (userData.name) {
                 const nameParts = userData.name.split(' ');
                 firstName = nameParts[0] || 'User';
                 lastName = nameParts.slice(1).join(' ') || '';
             }
-            
+
             // Set form values (use saved profile data first, then userData)
             document.getElementById('firstName').value = savedProfile.firstName || firstName;
             document.getElementById('lastName').value = savedProfile.lastName || lastName;
             document.getElementById('email').value = savedProfile.email || email;
             document.getElementById('phone').value = savedProfile.phone || '';
             document.getElementById('department').value = savedProfile.department || '';
-            
+
             // Update profile photo if exists
             if (savedProfile.photo) {
                 if (profileImage) {
@@ -457,7 +435,7 @@
                     profileInitials.style.display = 'none';
                 }
             }
-            
+
             // Update profile initials
             if (profileInitials) {
                 const formFirstName = document.getElementById('firstName').value;
@@ -465,7 +443,7 @@
                 const initials = (formFirstName.charAt(0) + (formLastName.charAt(0) || '')).toUpperCase();
                 profileInitials.textContent = initials;
             }
-            
+
             // Update header avatar
             updateHeaderAvatar();
         }
@@ -474,11 +452,11 @@
         function updateHeaderAvatar() {
             const headerAvatar = document.getElementById('userAvatar');
             if (!headerAvatar) return;
-            
+
             const savedProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
-            
+
             if (savedProfile.photo) {
                 headerAvatar.innerHTML = `<img src="${savedProfile.photo}" alt="${firstName} ${lastName}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
             } else {
@@ -497,25 +475,25 @@
                     alert('Please select a valid image file (JPG, PNG, or GIF)');
                     return;
                 }
-                
+
                 if (file.size > 5 * 1024 * 1024) {
                     alert('File size must be less than 5MB');
                     return;
                 }
-                
+
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     if (profileImage && profileInitials) {
                         profileImage.src = e.target.result;
                         profileImage.style.display = 'block';
                         profileInitials.style.display = 'none';
                     }
-                    
+
                     // Save to localStorage
                     const profile = JSON.parse(localStorage.getItem('userProfile') || '{}');
                     profile.photo = e.target.result;
                     localStorage.setItem('userProfile', JSON.stringify(profile));
-                    
+
                     // Update header avatar
                     updateHeaderAvatar();
                 };
@@ -529,12 +507,12 @@
                 profileImage.style.display = 'none';
                 profileInitials.style.display = 'block';
             }
-            
+
             // Remove from localStorage
             const profile = JSON.parse(localStorage.getItem('userProfile') || '{}');
             delete profile.photo;
             localStorage.setItem('userProfile', JSON.stringify(profile));
-            
+
             // Update header avatar
             updateHeaderAvatar();
         }
@@ -542,20 +520,20 @@
         // Password strength checker
         function checkPasswordStrength(password) {
             if (!passwordStrength) return;
-            
+
             let strength = 0;
-            
+
             if (password.length >= 8) strength++;
             if (password.match(/[a-z]/)) strength++;
             if (password.match(/[A-Z]/)) strength++;
             if (password.match(/[0-9]/)) strength++;
             if (password.match(/[^a-zA-Z0-9]/)) strength++;
-            
+
             // Update strength indicator
             passwordStrength.className = 'password-strength';
             const strengthFill = passwordStrength.querySelector('.strength-fill');
             const strengthText = passwordStrength.querySelector('.strength-text');
-            
+
             if (password.length === 0) {
                 strengthText.textContent = 'Password strength';
             } else if (strength <= 2) {
@@ -573,7 +551,7 @@
         // Form validation
         function validateForm() {
             let isValid = true;
-            
+
             // Reset errors
             document.querySelectorAll('.form-error').forEach(error => {
                 error.classList.remove('show');
@@ -581,7 +559,7 @@
             document.querySelectorAll('.form-input').forEach(input => {
                 input.classList.remove('error');
             });
-            
+
             // Validate required fields
             const requiredFields = ['firstName', 'lastName', 'email'];
             requiredFields.forEach(field => {
@@ -593,7 +571,7 @@
                     isValid = false;
                 }
             });
-            
+
             // Validate email format
             const email = document.getElementById('email');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -603,16 +581,16 @@
                 if (email) email.classList.add('error');
                 isValid = false;
             }
-            
+
             // Validate password change if any password field is filled
             const currentPassword = document.getElementById('currentPassword');
             const newPassword = document.getElementById('newPassword');
             const confirmPassword = document.getElementById('confirmPassword');
-            
+
             const currentPasswordValue = currentPassword ? currentPassword.value : '';
             const newPasswordValue = newPassword ? newPassword.value : '';
             const confirmPasswordValue = confirmPassword ? confirmPassword.value : '';
-            
+
             if (currentPasswordValue || newPasswordValue || confirmPasswordValue) {
                 if (!currentPasswordValue) {
                     const currentPasswordError = document.getElementById('currentPasswordError');
@@ -620,21 +598,21 @@
                     if (currentPassword) currentPassword.classList.add('error');
                     isValid = false;
                 }
-                
+
                 if (!newPasswordValue) {
                     const newPasswordError = document.getElementById('newPasswordError');
                     if (newPasswordError) newPasswordError.classList.add('show');
                     if (newPassword) newPassword.classList.add('error');
                     isValid = false;
                 }
-                
+
                 if (newPasswordValue !== confirmPasswordValue) {
                     const confirmPasswordError = document.getElementById('confirmPasswordError');
                     if (confirmPasswordError) confirmPasswordError.classList.add('show');
                     if (confirmPassword) confirmPassword.classList.add('error');
                     isValid = false;
                 }
-                
+
                 // Validate password strength
                 if (newPasswordValue && newPasswordValue.length < 8) {
                     const newPasswordError = document.getElementById('newPasswordError');
@@ -646,7 +624,7 @@
                     isValid = false;
                 }
             }
-            
+
             return isValid;
         }
 
@@ -661,33 +639,33 @@
                     department: document.getElementById('department').value,
                     photo: profileImage && profileImage.style.display === 'block' ? profileImage.src : null
                 };
-                
+
                 // Save to localStorage
                 localStorage.setItem('userProfile', JSON.stringify(profileData));
-                
+
                 // Also update the main userData in localStorage
                 const userData = JSON.parse(localStorage.getItem('userData') || '{}');
                 userData.name = `${profileData.firstName} ${profileData.lastName}`;
                 userData.email = profileData.email;
                 localStorage.setItem('userData', JSON.stringify(userData));
-                
+
                 // Update header display
                 updateUserDisplay(userData);
-                
+
                 // Update header avatar
                 updateHeaderAvatar();
-                
+
                 // Show success message
                 const successMessage = document.getElementById('successMessage');
                 if (successMessage) {
                     successMessage.classList.add('show');
-                    
+
                     // Hide success message after 3 seconds
                     setTimeout(() => {
                         successMessage.classList.remove('show');
                     }, 3000);
                 }
-                
+
                 console.log('Profile saved:', profileData);
             } catch (error) {
                 console.error('Error saving profile:', error);
@@ -701,32 +679,32 @@
                 let firstName = 'User';
                 let lastName = '';
                 let email = userData.email || 'user@example.com';
-                
+
                 if (userData.name) {
                     const nameParts = userData.name.split(' ');
                     firstName = nameParts[0] || 'User';
                     lastName = nameParts.slice(1).join(' ') || '';
                 }
-                
+
                 // Reset to original values
                 document.getElementById('firstName').value = firstName;
                 document.getElementById('lastName').value = lastName;
                 document.getElementById('email').value = email;
                 document.getElementById('phone').value = '';
                 document.getElementById('department').value = '';
-                
+
                 // Clear password fields
                 const currentPassword = document.getElementById('currentPassword');
                 const newPassword = document.getElementById('newPassword');
                 const confirmPassword = document.getElementById('confirmPassword');
-                
+
                 if (currentPassword) currentPassword.value = '';
                 if (newPassword) newPassword.value = '';
                 if (confirmPassword) confirmPassword.value = '';
-                
+
                 // Reset photo
                 removePhoto();
-                
+
                 // Reset errors
                 document.querySelectorAll('.form-error').forEach(error => {
                     error.classList.remove('show');
@@ -734,14 +712,14 @@
                 document.querySelectorAll('.form-input').forEach(input => {
                     input.classList.remove('error');
                 });
-                
+
                 // Reset password strength
                 if (passwordStrength) {
                     passwordStrength.className = 'password-strength';
                     const strengthText = passwordStrength.querySelector('.strength-text');
                     if (strengthText) strengthText.textContent = 'Password strength';
                 }
-                
+
                 // Update profile initials
                 if (profileInitials) {
                     const initials = (firstName.charAt(0) + (lastName.charAt(0) || '')).toUpperCase();
@@ -780,7 +758,15 @@
                     }
                 });
             }
+
+            // Initialize preferences manager on other pages
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.preferencesManager) {
+                    window.preferencesManager.initialize();
+                }
+            });
         }
     </script>
 </body>
+
 </html>

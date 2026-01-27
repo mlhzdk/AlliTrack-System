@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/my-tickets.css" />
+    <script src="../js/preference-manager.js" defer></script>
 </head>
 
 <body>
@@ -70,7 +72,8 @@
                 <header class="header">
                     <div class="search" role="search" aria-label="Search Tickets">
                         <i class="fas fa-search" style="opacity:.6"></i>
-                        <input id="q" placeholder="Search tickets, users, IDs..." aria-label="Search tickets, users, IDs" />
+                        <input id="q" placeholder="Search tickets, users, IDs..."
+                            aria-label="Search tickets, users, IDs" />
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
@@ -106,7 +109,7 @@
                                             <option value="resolved">Resolved</option>
                                             <option value="closed">Closed</option>
                                         </select>
-                                        
+
                                         <select class="filter-select" id="priorityFilter">
                                             <option value="all">All Priority</option>
                                             <option value="low">Low</option>
@@ -114,7 +117,7 @@
                                             <option value="high">High</option>
                                             <option value="critical">Critical</option>
                                         </select>
-                                        
+
                                         <select class="filter-select" id="sortFilter">
                                             <option value="newest">Newest First</option>
                                             <option value="oldest">Oldest First</option>
@@ -142,41 +145,41 @@
 
     <script>
         // Initialize the page when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Get user data from localStorage (set by dashboard login)
             const userData = JSON.parse(localStorage.getItem('userData'));
-            
+
             // Update user information in header
             updateUserDisplay(userData);
-            
+
             // Initialize tickets functionality
             initTickets();
-            
+
             // Setup logout functionality
             setupLogout();
-            
+
             console.log('My Tickets page loaded for user:', userData?.name);
         });
-        
+
         // Update user display in header
         function updateUserDisplay(userData) {
             if (!userData) {
                 console.warn('No user data found in localStorage');
                 return;
             }
-            
+
             // Update user name
             const userNameElement = document.getElementById('userName');
             if (userNameElement && userData.name) {
                 userNameElement.textContent = userData.name;
             }
-            
+
             // Update user email
             const userEmailElement = document.getElementById('userEmail');
             if (userEmailElement && userData.email) {
                 userEmailElement.textContent = userData.email;
             }
-            
+
             // Update user avatar with initials
             const userAvatarElement = document.getElementById('userAvatar');
             if (userAvatarElement && userData.name) {
@@ -190,17 +193,17 @@
                 userAvatarElement.textContent = initials;
             }
         }
-        
+
         // Logout functionality
         function setupLogout() {
             const logoutBtn = document.getElementById('logoutBtn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+                logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Clear user data from localStorage (same as dashboard)
                     localStorage.removeItem('userData');
-                    
+
                     // Redirect to login page (same as dashboard)
                     window.location.href = '../../landing page/pages/index.html';
                 });
@@ -269,10 +272,10 @@
         // Format date function
         function formatDate(dateString) {
             const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
             });
         }
 
@@ -282,7 +285,7 @@
             const now = new Date();
             const diffInMs = now - date;
             const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-            
+
             if (diffInDays === 0) {
                 return 'Today';
             } else if (diffInDays === 1) {
@@ -297,11 +300,11 @@
         // Render tickets
         function renderTickets(ticketsToRender) {
             const ticketsContainer = document.getElementById('ticketsContainer');
-            
+
             if (!ticketsContainer) return;
-            
+
             ticketsContainer.innerHTML = '';
-            
+
             if (ticketsToRender.length === 0) {
                 ticketsContainer.innerHTML = `
                     <div class="empty-state">
@@ -312,7 +315,7 @@
                 `;
                 return;
             }
-            
+
             ticketsToRender.forEach(ticket => {
                 const ticketElement = document.createElement('div');
                 ticketElement.className = 'ticket-card';
@@ -364,35 +367,35 @@
         // Filter and sort tickets
         function filterAndSortTickets() {
             let filteredTickets = [...tickets];
-            
+
             // Get filter elements
             const statusFilter = document.getElementById('statusFilter');
             const priorityFilter = document.getElementById('priorityFilter');
             const sortFilter = document.getElementById('sortFilter');
             const searchInput = document.getElementById('q');
-            
+
             if (!statusFilter || !priorityFilter || !sortFilter || !searchInput) return;
-            
+
             // Apply status filter
             if (statusFilter.value !== 'all') {
                 filteredTickets = filteredTickets.filter(ticket => ticket.status === statusFilter.value);
             }
-            
+
             // Apply priority filter
             if (priorityFilter.value !== 'all') {
                 filteredTickets = filteredTickets.filter(ticket => ticket.priority === priorityFilter.value);
             }
-            
+
             // Apply search filter
             if (searchInput.value.trim() !== '') {
                 const searchTerm = searchInput.value.toLowerCase();
-                filteredTickets = filteredTickets.filter(ticket => 
+                filteredTickets = filteredTickets.filter(ticket =>
                     ticket.title.toLowerCase().includes(searchTerm) ||
                     ticket.id.toLowerCase().includes(searchTerm) ||
                     ticket.description.toLowerCase().includes(searchTerm)
                 );
             }
-            
+
             // Apply sorting
             switch (sortFilter.value) {
                 case 'oldest':
@@ -406,7 +409,7 @@
                     filteredTickets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                     break;
             }
-            
+
             renderTickets(filteredTickets);
         }
 
@@ -417,15 +420,15 @@
             const priorityFilter = document.getElementById('priorityFilter');
             const sortFilter = document.getElementById('sortFilter');
             const searchInput = document.getElementById('q');
-            
+
             if (statusFilter) statusFilter.addEventListener('change', filterAndSortTickets);
             if (priorityFilter) priorityFilter.addEventListener('change', filterAndSortTickets);
             if (sortFilter) sortFilter.addEventListener('change', filterAndSortTickets);
             if (searchInput) searchInput.addEventListener('input', filterAndSortTickets);
-            
+
             // Initial render
             renderTickets(tickets);
-            
+
             // Setup account dropdown
             setupAccountDropdown();
         }
@@ -459,6 +462,14 @@
                 });
             }
         }
+
+        // Initialize preferences manager on other pages
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.preferencesManager) {
+                window.preferencesManager.initialize();
+            }
+        });
     </script>
 </body>
+
 </html>

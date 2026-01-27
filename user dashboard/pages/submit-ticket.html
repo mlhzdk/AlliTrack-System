@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/submit-ticket.css" />
+    <script src="../js/preference-manager.js" defer></script>
 </head>
 
 <body>
@@ -69,7 +71,8 @@
                 <header class="header">
                     <div class="search" role="search" aria-label="Search Tickets">
                         <i class="fas fa-search" style="opacity:.6"></i>
-                        <input id="q" placeholder="Search tickets, users, IDs..." aria-label="Search tickets, users, IDs" />
+                        <input id="q" placeholder="Search tickets, users, IDs..."
+                            aria-label="Search tickets, users, IDs" />
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
@@ -106,7 +109,8 @@
                             </div>
                             <div class="success-title">Ticket Submitted Successfully!</div>
                             <div class="success-details" id="ticketDetails">
-                                Your ticket <strong id="ticketId">TKT-4892</strong> has been created and assigned to our support team.
+                                Your ticket <strong id="ticketId">TKT-4892</strong> has been created and assigned to our
+                                support team.
                             </div>
                             <div class="form-actions">
                                 <button class="btn btn-secondary" onclick="resetForm()">
@@ -126,14 +130,10 @@
                                     <label class="form-label" for="subject">
                                         Subject <span class="required">*</span>
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        id="subject" 
-                                        class="form-input" 
-                                        placeholder="Brief description of your issue"
-                                        required
-                                    />
-                                    <div class="form-error" id="subjectError">Please enter a subject for your ticket</div>
+                                    <input type="text" id="subject" class="form-input"
+                                        placeholder="Brief description of your issue" required />
+                                    <div class="form-error" id="subjectError">Please enter a subject for your ticket
+                                    </div>
                                 </div>
 
                                 <!-- Category -->
@@ -158,16 +158,14 @@
                                     <label class="form-label" for="description">
                                         Description <span class="required">*</span>
                                     </label>
-                                    <textarea 
-                                        id="description" 
-                                        class="form-textarea" 
+                                    <textarea id="description" class="form-textarea"
                                         placeholder="Please provide detailed information about your issue. Include steps to reproduce, error messages, and any relevant details."
-                                        required
-                                    ></textarea>
+                                        required></textarea>
                                     <div class="form-hint">
                                         Be as detailed as possible to help us resolve your issue quickly
                                     </div>
-                                    <div class="form-error" id="descriptionError">Please provide a description of your issue</div>
+                                    <div class="form-error" id="descriptionError">Please provide a description of your
+                                        issue</div>
                                 </div>
                             </div>
 
@@ -195,41 +193,41 @@
 
     <script>
         // Initialize the page when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Get user data from localStorage (set by dashboard login)
             const userData = JSON.parse(localStorage.getItem('userData'));
-            
+
             // Update user information in header
             updateUserDisplay(userData);
-            
+
             // Initialize form functionality
             initForm();
-            
+
             // Setup logout functionality
             setupLogout();
-            
+
             console.log('Submit Ticket page loaded for user:', userData?.name);
         });
-        
+
         // Update user display in header
         function updateUserDisplay(userData) {
             if (!userData) {
                 console.warn('No user data found in localStorage');
                 return;
             }
-            
+
             // Update user name
             const userNameElement = document.getElementById('userName');
             if (userNameElement && userData.name) {
                 userNameElement.textContent = userData.name;
             }
-            
+
             // Update user email
             const userEmailElement = document.getElementById('userEmail');
             if (userEmailElement && userData.email) {
                 userEmailElement.textContent = userData.email;
             }
-            
+
             // Update user avatar with initials
             const userAvatarElement = document.getElementById('userAvatar');
             if (userAvatarElement && userData.name) {
@@ -243,17 +241,17 @@
                 userAvatarElement.textContent = initials;
             }
         }
-        
+
         // Logout functionality
         function setupLogout() {
             const logoutBtn = document.getElementById('logoutBtn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
+                logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Clear user data from localStorage (same as dashboard)
                     localStorage.removeItem('userData');
-                    
+
                     // Redirect to login page (same as dashboard)
                     window.location.href = '../../landing page/pages/index.html';
                 });
@@ -270,13 +268,13 @@
             if (ticketForm) {
                 ticketForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    
+
                     if (validateForm()) {
                         submitTicket();
                     }
                 });
             }
-            
+
             // Setup account dropdown
             setupAccountDropdown();
         }
@@ -286,7 +284,7 @@
             const subject = document.getElementById('subject');
             const category = document.getElementById('category');
             const description = document.getElementById('description');
-            
+
             // Reset errors
             document.querySelectorAll('.form-error').forEach(error => {
                 error.classList.remove('show');
@@ -294,28 +292,28 @@
             document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
                 input.classList.remove('error');
             });
-            
+
             // Validate subject
             if (!subject.value.trim()) {
                 document.getElementById('subjectError').classList.add('show');
                 subject.classList.add('error');
                 isValid = false;
             }
-            
+
             // Validate category
             if (!category.value) {
                 document.getElementById('categoryError').classList.add('show');
                 category.classList.add('error');
                 isValid = false;
             }
-            
+
             // Validate description
             if (!description.value.trim()) {
                 document.getElementById('descriptionError').classList.add('show');
                 description.classList.add('error');
                 isValid = false;
             }
-            
+
             return isValid;
         }
 
@@ -323,16 +321,16 @@
             // Simulate API call
             const ticketId = 'TKT-' + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('ticketId').textContent = ticketId;
-            
+
             // Show success message
             const ticketForm = document.getElementById('ticketForm');
             const successMessage = document.getElementById('successMessage');
-            
+
             if (ticketForm && successMessage) {
                 ticketForm.style.display = 'none';
                 successMessage.classList.add('show');
             }
-            
+
             // In a real application, you would send the form data to your backend here
             console.log('Ticket submitted:', {
                 subject: document.getElementById('subject').value,
@@ -344,11 +342,11 @@
         function resetForm() {
             const ticketForm = document.getElementById('ticketForm');
             const successMessage = document.getElementById('successMessage');
-            
+
             if (ticketForm) {
                 ticketForm.reset();
             }
-            
+
             // Reset errors
             document.querySelectorAll('.form-error').forEach(error => {
                 error.classList.remove('show');
@@ -356,7 +354,7 @@
             document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
                 input.classList.remove('error');
             });
-            
+
             // Show form, hide success message
             if (ticketForm && successMessage) {
                 ticketForm.style.display = 'block';
@@ -398,7 +396,15 @@
                     }
                 });
             }
+
+            // Initialize preferences manager on other pages
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.preferencesManager) {
+                    window.preferencesManager.initialize();
+                }
+            });
         }
     </script>
 </body>
+
 </html>

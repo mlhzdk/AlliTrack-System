@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Announcements - AlliTrack</title>
+    <title data-translate="announcements_page_title">Announcements - AlliTrack</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/announcements.css" />
+    <script src="../js/preference-manager.js"></script>
 </head>
 
 <body>
@@ -19,42 +20,42 @@
                     <div class="logo">AT</div>
                     <div>
                         <div class="title">AlliTrack</div>
-                        <div class="subtitle">User Dashboard</div>
+                        <div class="subtitle" data-translate="user_dashboard">User Dashboard</div>
                     </div>
                 </div>
                 <nav class="nav">
                     <a href="../pages/index-user.html" data-section="dashboard">
-                        <i class="fas fa-chart-line"></i> Dashboard
+                        <i class="fas fa-chart-line"></i> <span data-translate="dashboard">Dashboard</span>
                     </a>
 
-                    <div class="nav-section">Support</div>
+                    <div class="nav-section" data-translate="support">Support</div>
                     <a href="../pages/my-tickets.html" data-section="tickets">
-                        <i class="fas fa-ticket-alt"></i> My Tickets
+                        <i class="fas fa-ticket-alt"></i> <span data-translate="my_tickets">My Tickets</span>
                     </a>
                     <a href="../pages/notifications.html" data-section="notifications">
-                        <i class="fas fa-bell"></i> Notifications
+                        <i class="fas fa-bell"></i> <span data-translate="notifications">Notifications</span>
                     </a>
                     <a href="../pages/submit-ticket.html" data-section="submit-ticket">
-                        <i class="fas fa-plus-circle"></i> Submit a Ticket
+                        <i class="fas fa-plus-circle"></i> <span data-translate="submit_ticket">Submit a Ticket</span>
                     </a>
 
-                    <div class="nav-section">Management</div>
+                    <div class="nav-section" data-translate="management">Management</div>
                     <a href="../pages/preferences.html" data-section="preferences">
-                        <i class="fas fa-sliders-h"></i> Preferences
+                        <i class="fas fa-sliders-h"></i> <span data-translate="preferences">Preferences</span>
                     </a>
                     <a href="../pages/profile-settings.html" data-section="profile-settings">
-                        <i class="fas fa-user-cog"></i> Profile Settings
+                        <i class="fas fa-user-cog"></i> <span data-translate="profile_settings">Profile Settings</span>
                     </a>
                     <a href="../pages/announcements.html" class="active" data-section="announcements">
-                        <i class="fas fa-bullhorn"></i> Announcements
+                        <i class="fas fa-bullhorn"></i> <span data-translate="announcements">Announcements</span>
                     </a>
 
-                    <div class="nav-section">System</div>
+                    <div class="nav-section" data-translate="system">System</div>
                     <a href="../pages/account-security.html" data-section="account-security">
-                        <i class="fas fa-shield-alt"></i> Account Security
+                        <i class="fas fa-shield-alt"></i> <span data-translate="account_security">Account Security</span>
                     </a>
                     <a href="../pages/system-information.html" data-section="system-information">
-                        <i class="fas fa-info-circle"></i> System Information
+                        <i class="fas fa-info-circle"></i> <span data-translate="system_information">System Information</span>
                     </a>
                 </nav>
                 <div class="sidebar-footer">
@@ -69,7 +70,9 @@
                 <header class="header">
                     <div class="search" role="search" aria-label="Search Tickets">
                         <i class="fas fa-search" style="opacity:.6"></i>
-                        <input id="q" placeholder="Search announcements..." aria-label="Search announcements" />
+                        <input id="q" placeholder="Search announcements..." 
+                               data-translate-placeholder="search_announcements"
+                               aria-label="Search announcements" />
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
@@ -82,9 +85,9 @@
                         </div>
                         <div class="account-menu" id="accountMenu">
                             <div class="arrow"></div>
-                            <a href="../pages/profile-settings.html">Profile</a>
-                            <a href="../pages/preferences.html">Settings</a>
-                            <a href="#" id="logoutBtn">Logout</a>
+                            <a href="../pages/profile-settings.html" data-translate="profile">Profile</a>
+                            <a href="../pages/preferences.html" data-translate="settings">Settings</a>
+                            <a href="#" id="logoutBtn" data-translate="logout">Logout</a>
                         </div>
                     </div>
                 </header>
@@ -95,14 +98,14 @@
                         <!-- Header with Container -->
                         <div class="announcements-header-container">
                             <div class="announcements-header">
-                                <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
+                                <h1><i class="fas fa-bullhorn"></i> <span data-translate="announcements_title">Announcements</span></h1>
                                 <div class="announcements-controls">
                                     <div class="filter-group">
-                                        <button class="filter-btn active" data-filter="all">All</button>
-                                        <button class="filter-btn" data-filter="notice">Company Notices</button>
-                                        <button class="filter-btn" data-filter="maintenance">Maintenance</button>
-                                        <button class="filter-btn" data-filter="feature">New Features</button>
-                                        <button class="filter-btn" data-filter="unread">Unread</button>
+                                        <button class="filter-btn active" data-filter="all" data-translate="filter_all">All</button>
+                                        <button class="filter-btn" data-filter="notice" data-translate="filter_notice">Company Notices</button>
+                                        <button class="filter-btn" data-filter="maintenance" data-translate="filter_maintenance">Maintenance</button>
+                                        <button class="filter-btn" data-filter="feature" data-translate="filter_feature">New Features</button>
+                                        <button class="filter-btn" data-filter="unread" data-translate="filter_unread">Unread</button>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +119,7 @@
                                 </div>
                                 <div class="stat-info">
                                     <div class="stat-count" id="totalAnnouncements">12</div>
-                                    <div class="stat-label">Total Announcements</div>
+                                    <div class="stat-label" data-translate="total_announcements">Total Announcements</div>
                                 </div>
                             </div>
                             <div class="stat-card">
@@ -125,7 +128,7 @@
                                 </div>
                                 <div class="stat-info">
                                     <div class="stat-count" id="unreadCount">3</div>
-                                    <div class="stat-label">Unread Announcements</div>
+                                    <div class="stat-label" data-translate="unread_announcements">Unread Announcements</div>
                                 </div>
                             </div>
                             <div class="stat-card">
@@ -134,7 +137,7 @@
                                 </div>
                                 <div class="stat-info">
                                     <div class="stat-count" id="featureCount">5</div>
-                                    <div class="stat-label">New Features</div>
+                                    <div class="stat-label" data-translate="new_features">New Features</div>
                                 </div>
                             </div>
                         </div>
@@ -149,15 +152,124 @@
                 <!-- Footer -->
                 <footer class="site-footer">
                     <div>&copy; 2025 Business Alliance Inc.</div>
-                    <div>Dashboard Template</div>
+                    <div data-translate="footer_text">Dashboard Template</div>
                 </footer>
             </main>
         </div>
     </div>
 
     <script>
+        // Translation dictionary for announcements page
+        const translations = {
+            'en': {
+                // PAGE-SPECIFIC translations only:
+                'announcements_page_title': 'Announcements - AlliTrack',
+                'announcements_title': 'Announcements',
+                'search_announcements': 'Search announcements...',
+                'filter_all': 'All',
+                'filter_notice': 'Company Notices',
+                'filter_maintenance': 'Maintenance',
+                'filter_feature': 'New Features',
+                'filter_unread': 'Unread',
+                'total_announcements': 'Total Announcements',
+                'unread_announcements': 'Unread Announcements',
+                'new_features': 'New Features',
+                'footer_text': 'Dashboard Template',
+                
+                // Dynamic content translations
+                'just_now': 'Just now',
+                'min_ago': 'min ago',
+                'hr_ago': 'hr ago',
+                'yesterday': 'Yesterday',
+                'days_ago': 'days ago',
+                
+                // Empty state
+                'empty_state_title': 'No announcements found',
+                'empty_state_description': 'Try adjusting your filters or check back later for updates',
+                
+                // Button text
+                'mark_as_read': 'Mark as Read',
+                'view_details': 'View Details',
+                'share': 'Share',
+                
+                // Priority labels
+                'high_priority': 'High Priority',
+                'medium_priority': 'Medium Priority',
+                'low_priority': 'Low Priority',
+                
+                // Announcement types
+                'company_notice': 'Company Notice',
+                'maintenance_alert': 'Maintenance Alert',
+                'maintenance_update': 'Maintenance Update',
+                'new_feature': 'New Feature',
+                'urgent': 'Urgent'
+            },
+            'fil': {
+                // PAGE-SPECIFIC translations only:
+                'announcements_page_title': 'Mga Anunsyo - AlliTrack',
+                'announcements_title': 'Mga Anunsyo',
+                'search_announcements': 'Maghanap ng mga anunsyo...',
+                'filter_all': 'Lahat',
+                'filter_notice': 'Mga Notice ng Kumpanya',
+                'filter_maintenance': 'Maintenance',
+                'filter_feature': 'Mga Bagong Feature',
+                'filter_unread': 'Hindi pa Nababasa',
+                'total_announcements': 'Kabuuang Mga Anunsyo',
+                'unread_announcements': 'Hindi pa Nababasang Mga Anunsyo',
+                'new_features': 'Mga Bagong Feature',
+                'footer_text': 'Dashboard',
+                
+                // Dynamic content translations
+                'just_now': 'Ngayon lang',
+                'min_ago': 'min ang nakalipas',
+                'hr_ago': 'oras ang nakalipas',
+                'yesterday': 'Kahapon',
+                'days_ago': 'araw ang nakalipas',
+                
+                // Empty state
+                'empty_state_title': 'Walang nakitang mga anunsyo',
+                'empty_state_description': 'Subukang ayusin ang iyong mga filter o bumalik mamaya para sa mga update',
+                
+                // Button text
+                'mark_as_read': 'Markahan bilang Nabasa',
+                'view_details': 'Tingnan ang mga Detalye',
+                'share': 'I-share',
+                
+                // Priority labels
+                'high_priority': 'Mataas na Priority',
+                'medium_priority': 'Katamtamang Priority',
+                'low_priority': 'Mababang Priority',
+                
+                // Announcement types
+                'company_notice': 'Notice ng Kumpanya',
+                'maintenance_alert': 'Alert sa Maintenance',
+                'maintenance_update': 'Update sa Maintenance',
+                'new_feature': 'Bagong Feature',
+                'urgent': 'Urgent'
+            }
+        };
+
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize preferences manager FIRST
+            if (window.preferencesManager) {
+                console.log('Announcements: Initializing Preferences Manager...');
+                window.preferencesManager.initialize();
+                
+                // Apply theme immediately
+                window.preferencesManager.applyTheme();
+                
+                // Get current language from preferences manager
+                const currentLang = window.preferencesManager.getCurrentLanguage() || 'en';
+                applyTranslations(currentLang);
+            } else {
+                console.error('Announcements: preferencesManager not found!');
+                applyTranslations('en'); // Default to English
+            }
+
+            // Setup theme listener
+            setupThemeListener();
+
             // Get user data from localStorage (set by dashboard login)
             const userData = JSON.parse(localStorage.getItem('userData'));
             
@@ -172,6 +284,58 @@
             
             console.log('Announcements page loaded for user:', userData?.name);
         });
+
+        // Setup theme listener
+        function setupThemeListener() {
+            console.log('Setting up theme listener for announcements...');
+            
+            // Listen for theme changes via storage events
+            window.addEventListener('storage', (event) => {
+                if (event.key === 'preferredTheme') {
+                    console.log('Theme changed via storage:', event.newValue);
+                    if (window.preferencesManager) {
+                        setTimeout(() => {
+                            window.preferencesManager.applyTheme();
+                        }, 100);
+                    }
+                }
+            });
+            
+            // Listen for theme changes via broadcast
+            document.addEventListener('themeChanged', function(e) {
+                console.log('Theme changed via event:', e.detail.theme);
+                if (window.preferencesManager) {
+                    window.preferencesManager.applyTheme();
+                }
+            });
+        }
+
+        // Apply translations to the page
+        function applyTranslations(language) {
+            const lang = translations[language] ? language : 'en';
+            const dict = translations[lang];
+            
+            // Translate all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (dict[key]) {
+                    element.textContent = dict[key];
+                }
+            });
+            
+            // Translate all placeholder texts
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (dict[key]) {
+                    element.placeholder = dict[key];
+                }
+            });
+            
+            // Update page title
+            if (dict['announcements_page_title']) {
+                document.title = dict['announcements_page_title'];
+            }
+        }
         
         // Update user display in header
         function updateUserDisplay(userData) {
@@ -259,7 +423,7 @@
                 type: "notice",
                 title: "Quarterly Company Meeting Schedule",
                 message: "We're excited to announce the schedule for our upcoming quarterly company meetings. All team members are required to attend their respective department meetings. The meetings will cover Q1 performance reviews and Q2 strategic planning.",
-                category: "Company Notice",
+                category: "company_notice",
                 priority: "medium",
                 date: "2025-03-20T10:00:00",
                 unread: true,
@@ -275,7 +439,7 @@
                 type: "maintenance",
                 title: "Scheduled System Maintenance",
                 message: "We will be performing essential system maintenance to improve performance and security. The maintenance window is scheduled for this weekend. During this time, the system may be temporarily unavailable.",
-                category: "Maintenance Alert",
+                category: "maintenance_alert",
                 priority: "high",
                 date: "2025-03-18T14:30:00",
                 unread: true,
@@ -292,7 +456,7 @@
                 type: "feature",
                 title: "New Reporting Dashboard Released",
                 message: "We're thrilled to announce the release of our new advanced reporting dashboard! This update includes enhanced analytics, customizable reports, and real-time data visualization to help you make better decisions.",
-                category: "New Feature",
+                category: "new_feature",
                 priority: "medium",
                 date: "2025-03-15T09:15:00",
                 unread: false,
@@ -309,7 +473,7 @@
                 type: "notice",
                 title: "Updated Remote Work Policy",
                 message: "Effective immediately, we're updating our remote work policy to provide more flexibility while maintaining productivity standards. Please review the new guidelines in the employee handbook.",
-                category: "Company Notice",
+                category: "company_notice",
                 priority: "medium",
                 date: "2025-03-12T16:45:00",
                 unread: false,
@@ -326,7 +490,7 @@
                 type: "maintenance",
                 title: "Database Optimization Complete",
                 message: "The recent database optimization has been successfully completed. Users should experience improved system performance and faster response times when accessing ticket history and reports.",
-                category: "Maintenance Update",
+                category: "maintenance_update",
                 priority: "medium",
                 date: "2025-03-10T11:20:00",
                 unread: false,
@@ -343,7 +507,7 @@
                 type: "feature",
                 title: "Mobile App Update Available",
                 message: "A new version of the AlliTrack mobile app is now available in the app stores. This update includes bug fixes, performance improvements, and new notification features.",
-                category: "New Feature",
+                category: "new_feature",
                 priority: "medium",
                 date: "2025-03-08T13:10:00",
                 unread: false,
@@ -360,7 +524,7 @@
                 type: "notice",
                 title: "Holiday Schedule - Memorial Day",
                 message: "Please be advised that our offices will be closed on Memorial Day, May 26th, 2025. Emergency support will remain available through our on-call team.",
-                category: "Company Notice",
+                category: "company_notice",
                 priority: "medium",
                 date: "2025-03-05T08:30:00",
                 unread: false,
@@ -377,7 +541,7 @@
                 type: "feature",
                 title: "Enhanced Security Features",
                 message: "We've implemented new security features including two-factor authentication and enhanced password requirements to better protect your account and data.",
-                category: "New Feature",
+                category: "new_feature",
                 priority: "high",
                 date: "2025-03-01T15:45:00",
                 unread: false,
@@ -403,7 +567,7 @@
             });
         }
 
-        // Format relative time
+        // Format relative time WITH TRANSLATIONS
         function formatRelativeTime(dateString) {
             const date = new Date(dateString);
             const now = new Date();
@@ -412,16 +576,21 @@
             const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
             const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
             
+            // Get current language
+            const currentLang = window.preferencesManager ? 
+                window.preferencesManager.getCurrentLanguage() : 'en';
+            const dict = translations[currentLang] || translations['en'];
+            
             if (diffInMinutes < 1) {
-                return 'Just now';
+                return dict['just_now'] || 'Just now';
             } else if (diffInMinutes < 60) {
-                return `${diffInMinutes} min ago`;
+                return `${diffInMinutes} ${dict['min_ago'] || 'min ago'}`;
             } else if (diffInHours < 24) {
-                return `${diffInHours} hr ago`;
+                return `${diffInHours} ${dict['hr_ago'] || 'hr ago'}`;
             } else if (diffInDays === 1) {
-                return 'Yesterday';
+                return dict['yesterday'] || 'Yesterday';
             } else if (diffInDays < 7) {
-                return `${diffInDays} days ago`;
+                return `${diffInDays} ${dict['days_ago'] || 'days ago'}`;
             } else {
                 return formatDate(dateString);
             }
@@ -456,6 +625,26 @@
                     return 'fas fa-exclamation-triangle';
                 default:
                     return 'fas fa-bullhorn';
+            }
+        }
+
+        // Get category text based on type and language
+        function getCategoryText(type, lang) {
+            const dict = translations[lang] || translations['en'];
+            
+            switch(type) {
+                case 'notice':
+                    return dict['company_notice'] || 'Company Notice';
+                case 'maintenance':
+                    return type === 'maintenance_alert' ? 
+                        (dict['maintenance_alert'] || 'Maintenance Alert') : 
+                        (dict['maintenance_update'] || 'Maintenance Update');
+                case 'feature':
+                    return dict['new_feature'] || 'New Feature';
+                case 'urgent':
+                    return dict['urgent'] || 'Urgent';
+                default:
+                    return 'Notice';
             }
         }
 
@@ -501,15 +690,19 @@
             announcementsContainer.innerHTML = '';
             
             if (announcementsToRender.length === 0) {
+                const dict = translations[window.preferencesManager ? window.preferencesManager.getCurrentLanguage() : 'en'] || translations['en'];
                 announcementsContainer.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-bullhorn"></i>
-                        <h3>No announcements found</h3>
-                        <p>Try adjusting your filters or check back later for updates</p>
+                        <h3>${dict['empty_state_title'] || 'No announcements found'}</h3>
+                        <p>${dict['empty_state_description'] || 'Try adjusting your filters or check back later for updates'}</p>
                     </div>
                 `;
                 return;
             }
+            
+            const currentLang = window.preferencesManager ? window.preferencesManager.getCurrentLanguage() : 'en';
+            const dict = translations[currentLang] || translations['en'];
             
             announcementsToRender.forEach(announcement => {
                 const announcementElement = document.createElement('div');
@@ -541,11 +734,11 @@
                                 <div class="announcement-title">${announcement.title}</div>
                                 <div class="announcement-meta">
                                     <div class="announcement-category ${getCategoryClass(announcement.type)}">
-                                        ${announcement.category}
+                                        ${getCategoryText(announcement.category || announcement.type, currentLang)}
                                     </div>
                                     ${announcement.priority === 'high' ? `
                                         <div class="announcement-priority priority-high">
-                                            <i class="fas fa-exclamation-circle"></i> High Priority
+                                            <i class="fas fa-exclamation-circle"></i> ${dict['high_priority'] || 'High Priority'}
                                         </div>
                                     ` : ''}
                                     <div class="announcement-date">
@@ -567,14 +760,14 @@
                     <div class="announcement-actions">
                         ${announcement.unread ? `
                             <button class="action-btn" data-id="${announcement.id}" data-action="mark-read">
-                                <i class="fas fa-check"></i> Mark as Read
+                                <i class="fas fa-check"></i> ${dict['mark_as_read'] || 'Mark as Read'}
                             </button>
                         ` : ''}
                         <button class="action-btn" data-id="${announcement.id}" data-action="view">
-                            <i class="fas fa-eye"></i> View Details
+                            <i class="fas fa-eye"></i> ${dict['view_details'] || 'View Details'}
                         </button>
                         <button class="action-btn" data-id="${announcement.id}" data-action="share">
-                            <i class="fas fa-share"></i> Share
+                            <i class="fas fa-share"></i> ${dict['share'] || 'Share'}
                         </button>
                     </div>
                 `;
@@ -627,8 +820,7 @@
                 const searchTerm = searchInput.value.toLowerCase();
                 filteredAnnouncements = filteredAnnouncements.filter(announcement => 
                     announcement.title.toLowerCase().includes(searchTerm) ||
-                    announcement.message.toLowerCase().includes(searchTerm) ||
-                    announcement.category.toLowerCase().includes(searchTerm)
+                    announcement.message.toLowerCase().includes(searchTerm)
                 );
             }
             
@@ -706,6 +898,14 @@
                 });
             }
         }
+        
+        // Listen for language changes from preference-manager.js
+        document.addEventListener('languageChanged', function(e) {
+            console.log('Language changed to:', e.detail.language);
+            applyTranslations(e.detail.language);
+            // Re-render announcements with new language
+            filterAnnouncements(getActiveFilter());
+        });
     </script>
 </body>
 </html>
