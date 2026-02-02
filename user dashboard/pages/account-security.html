@@ -5,20 +5,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title data-translate="account_security_page_title">Account Security - AlliTrack</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/sidebar-header.css" />
     <link rel="stylesheet" href="../css/account-security.css" />
     <script src="../js/preference-manager.js"></script>
+    <script src="../js/user-data-manager.js"></script>
 </head>
 
 <body>
     <div class="app">
         <div class="shell">
-            <!-- Sidebar -->
             <aside class="sidebar" role="navigation" aria-label="Main Sidebar">
                 <div class="brand">
-                    <div class="logo">AT</div>
+                    <div class="logo">
+                        <img src="../pictures/AlliTrack Logo.png" alt="AlliTrack Logo" class="logo-img"
+                            style="width: 32px; height: 32px;">
+                    </div>
                     <div>
                         <div class="title">AlliTrack</div>
                         <div class="subtitle" data-translate="user_dashboard">User Dashboard</div>
@@ -316,17 +318,82 @@
             }
         };
 
+        // Account Dropdown Functionality - FIXED
+        function setupAccountDropdown() {
+            console.log('Setting up account dropdown...');
+            const accountBtn = document.getElementById("accountBtn");
+            const accountMenu = document.getElementById("accountMenu");
+
+            if (accountBtn && accountMenu) {
+                // Clear any existing event listeners
+                const newBtn = accountBtn.cloneNode(true);
+                accountBtn.parentNode.replaceChild(newBtn, accountBtn);
+
+                const newMenu = accountMenu.cloneNode(true);
+                accountMenu.parentNode.replaceChild(newMenu, accountMenu);
+
+                const refreshedBtn = document.getElementById("accountBtn");
+                const refreshedMenu = document.getElementById("accountMenu");
+
+                refreshedBtn.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    const isShowing = refreshedMenu.classList.contains("show");
+                    refreshedMenu.classList.toggle("show");
+                    refreshedBtn.setAttribute("aria-expanded", !isShowing);
+                });
+
+                document.addEventListener("click", function (e) {
+                    if (!refreshedBtn.contains(e.target) && !refreshedMenu.contains(e.target)) {
+                        refreshedMenu.classList.remove("show");
+                        refreshedBtn.setAttribute("aria-expanded", false);
+                    }
+                });
+
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape" && refreshedMenu.classList.contains("show")) {
+                        refreshedMenu.classList.remove("show");
+                        refreshedBtn.setAttribute("aria-expanded", false);
+                    }
+                });
+
+                const menuItems = refreshedMenu.querySelectorAll("a");
+                menuItems.forEach(item => {
+                    item.addEventListener("click", function () {
+                        refreshedMenu.classList.remove("show");
+                        refreshedBtn.setAttribute("aria-expanded", false);
+                    });
+                });
+
+                refreshedBtn.style.cursor = 'pointer';
+            }
+        }
+
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
-            // Initialize preferences manager FIRST
+            console.log('Account Security: Starting initialization...');
+
+            // Initialize user data manager FIRST
+            if (window.userDataManager) {
+                console.log('User Data Manager found, initializing user display...');
+                window.userDataManager.initializeUserDisplay();
+
+                // Check what user data is available
+                const userData = window.userDataManager.getUserData();
+                console.log('User Data from manager:', userData);
+                console.log('Profile picture URL:', userData.photo);
+            } else {
+                console.error('User Data Manager NOT FOUND! Check if user-data-manager.js is loaded.');
+            }
+
+            // Initialize preferences manager
             if (window.preferencesManager) {
-                console.log('Account Security: Initializing Preferences Manager...');
+                console.log('Preferences Manager found, initializing...');
                 window.preferencesManager.initialize();
 
-                // ============ ADD THIS ============
                 // Apply theme immediately when page loads
                 window.preferencesManager.applyTheme();
-                // ==================================
 
                 // Get current language from preferences manager
                 const currentLang = window.preferencesManager.getCurrentLanguage() || 'en';
@@ -336,16 +403,14 @@
                 applyTranslations('en'); // Default to English
             }
 
-            // ============ ADD THIS ============
             // Setup theme listener
             setupThemeListener();
-            // ==================================
 
-            // Get user data from localStorage (set by dashboard login)
-            const userData = JSON.parse(localStorage.getItem('userData'));
+            // SETUP ACCOUNT DROPDOWN - MUST BE CALLED HERE
+            setupAccountDropdown();
 
-            // Update user information in header
-            updateUserDisplay(userData);
+            // Setup logout functionality
+            setupLogout();
 
             // Load security settings
             loadSecuritySettings();
@@ -353,16 +418,12 @@
             // Initialize form functionality
             initForm();
 
-            // Setup logout functionality
-            setupLogout();
-
             // Render login history
             renderLoginHistory();
 
-            console.log('Account Security page loaded for user:', userData?.name);
+            console.log('Account Security page loaded');
         });
 
-        // ============ ADD THIS FUNCTION ============
         // Setup theme listener
         function setupThemeListener() {
             console.log('Setting up theme listener...');
@@ -381,8 +442,6 @@
                 }
             });
 
-            // Listen for theme changes via broadcast (from preference-manager.js)
-            // You might need to add this event dispatch in your preference-manager.js
             document.addEventListener('themeChanged', function (e) {
                 console.log('Theme changed via event:', e.detail.theme);
                 if (window.preferencesManager) {
@@ -390,7 +449,6 @@
                 }
             });
         }
-        // ===========================================
 
         // Apply translations to the page
         function applyTranslations(language) {
@@ -442,7 +500,7 @@
             });
         }
 
-        // Update user display in header
+        // Update user display in header - simplified version
         function updateUserDisplay(userData) {
             if (!userData) {
                 console.warn('No user data found in localStorage');
@@ -461,18 +519,7 @@
                 userEmailElement.textContent = userData.email;
             }
 
-            // Update user avatar with initials
-            const userAvatarElement = document.getElementById('userAvatar');
-            if (userAvatarElement && userData.name) {
-                // Get initials from name (same as dashboard logic)
-                const initials = userData.name
-                    .split(' ')
-                    .map(word => word[0])
-                    .join('')
-                    .toUpperCase()
-                    .substring(0, 2);
-                userAvatarElement.textContent = initials;
-            }
+            // Note: The avatar is handled by userDataManager.initializeUserDisplay()
         }
 
         // Logout functionality
@@ -482,10 +529,11 @@
                 logoutBtn.addEventListener('click', function (e) {
                     e.preventDefault();
 
-                    // Clear user data from localStorage (same as dashboard)
+                    // Clear user data from localStorage
                     localStorage.removeItem('userData');
+                    localStorage.removeItem('userProfile');
 
-                    // Redirect to login page (same as dashboard)
+                    // Redirect to login page
                     window.location.href = '../../landing page/pages/index.html';
                 });
             }
@@ -518,8 +566,8 @@
                 });
             }
 
-            // Setup account dropdown
-            setupAccountDropdown();
+            // REMOVE the setupAccountDropdown() call from here
+            // It's already called directly in DOMContentLoaded
         }
 
         // Sample login history data
@@ -707,41 +755,21 @@
             }
         }
 
-        // Account Dropdown Functionality
-        function setupAccountDropdown() {
-            const accountBtn = document.getElementById("accountBtn");
-            const accountMenu = document.getElementById("accountMenu");
-
-            if (accountBtn && accountMenu) {
-                accountBtn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    accountMenu.classList.toggle("show");
-                    accountBtn.setAttribute("aria-expanded", accountMenu.classList.contains("show"));
-                });
-
-                // Close dropdown when clicking outside
-                document.addEventListener("click", (e) => {
-                    if (!accountBtn.contains(e.target) && !accountMenu.contains(e.target)) {
-                        accountMenu.classList.remove("show");
-                        accountBtn.setAttribute("aria-expanded", false);
-                    }
-                });
-
-                // Close dropdown when pressing Escape key
-                document.addEventListener("keydown", (e) => {
-                    if (e.key === "Escape" && accountMenu.classList.contains("show")) {
-                        accountMenu.classList.remove("show");
-                        accountBtn.setAttribute("aria-expanded", false);
-                    }
-                });
-            }
-        }
-
         // Listen for language changes from preference-manager.js
         document.addEventListener('languageChanged', function (e) {
             console.log('Language changed to:', e.detail.language);
             applyTranslations(e.detail.language);
             renderLoginHistory(); // Re-render with new language
+        });
+
+        // Listen for user data changes
+        document.addEventListener('userDataChanged', function (e) {
+            console.log('User data changed event received:', e.detail);
+            // Update display if needed
+            if (window.userDataManager) {
+                window.userDataManager.updateHeaderAvatar();
+                window.userDataManager.updateUserInfo();
+            }
         });
     </script>
 </body>

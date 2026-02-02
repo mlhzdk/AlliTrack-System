@@ -6,23 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title data-translate="dashboard_page_title">Admin Dashboard - AlliTrack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="../css/header-sidebar.css" />
-    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/sidebar-header.css" />
+    <link rel="stylesheet" href="../css/admin-dashboard.css" />
     <script src="../js/preference-manager.js"></script>
-    <script src="../js/admin-data-manager.js"></script>
+    <script src="../js/user-data-manager.js"></script>
 </head>
 
 <body>
-    <!-- Mobile Warning Message -->
-    <div class="mobile-warning" style="display: none;">
-        <div class="icon">📱</div>
-        <h1>Admin Dashboard Not Available on Mobile</h1>
-        <p>The Admin Dashboard is designed for use on larger screens (laptops, tablets, or desktop computers).
-            Please access this feature from a device with a screen width of 768 pixels or larger.</p>
-        <p>For mobile access, please use the regular user interface.</p>
-        <a href="../../landing page/pages/index.html" class="mobile-btn">Go to Home Page</a>
-    </div>
-
     <!-- Main Dashboard Content -->
     <div class="app" id="dashboardContent">
         <div class="shell">
@@ -51,8 +41,7 @@
                         <i class="fas fa-list-ol"></i> <span data-translate="ticket_queue">Ticket Queue</span>
                     </a>
                     <a href="../pages/escalated-tickets.html" data-section="escalated-tickets">
-                        <i class="fas fa-exclamation-triangle"></i> <span data-translate="escalated_tickets">Escalated
-                            Tickets</span>
+                        <i class="fas fa-exclamation-triangle"></i> <span data-translate="escalated_tickets">Escalated Tickets</span>
                     </a>
 
                     <div class="nav-section" data-translate="user_management">User Management</div>
@@ -63,8 +52,7 @@
                         <i class="fas fa-headset"></i> <span data-translate="support_agents">Support Agents</span>
                     </a>
                     <a href="../pages/roles-permissions.html" data-section="roles-permissions">
-                        <i class="fas fa-user-shield"></i> <span data-translate="roles_permissions">Roles &
-                            Permissions</span>
+                        <i class="fas fa-user-shield"></i> <span data-translate="roles_permissions">Roles & Permissions</span>
                     </a>
 
                     <div class="nav-section" data-translate="analytics">Analytics</div>
@@ -105,6 +93,10 @@
                             data-translate-placeholder="search_tickets" aria-label="Search tickets, users, IDs" />
                     </div>
                     <div class="header-actions">
+                        <div class="admin-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span data-translate="admin">Admin</span>
+                        </div>
                         <div style="text-align:right">
                             <div style="font-weight:700" id="userNameDisplay">Admin User</div>
                             <div style="font-size:.82rem;color:var(--muted)" id="userEmailDisplay">admin@allitrack.com
@@ -118,6 +110,8 @@
                             <div class="arrow"></div>
                             <a href="../pages/profile-settings.html" data-translate="profile">Profile</a>
                             <a href="../pages/preferences.html" data-translate="settings">Settings</a>
+                            <div class="divider"></div>
+                            <a href="../pages/system-settings.html" data-translate="system_settings">System Settings</a>
                             <a href="../pages/audit-log.html" data-translate="audit_log">Audit Log</a>
                             <div class="divider"></div>
                             <a href="#" id="logoutBtn" data-translate="logout">Logout</a>
@@ -130,8 +124,7 @@
                     <div class="dashboard-content">
                         <!-- Feature 1: System Overview -->
                         <section class="dashboard-section">
-                            <h2><i class="fas fa-tachometer-alt"></i> <span data-translate="system_overview">System
-                                    Overview</span></h2>
+                            <h2><i class="fas fa-tachometer-alt"></i> <span data-translate="system_overview">System Overview</span></h2>
                             <div class="system-overview-grid">
                                 <div class="overview-card">
                                     <div class="overview-icon total-tickets">
@@ -141,8 +134,7 @@
                                         <div class="overview-count">156</div>
                                         <div class="overview-label" data-translate="total_tickets">Total Tickets</div>
                                         <div class="overview-trend up">
-                                            <i class="fas fa-arrow-up"></i> 12% <span
-                                                data-translate="from_last_week">from last week</span>
+                                            <i class="fas fa-arrow-up"></i> 12% <span data-translate="from_last_week">from last week</span>
                                         </div>
                                     </div>
                                 </div>
@@ -154,8 +146,19 @@
                                         <div class="overview-count">42</div>
                                         <div class="overview-label" data-translate="open_tickets">Open Tickets</div>
                                         <div class="overview-trend down">
-                                            <i class="fas fa-arrow-down"></i> 8% <span
-                                                data-translate="from_yesterday">from yesterday</span>
+                                            <i class="fas fa-arrow-down"></i> 8% <span data-translate="from_yesterday">from yesterday</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-icon active-users">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="overview-content">
+                                        <div class="overview-count">1,248</div>
+                                        <div class="overview-label" data-translate="active_users">Active Users</div>
+                                        <div class="overview-trend up">
+                                            <i class="fas fa-arrow-up"></i> 5% <span data-translate="today">today</span>
                                         </div>
                                     </div>
                                 </div>
@@ -165,11 +168,9 @@
                                     </div>
                                     <div class="overview-content">
                                         <div class="overview-count">2.4<span class="unit">h</span></div>
-                                        <div class="overview-label" data-translate="avg_response_time">Avg Response Time
-                                        </div>
+                                        <div class="overview-label" data-translate="avg_response_time">Avg Response Time</div>
                                         <div class="overview-trend down">
-                                            <i class="fas fa-arrow-down"></i> 15% <span
-                                                data-translate="improvement">improvement</span>
+                                            <i class="fas fa-arrow-down"></i> 15% <span data-translate="improvement">improvement</span>
                                         </div>
                                     </div>
                                 </div>
@@ -179,8 +180,7 @@
                         <!-- Feature 2: Quick Stats & Actions -->
                         <div class="dashboard-row">
                             <section class="dashboard-section stats-section">
-                                <h2><i class="fas fa-chart-pie"></i> <span data-translate="ticket_statistics">Ticket
-                                        Statistics</span></h2>
+                                <h2><i class="fas fa-chart-pie"></i> <span data-translate="ticket_statistics">Ticket Statistics</span></h2>
                                 <div class="stats-grid">
                                     <div class="stat-item">
                                         <div class="stat-value">65%</div>
@@ -214,8 +214,7 @@
                             </section>
 
                             <section class="dashboard-section quick-actions-section">
-                                <h2><i class="fas fa-bolt"></i> <span data-translate="admin_actions">Admin
-                                        Actions</span></h2>
+                                <h2><i class="fas fa-bolt"></i> <span data-translate="admin_actions">Admin Actions</span></h2>
                                 <div class="admin-actions-grid">
                                     <a href="../pages/users.html" class="admin-action-card">
                                         <div class="admin-action-icon">
@@ -223,8 +222,7 @@
                                         </div>
                                         <div class="admin-action-content">
                                             <div class="admin-action-title" data-translate="add_user">Add User</div>
-                                            <div class="admin-action-desc" data-translate="create_new_user_account">
-                                                Create new user account</div>
+                                            <div class="admin-action-desc" data-translate="create_new_user_account">Create new user account</div>
                                         </div>
                                     </a>
                                     <a href="../pages/system-settings.html" class="admin-action-card">
@@ -232,10 +230,8 @@
                                             <i class="fas fa-cog"></i>
                                         </div>
                                         <div class="admin-action-content">
-                                            <div class="admin-action-title" data-translate="system_config">System Config
-                                            </div>
-                                            <div class="admin-action-desc" data-translate="configure_system_settings">
-                                                Configure system settings</div>
+                                            <div class="admin-action-title" data-translate="system_config">System Config</div>
+                                            <div class="admin-action-desc" data-translate="configure_system_settings">Configure system settings</div>
                                         </div>
                                     </a>
                                     <a href="../pages/reports.html" class="admin-action-card">
@@ -243,10 +239,8 @@
                                             <i class="fas fa-file-export"></i>
                                         </div>
                                         <div class="admin-action-content">
-                                            <div class="admin-action-title" data-translate="generate_report">Generate
-                                                Report</div>
-                                            <div class="admin-action-desc" data-translate="create_performance_report">
-                                                Create performance report</div>
+                                            <div class="admin-action-title" data-translate="generate_report">Generate Report</div>
+                                            <div class="admin-action-desc" data-translate="create_performance_report">Create performance report</div>
                                         </div>
                                     </a>
                                     <a href="../pages/announcements-admin.html" class="admin-action-card">
@@ -254,10 +248,8 @@
                                             <i class="fas fa-bullhorn"></i>
                                         </div>
                                         <div class="admin-action-content">
-                                            <div class="admin-action-title" data-translate="post_announcement">Post
-                                                Announcement</div>
-                                            <div class="admin-action-desc" data-translate="broadcast_to_all_users">
-                                                Broadcast to all users</div>
+                                            <div class="admin-action-title" data-translate="post_announcement">Post Announcement</div>
+                                            <div class="admin-action-desc" data-translate="broadcast_to_all_users">Broadcast to all users</div>
                                         </div>
                                     </a>
                                 </div>
@@ -267,18 +259,15 @@
                         <!-- Feature 3: Recent Activity & Alerts -->
                         <div class="dashboard-row">
                             <section class="dashboard-section activity-section">
-                                <h2><i class="fas fa-history"></i> <span data-translate="recent_system_activity">Recent
-                                        System Activity</span></h2>
+                                <h2><i class="fas fa-history"></i> <span data-translate="recent_system_activity">Recent System Activity</span></h2>
                                 <div class="system-activity-list">
                                     <div class="system-activity-item">
                                         <div class="activity-type admin">
                                             <i class="fas fa-user-shield"></i>
                                         </div>
                                         <div class="activity-details">
-                                            <div class="activity-title" data-translate="new_admin_added">New admin added
-                                            </div>
-                                            <div class="activity-meta" data-translate="user_jdoe_added_as_admin">User
-                                                jdoe added as system administrator</div>
+                                            <div class="activity-title" data-translate="new_admin_added">New admin added</div>
+                                            <div class="activity-meta" data-translate="user_jdoe_added_as_admin">User jdoe added as system administrator</div>
                                         </div>
                                         <div class="activity-time">10 min ago</div>
                                     </div>
@@ -287,10 +276,8 @@
                                             <i class="fas fa-exclamation-triangle"></i>
                                         </div>
                                         <div class="activity-details">
-                                            <div class="activity-title" data-translate="ticket_escalated">Ticket
-                                                escalated</div>
-                                            <div class="activity-meta" data-translate="ticket_4872_escalated">Ticket
-                                                #TKT-4872 escalated to Level 2</div>
+                                            <div class="activity-title" data-translate="ticket_escalated">Ticket escalated</div>
+                                            <div class="activity-meta" data-translate="ticket_4872_escalated">Ticket #TKT-4872 escalated to Level 2</div>
                                         </div>
                                         <div class="activity-time">45 min ago</div>
                                     </div>
@@ -299,10 +286,8 @@
                                             <i class="fas fa-server"></i>
                                         </div>
                                         <div class="activity-details">
-                                            <div class="activity-title" data-translate="system_backup_completed">System
-                                                backup completed</div>
-                                            <div class="activity-meta" data-translate="daily_backup_successful">Daily
-                                                backup completed successfully</div>
+                                            <div class="activity-title" data-translate="system_backup_completed">System backup completed</div>
+                                            <div class="activity-meta" data-translate="daily_backup_successful">Daily backup completed successfully</div>
                                         </div>
                                         <div class="activity-time">2 hours ago</div>
                                     </div>
@@ -311,10 +296,8 @@
                                             <i class="fas fa-user-slash"></i>
                                         </div>
                                         <div class="activity-details">
-                                            <div class="activity-title" data-translate="user_deactivated">User
-                                                deactivated</div>
-                                            <div class="activity-meta" data-translate="user_inactive_account">User
-                                                account deactivated due to inactivity</div>
+                                            <div class="activity-title" data-translate="user_deactivated">User deactivated</div>
+                                            <div class="activity-meta" data-translate="user_inactive_account">User account deactivated due to inactivity</div>
                                         </div>
                                         <div class="activity-time">5 hours ago</div>
                                     </div>
@@ -322,47 +305,37 @@
                             </section>
 
                             <section class="dashboard-section alerts-section">
-                                <h2><i class="fas fa-bell"></i> <span data-translate="system_alerts">System
-                                        Alerts</span></h2>
+                                <h2><i class="fas fa-bell"></i> <span data-translate="system_alerts">System Alerts</span></h2>
                                 <div class="alerts-list">
                                     <div class="alert-item warning">
                                         <div class="alert-icon">
                                             <i class="fas fa-exclamation-circle"></i>
                                         </div>
                                         <div class="alert-content">
-                                            <div class="alert-title" data-translate="high_ticket_volume">High Ticket
-                                                Volume</div>
-                                            <div class="alert-desc" data-translate="tickets_exceeding_threshold">Ticket
-                                                submissions exceeding threshold</div>
+                                            <div class="alert-title" data-translate="high_ticket_volume">High Ticket Volume</div>
+                                            <div class="alert-desc" data-translate="tickets_exceeding_threshold">Ticket submissions exceeding threshold</div>
                                         </div>
-                                        <a href="../pages/admin-tickets.html" class="alert-action"
-                                            data-translate="view">View</a>
+                                        <a href="../pages/admin-tickets.html" class="alert-action" data-translate="view">View</a>
                                     </div>
                                     <div class="alert-item info">
                                         <div class="alert-icon">
                                             <i class="fas fa-info-circle"></i>
                                         </div>
                                         <div class="alert-content">
-                                            <div class="alert-title" data-translate="update_available">Update Available
-                                            </div>
-                                            <div class="alert-desc" data-translate="system_update_v1_3_0">System update
-                                                v1.3.0 available</div>
+                                            <div class="alert-title" data-translate="update_available">Update Available</div>
+                                            <div class="alert-desc" data-translate="system_update_v1_3_0">System update v1.3.0 available</div>
                                         </div>
-                                        <a href="../pages/system-settings.html" class="alert-action"
-                                            data-translate="update">Update</a>
+                                        <a href="../pages/system-settings.html" class="alert-action" data-translate="update">Update</a>
                                     </div>
                                     <div class="alert-item success">
                                         <div class="alert-icon">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
                                         <div class="alert-content">
-                                            <div class="alert-title" data-translate="backup_successful">Backup
-                                                Successful</div>
-                                            <div class="alert-desc" data-translate="latest_backup_completed">Latest
-                                                system backup completed</div>
+                                            <div class="alert-title" data-translate="backup_successful">Backup Successful</div>
+                                            <div class="alert-desc" data-translate="latest_backup_completed">Latest system backup completed</div>
                                         </div>
-                                        <a href="../pages/system-settings.html" class="alert-action"
-                                            data-translate="details">Details</a>
+                                        <a href="../pages/system-settings.html" class="alert-action" data-translate="details">Details</a>
                                     </div>
                                 </div>
                             </section>
@@ -403,9 +376,6 @@
                 'system_settings': 'System Settings',
                 'announcements': 'Announcements',
                 'audit_log': 'Audit Log',
-                'preferences': 'Preferences',
-                'theme_preference': 'Theme Preference',
-                'language_preference': 'Language Preference',
                 'search_tickets': 'Search tickets, users, agents...',
                 'admin': 'Admin',
                 'profile': 'Profile',
@@ -414,9 +384,11 @@
                 'system_overview': 'System Overview',
                 'total_tickets': 'Total Tickets',
                 'open_tickets': 'Open Tickets',
+                'active_users': 'Active Users',
                 'avg_response_time': 'Avg Response Time',
                 'from_last_week': 'from last week',
                 'from_yesterday': 'from yesterday',
+                'today': 'today',
                 'improvement': 'improvement',
                 'ticket_statistics': 'Ticket Statistics',
                 'resolved_tickets': 'Resolved Tickets',
@@ -474,9 +446,6 @@
                 'system_settings': 'Mga Setting ng System',
                 'announcements': 'Mga Anunsyo',
                 'audit_log': 'Audit Log',
-                'preferences': 'Mga Kagustuhan',
-                'theme_preference': 'Kagustuhan sa Tema',
-                'language_preference': 'Kagustuhan sa Wika',
                 'search_tickets': 'Maghanap ng mga ticket, user, agent...',
                 'admin': 'Admin',
                 'profile': 'Profile',
@@ -485,9 +454,11 @@
                 'system_overview': 'Pangkalahatang-ideya ng System',
                 'total_tickets': 'Kabuuang mga Ticket',
                 'open_tickets': 'Mga Bukas na Ticket',
+                'active_users': 'Mga Aktibong User',
                 'avg_response_time': 'Average na Response Time',
                 'from_last_week': 'mula noong nakaraang linggo',
                 'from_yesterday': 'mula kahapon',
+                'today': 'ngayong araw',
                 'improvement': 'pagpapabuti',
                 'ticket_statistics': 'Mga Istatistika ng Ticket',
                 'resolved_tickets': 'Mga Naresolbang Ticket',
@@ -526,26 +497,9 @@
             }
         };
 
-        // Check screen size on load and resize
-        function checkScreenSize() {
-            const mobileWarning = document.querySelector('.mobile-warning');
-            const dashboardContent = document.querySelector('.app');
-
-            if (window.innerWidth <= 768) {
-                if (mobileWarning) mobileWarning.style.display = 'block';
-                if (dashboardContent) dashboardContent.style.display = 'none';
-            } else {
-                if (mobileWarning) mobileWarning.style.display = 'none';
-                if (dashboardContent) dashboardContent.style.display = 'flex';
-            }
-        }
-
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             console.log('Admin Dashboard: Starting initialization...');
-
-            // Check screen size
-            checkScreenSize();
 
             // Load admin user data
             loadAndDisplayAdminData();
@@ -581,9 +535,6 @@
                     loadAndDisplayAdminData();
                 }
             });
-
-            // Listen for resize events
-            window.addEventListener('resize', checkScreenSize);
         });
 
         // Load admin user data

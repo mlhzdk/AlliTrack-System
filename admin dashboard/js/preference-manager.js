@@ -10,7 +10,7 @@ class PreferencesManager {
                 
                 // Navigation - EXACT keys that match data-section attributes
                 dashboard: "Dashboard",
-                myTickets: "My Tickets",
+                myTickets: "All Tickets",
                 notifications: "Notifications",
                 submitTicket: "Submit a Ticket",  // Matches data-section="submit-ticket"
                 preferences: "Preferences",
@@ -74,7 +74,7 @@ class PreferencesManager {
                 
                 // Navigation - EXACT keys that match data-section attributes
                 dashboard: "Dashboard",
-                myTickets: "Aking Ticket",
+                myTickets: "Lahat ng Ticket",
                 notifications: "Notipikasyon",
                 submitTicket: "Sumite Ticket",  // Matches data-section="submit-ticket"
                 preferences: "Kagustuhan",
