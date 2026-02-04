@@ -5,17 +5,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AlliTrack</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/header-footer.css">
     <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/accessibility.js" defer></script>
 </head>
 
 <body>
+    <div class="accessibility-menu" id="accessibilityMenu">
+        <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Open accessibility menu">
+            <i class="fas fa-universal-access" aria-hidden="true"></i>
+        </button>
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <div class="accessibility-header">
+                <h3>Accessibility Settings</h3>
+                <button class="close-panel" id="closeAccessibility" aria-label="Close accessibility menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="accessibility-controls">
+                <div class="control-group">
+                    <h4>Theme</h4>
+                    <div class="theme-toggle">
+                        <button class="theme-btn active" data-theme="light" aria-label="Switch to light mode">
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                            <span>Light</span>
+                        </button>
+                        <button class="theme-btn" data-theme="dark" aria-label="Switch to dark mode">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                            <span>Dark</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Text Size</h4>
+                    <div class="text-size-controls">
+                        <button class="size-btn" id="decreaseFont" aria-label="Decrease text size">
+                            <i class="fas fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <span class="size-label" id="currentFontSize">Medium</span>
+                        <button class="size-btn" id="increaseFont" aria-label="Increase text size">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Contrast Mode</h4>
+                    <button class="contrast-btn" id="toggleContrast" aria-pressed="false">
+                        <span class="btn-label">High Contrast</span>
+                        <span class="toggle-switch"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <h4>Focus Enhancement</h4>
+                    <button class="focus-btn" id="toggleFocus" aria-pressed="false">
+                        <span class="btn-label">Highlight Focus</span>
+                        <span class="toggle-switch"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <h4>Reset All Settings</h4>
+                    <button class="reset-btn" id="resetAccessibility" aria-label="Reset all accessibility settings">
+                        <i class="fas fa-redo" aria-hidden="true"></i> Reset to Default
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="site-header" role="banner">
         <div class="container header-inner">
-            <div class="brand">AlliTrack</div>
+            <div class="brand">
+                <a href="../pages/index.html" aria-label="AlliTrack Home">
+                    <img src="../pictures/AlliTrack Logo.png" alt="AlliTrack Logo" width="150" height="40">
+                </a>
+            </div>
 
             <nav class="primary-nav" role="navigation" aria-label="Primary navigation">
                 <ul id="nav-menu" class="nav-list" data-visible="false">
@@ -38,74 +109,155 @@
     <!-- Main Content -->
     <main>
         <div class="container">
+            <!-- Hero Section -->
             <section class="about-hero">
                 <div class="hero-content">
                     <h1>About AlliTrack</h1>
-                    <p>Discover how our innovative support ticket management system helps businesses streamline their operations and enhance customer satisfaction.</p>
+                    <p>Discover how our innovative support ticket management system helps businesses streamline their
+                        operations and enhance customer satisfaction.</p>
                 </div>
             </section>
 
-            <div class="about-content">
-                <!-- About Information -->
-                <div class="about-info">
-                    <h2 style="margin-top: 0; margin-bottom: 30px; color: #111827;">About Our Company</h2>
-
-                    <div class="about-section">
-                        <div class="about-icon">
+            <!-- Company Overview -->
+            <section class="company-overview">
+                <div class="overview-content">
+                    <div class="overview-text">
+                        <h2>Business Alliance Inc.</h2>
+                        <p>BUSINESS ALLIANCE INC. is an IT company engaged in providing comprehensive business solutions
+                            in telecommunications, Voice Over Internet Protocol (VoIP), System Integration, Door
+                            Access/Biometrics, IP Surveillance, and Security Solutions for businesses of all sizes.</p>
+                        <p>With established clients and strong supplier partnerships, we focus on delivering unique
+                            security and telecommunication solutions through state-of-the-art technology, enhancing and
+                            upgrading traditional systems in the most economical approach.</p>
+                    </div>
+                    <div class="overview-image">
+                        <div class="image-placeholder">
                             <i class="fas fa-building"></i>
-                        </div>
-                        <div class="about-details">
-                            <h3>Business Alliance Inc.</h3>
-                            <p>BUSINESS ALLIANCE INC., is an IT company engaged in providing business solutions in the fields of telecommunications, Voice Over Internet Protocol (VoIP), System Integration, Door Access/Biometrics, IP Surveillance, providing Security Solutions and similar to any kind of business.</p>
-                            <p>The company has already established clients and strong partnership with its suppliers. The company is focused in providing unique security and telecommunication solutions through adapting new and state of the art technology that will enhance, upgrade and replace traditional PABX and existing CCTV System in the most economical approach.</p>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Mission & Vision -->
-                <div class="mission-vision">
-                    <h2 style="margin-top: 0; margin-bottom: 30px; color: #111827;">Our Mission & Vision</h2>
+            <!-- Mission & Vision -->
+            <section class="mission-vision-section">
+                <h2>Our Mission & Vision</h2>
 
-                    <div class="about-section">
-                        <div class="about-icon">
+                <div class="mv-grid">
+                    <div class="mv-card mission">
+                        <div class="mv-icon">
                             <i class="fas fa-bullseye"></i>
                         </div>
-                        <div class="about-details">
-                            <h3>Our Mission</h3>
-                            <ul class="mission-list">
+                        <h3>Our Mission</h3>
+                        <div class="mv-content">
+                            <ul class="mv-list">
                                 <li>
-                                    <div class="mission-icon">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="mission-text">To provide high quality products and services with reasonable pricing and establishing a successful relationship with our customers and suppliers.</div>
+                                    <i class="fas fa-check"></i>
+                                    <span>To provide high quality products and services with reasonable pricing and
+                                        establishing successful relationships with customers and suppliers.</span>
                                 </li>
                                 <li>
-                                    <div class="mission-icon">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="mission-text">To innovate and expand our product lines with new, technologically advanced and state-of-the-art features that will cater all the needs to any kind and size of business as one stop shop provider.</div>
+                                    <i class="fas fa-check"></i>
+                                    <span>To innovate and expand our product lines with new, technologically advanced
+                                        features that cater to all business needs as a one-stop shop provider.</span>
                                 </li>
                                 <li>
-                                    <div class="mission-icon">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="mission-text">To maintain quality products and services to meet the critical challenge in establishing a stronghold in the industry by continuous research and development in the field of telecommunication in a cost effective approach.</div>
+                                    <i class="fas fa-check"></i>
+                                    <span>To maintain quality products and services through continuous research and
+                                        development in telecommunications with a cost-effective approach.</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="about-section">
-                        <div class="about-icon">
+                    <div class="mv-card vision">
+                        <div class="mv-icon">
                             <i class="fas fa-eye"></i>
                         </div>
-                        <div class="about-details">
-                            <h3>Our Vision</h3>
-                            <p>To be recognized as the leading one stop shop for business solutions provider to any Filipino Enterprise providing high quality in an economical approach and innovative telecommunication services, unmatched support and quality services in terms of supplies to our customers, working in partnership with the team of highly competent and honest individual to meet total customer satisfaction.</p>
+                        <h3>Our Vision</h3>
+                        <div class="mv-content">
+                            <p>To be recognized as the leading one-stop shop for business solutions provider to any
+                                Filipino Enterprise, offering high-quality, economical, and innovative telecommunication
+                                services with unmatched support and quality supplies, working with a team of highly
+                                competent and honest individuals to achieve total customer satisfaction.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Core Values -->
+            <section class="core-values">
+                <h2>Our Core Values</h2>
+                <p class="values-intro">At Business Alliance Inc., our values guide everything we do and define who we
+                    are as a company.</p>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We conduct business with honesty, transparency, and ethical practices in all our dealings
+                            with clients, partners, and employees.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Customer Focus</h3>
+                        <p>Our clients are at the center of everything we do. We listen, understand, and deliver
+                            solutions that exceed their expectations.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>We continuously seek new technologies and approaches to provide cutting-edge solutions that
+                            drive business success.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>We strive for the highest standards in quality, service delivery, and customer support in
+                            everything we undertake.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Company Achievements -->
+            <section class="achievements">
+                <h2>Why Choose Us</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-number">10+</div>
+                        <h3>Years of Excellence</h3>
+                        <p>Over a decade of experience in delivering quality IT and telecommunication solutions.</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-number">500+</div>
+                        <h3>Happy Clients</h3>
+                        <p>Satisfied businesses across various industries relying on our solutions.</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-number">24/7</div>
+                        <h3>Support Available</h3>
+                        <p>Round-the-clock technical support and customer service.</p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-number">100+</div>
+                        <h3>Projects Completed</h3>
+                        <p>Successful implementations of complex business solutions.</p>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 

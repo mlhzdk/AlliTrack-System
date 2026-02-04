@@ -5,22 +5,94 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>AlliTrack | Streamlined Ticketing System</title>
-    <meta name="description" content="Streamline your support ticket management with AlliTrack's efficient and reliable system. Get help from our support team through dedicated service portals.">
+    <meta name="description"
+        content="Streamline your support ticket management with AlliTrack's efficient and reliable system. Get help from our support team through dedicated service portals.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="../css/header-footer.css" />
     <link rel="stylesheet" href="../css/index.css" />
     <meta name="theme-color" content="#0d6efd" />
+    <script src="../js/accessibility.js"></script>
 </head>
 
 <body>
+    <div class="accessibility-menu" id="accessibilityMenu">
+        <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Open accessibility menu">
+            <i class="fas fa-universal-access" aria-hidden="true"></i>
+        </button>
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <div class="accessibility-header">
+                <h3>Accessibility Settings</h3>
+                <button class="close-panel" id="closeAccessibility" aria-label="Close accessibility menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="accessibility-controls">
+                <div class="control-group">
+                    <h4>Theme</h4>
+                    <div class="theme-toggle">
+                        <button class="theme-btn active" data-theme="light" aria-label="Switch to light mode">
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                            <span>Light</span>
+                        </button>
+                        <button class="theme-btn" data-theme="dark" aria-label="Switch to dark mode">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                            <span>Dark</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Text Size</h4>
+                    <div class="text-size-controls">
+                        <button class="size-btn" id="decreaseFont" aria-label="Decrease text size">
+                            <i class="fas fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <span class="size-label" id="currentFontSize">Medium</span>
+                        <button class="size-btn" id="increaseFont" aria-label="Increase text size">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Contrast Mode</h4>
+                    <button class="contrast-btn" id="toggleContrast" aria-pressed="false">
+                        <span class="btn-label">High Contrast</span>
+                        <span class="toggle-switch"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <h4>Focus Enhancement</h4>
+                    <button class="focus-btn" id="toggleFocus" aria-pressed="false">
+                        <span class="btn-label">Highlight Focus</span>
+                        <span class="toggle-switch"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <h4>Reset All Settings</h4>
+                    <button class="reset-btn" id="resetAccessibility" aria-label="Reset all accessibility settings">
+                        <i class="fas fa-redo" aria-hidden="true"></i> Reset to Default
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="site-header" role="banner">
         <div class="container header-inner">
-            <div class="brand">AlliTrack</div>
+            <div class="brand">
+                <a href="../pages/index.html" aria-label="AlliTrack Home">
+                    <img src="../pictures/AlliTrack Logo.png" alt="AlliTrack Logo" width="150" height="40">
+                </a>
+            </div>
 
             <nav class="primary-nav" role="navigation" aria-label="Primary navigation">
                 <ul id="nav-menu" class="nav-list" data-visible="false">
@@ -68,7 +140,8 @@
                         </div>
                         <h3>IP Surveillance System (CCTV)</h3>
                         <p class="service-description">Assistance with setup, monitoring, and troubleshooting.</p>
-                        <a href="../pages/service/service-one.html" class="quick-question-link">Click here to access instructions</a>
+                        <a href="../pages/service/service-one.html" class="quick-question-link">Click here to access
+                            instructions</a>
                     </div>
 
                     <div class="service-card" data-service="2">
@@ -77,7 +150,8 @@
                         </div>
                         <h3>IP PBX System (Yeastar)</h3>
                         <p class="service-description">Support for call setup, communication, and troubleshooting.</p>
-                        <a href="../pages/service/service-two.html" class="quick-question-link">Click here to access instructions</a>
+                        <a href="../pages/service/service-two.html" class="quick-question-link">Click here to access
+                            instructions</a>
                     </div>
 
                     <div class="service-card" data-service="3">
@@ -86,7 +160,8 @@
                         </div>
                         <h3>GSM Alarm System</h3>
                         <p class="service-description">Installation, alert management, and system monitoring.</p>
-                        <a href="../pages/service/service-three.html" class="quick-question-link">Click here to access instructions</a>
+                        <a href="../pages/service/service-three.html" class="quick-question-link">Click here to access
+                            instructions</a>
                     </div>
 
                     <div class="service-card" data-service="4">
@@ -95,7 +170,8 @@
                         </div>
                         <h3>Biometrics / Door Access</h3>
                         <p class="service-description">Access configuration, enrollment, and secure operations.</p>
-                        <a href="../pages/service/service-four.html" class="quick-question-link">Click here to access instructions</a>
+                        <a href="../pages/service/service-four.html" class="quick-question-link">Click here to access
+                            instructions</a>
                     </div>
                 </div>
             </section>

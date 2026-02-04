@@ -11,7 +11,7 @@
     --ease: cubic-bezier(.2, .9, .2, 1);
     
     /* Light Theme Defaults - SOLID BACKGROUNDS */
-    --bg: #ffffff; /* Changed from gradient to solid */
+    --bg: #ffffff;
     --surface: #ffffff;
     --text-primary: #0f172a;
     --text-secondary: #64748b;
@@ -22,7 +22,7 @@
 
 /* Dark Theme Variables - SOLID BACKGROUNDS */
 .dark-theme {
-    --bg: #1e293b; /* Changed from gradient to solid */
+    --bg: #1e293b;
     --surface: #1e293b;
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
@@ -36,7 +36,7 @@
 
 /* Light Theme Variables - SOLID BACKGROUNDS */
 .light-theme {
-    --bg: #ffffff; /* Changed from gradient to solid */
+    --bg: #ffffff;
     --surface: #ffffff;
     --text-primary: #0f172a;
     --text-secondary: #64748b;
@@ -57,7 +57,7 @@ body {
     height: 100%;
     margin: 0;
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: var(--bg); /* Now solid, not gradient */
+    background: var(--bg);
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -72,7 +72,7 @@ body {
     align-items: stretch;
     justify-content: center;
     padding: 28px;
-    background: var(--bg); /* Ensure solid background */
+    background: var(--bg);
 }
 
 .shell {
@@ -101,10 +101,13 @@ body {
     overflow: hidden;
 }
 
+/* AlliTrack Logo in Sidebar */
 .brand {
     display: flex;
     gap: 12px;
     align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sidebar-border);
 }
 
 .brand .logo {
@@ -118,18 +121,59 @@ body {
     color: white;
     font-weight: 700;
     box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+/* AlliTrack logo styling - you can customize this based on your actual logo */
+.logo-allitrack {
     font-family: var(--mono);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #ffffff, #e0f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Or if you're using an image logo, add this class to your HTML:
+   <div class="logo"><img src="allitrack-logo.png" alt="AlliTrack" class="logo-img"></div>
+*/
+.logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Makes logo white on colored background */
 }
 
 .brand .title {
-    font-weight: 700;
+    font-weight: 800;
     color: var(--accent);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
 }
 
 .brand .subtitle {
-    font-size: .78rem;
+    font-size: .75rem;
     color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Optional: Add AlliTrack logo to header as well for mobile view */
+.header .logo-small {
+    display: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 0.9rem;
+    font-family: var(--mono);
 }
 
 .nav {
@@ -138,7 +182,6 @@ body {
     flex-direction: column;
     gap: 6px;
     flex: 1;
-    /* NO scrollbar - completely hidden */
     overflow: hidden;
 }
 
@@ -321,7 +364,7 @@ body {
     color: var(--accent);
 }
 
-/* FIXED: Layout from admin.css */
+/* Main Content */
 .main {
     flex: 1;
     display: flex;
@@ -348,6 +391,15 @@ body {
     font-size: 0.92rem;
     color: var(--text-secondary);
     transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Add AlliTrack branding to footer */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 /* Responsive Design */
@@ -392,5 +444,10 @@ body {
         flex-direction: column;
         gap: 8px;
         text-align: center;
+    }
+    
+    /* Show small logo in header on mobile */
+    .header .logo-small {
+        display: flex;
     }
 }
