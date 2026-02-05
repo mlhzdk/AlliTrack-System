@@ -146,7 +146,7 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     background: var(--surface);
-    color: var(--text-primary);
+    color: var(--text-primary) !important; /* Force text color for dark/light theme */
     font-size: 0.9rem;
     transition: all 0.2s var(--ease);
 }
@@ -158,7 +158,7 @@
 }
 
 .form-control::placeholder {
-    color: var(--text-secondary);
+    color: var(--text-secondary) !important; /* Force placeholder color */
     opacity: 0.7;
 }
 
@@ -340,6 +340,18 @@ textarea.form-control {
     resize: vertical;
     min-height: 80px;
     font-family: inherit;
+    color: var(--text-primary) !important; /* Force text color for textareas */
+}
+
+/* Select dropdowns */
+select.form-control {
+    color: var(--text-primary) !important;
+    background-color: var(--surface) !important;
+}
+
+/* Password fields */
+input[type="password"].form-control {
+    color: var(--text-primary) !important;
 }
 
 /* Dark Mode Overrides */
@@ -354,6 +366,7 @@ textarea.form-control {
     
     .form-control {
         background: rgba(255, 255, 255, 0.05);
+        border-color: #334155;
     }
 }
 
