@@ -7,10 +7,10 @@
     <title>AlliTrack · intelligent support ticketing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="shared/js/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="shared/css/landing-style.css">
     <style>
         /* ---------- GLOBAL DESIGN SYSTEM – refined corporate + DEEP BACKGROUND ANIMATIONS ---------- */
         * {
@@ -1580,7 +1580,7 @@
             transform: translateY(-6px) scale(1.15);
         }
 
-        /* ---------- ACCESSIBILITY MENU – FULLY FUNCTIONAL ---------- */
+        /* ---------- ACCESSIBILITY MENU ---------- */
         .accessibility-menu {
             position: fixed;
             bottom: 20px;
@@ -1839,7 +1839,7 @@
             overflow: hidden;
         }
 
-        /* ---------- COMPREHENSIVE MOBILE RESPONSIVE – burger fix & accessibility working ---------- */
+        /* ---------- COMPREHENSIVE MOBILE RESPONSIVE – optimized for all screen sizes ---------- */
         /* Tablet and small desktop */
         @media (max-width: 1024px) {
             .container {
@@ -1890,13 +1890,13 @@
             }
         }
 
-        /* Mobile landscape and large phones – BURGER FIXED + ACCESSIBILITY WORKING */
+        /* Mobile landscape and large phones */
         @media (max-width: 780px) {
             .container {
                 padding: 0 20px;
             }
 
-            /* ----- HEADER & NAVIGATION – BURGER VISIBLE & WORKING ----- */
+            /* ----- HEADER & NAVIGATION ----- */
             .site-header {
                 padding: 12px 0;
             }
@@ -1906,27 +1906,21 @@
             }
 
             .mobile-toggle {
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                width: 44px;
-                height: 44px;
-                font-size: 1.5rem;
+                display: flex;
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
             }
 
-            .primary-nav {
-                position: relative;
-            }
-
-            .primary-nav .nav-list {
-                display: none;
+            .primary-nav[data-visible="true"] .nav-list {
+                display: flex;
                 position: fixed;
                 top: 70px;
                 left: 20px;
                 right: 20px;
                 width: auto;
                 background: var(--bg-primary);
-                backdrop-filter: blur(16px);
+                backdrop-filter: blur(12px);
                 flex-direction: column;
                 padding: 24px 16px;
                 border-radius: 24px;
@@ -1934,17 +1928,11 @@
                 border: 1px solid var(--border-color);
                 z-index: 999;
                 gap: 12px;
-                margin: 0;
-                list-style: none;
             }
 
-            body.dark-theme .primary-nav .nav-list {
+            body.dark-theme .primary-nav[data-visible="true"] .nav-list {
                 background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(16px);
-            }
-
-            .primary-nav[data-visible="true"] .nav-list {
-                display: flex !important;
+                backdrop-filter: blur(12px);
             }
 
             .nav-list .nav-link {
@@ -1962,7 +1950,7 @@
                 margin-top: 4px;
             }
 
-            /* ----- HERO, TRUST, SERVICES, etc. (keep existing mobile styles) ----- */
+            /* ----- HERO SECTION ----- */
             .hero {
                 padding: 40px 24px;
                 margin-top: 20px;
@@ -2002,6 +1990,7 @@
                 font-size: 6rem;
             }
 
+            /* ----- TRUST BAR - GRID LAYOUT ----- */
             .trust-section {
                 margin-top: 20px;
                 margin-bottom: 30px;
@@ -2037,6 +2026,7 @@
                 font-size: 0.85rem;
             }
 
+            /* ----- SERVICE MODULE ----- */
             .service-module {
                 margin: 20px 0 30px;
             }
@@ -2086,6 +2076,7 @@
                 font-size: 0.9rem;
             }
 
+            /* ----- ABOUT SECTION ----- */
             .about-preview {
                 margin: 40px 0;
                 padding: 30px 24px;
@@ -2140,6 +2131,7 @@
                 font-size: 6rem;
             }
 
+            /* ----- SERVICES PREVIEW ----- */
             .services-preview {
                 margin: 30px 0;
             }
@@ -2181,6 +2173,7 @@
                 margin-top: 30px;
             }
 
+            /* ----- CONTACT SECTION ----- */
             .contact-preview {
                 margin: 40px 0;
                 padding: 30px 24px;
@@ -2244,6 +2237,7 @@
                 font-size: 6rem;
             }
 
+            /* ----- FOOTER ----- */
             .site-footer {
                 margin-top: 50px;
                 padding: 32px 0 24px;
@@ -2293,6 +2287,7 @@
                 font-size: 1.1rem;
             }
 
+            /* ----- ACCESSIBILITY MENU ----- */
             .accessibility-menu {
                 bottom: 15px;
                 right: 15px;
@@ -2312,7 +2307,7 @@
             }
         }
 
-        /* EXTRA SMALL DEVICES */
+        /* ----- EXTRA SMALL DEVICES (480px and below) ----- */
         @media (max-width: 480px) {
             .container {
                 padding: 0 16px;
@@ -2418,6 +2413,7 @@
                 gap: 16px;
             }
 
+            /* Prevent text overflow */
             .service-description,
             .preview-card p,
             .about-content p,
@@ -2426,7 +2422,63 @@
             }
         }
 
-        /* LANDSCAPE MODE FIXES */
+        /* ----- VERY NARROW DEVICES (360px and below) ----- */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 12px;
+            }
+
+            .brand span {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero-graphic i {
+                font-size: 4.5rem;
+            }
+
+            .module-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-content h2,
+            .services-preview-header h2,
+            .contact-preview-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .trust-text strong {
+                font-size: 1.1rem;
+            }
+
+            .trust-text span {
+                font-size: 0.8rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .footer-brand strong {
+                font-size: 1.2rem;
+            }
+
+            .footer-links {
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+
+            .socials a {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ----- LANDSCAPE MODE FIXES ----- */
         @media (max-height: 600px) and (orientation: landscape) {
             .primary-nav[data-visible="true"] .nav-list {
                 max-height: 80vh;
@@ -2451,7 +2503,7 @@
             }
         }
 
-        /* PRINT STYLES */
+        /* ----- PRINT STYLES ----- */
         @media print {
 
             .bg-orb,
@@ -2510,8 +2562,7 @@
                     <span>AlliTrack</span>
                 </a>
             </div>
-            <nav class="primary-nav" role="navigation" id="primaryNav" data-visible="false"
-                aria-label="Primary navigation">
+            <nav class="primary-nav" role="navigation" data-visible="false" aria-label="Primary navigation">
                 <ul class="nav-list">
                     <li><a href="#home-section" class="nav-link active">Home</a></li>
                     <li><a href="#about-section" class="nav-link">About</a></li>
@@ -2521,7 +2572,7 @@
                     </li>
                 </ul>
             </nav>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -2749,299 +2800,50 @@
         </div>
     </footer>
 
-    <!-- ACCESSIBILITY MENU – FULLY FIXED & OPERATIONAL -->
+    <!-- ACCESSIBILITY MENU -->
     <div class="accessibility-menu">
         <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Open accessibility menu"
             aria-expanded="false">
-            <i class="fas fa-universal-access"></i>
+            <i class="fas fa-universal-access" aria-hidden="true"></i>
         </button>
         <div class="accessibility-panel" id="accessibilityPanel">
             <div class="accessibility-header">
                 <h3>Accessibility Settings</h3>
-                <button class="close-panel" id="closeAccessibility" aria-label="Close accessibility menu">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="close-panel" id="closeAccessibility" aria-label="Close accessibility menu"><i
+                        class="fas fa-times" aria-hidden="true"></i></button>
             </div>
             <div class="accessibility-controls">
                 <div class="control-group">
                     <h4>Theme</h4>
-                    <div class="theme-toggle">
-                        <button class="theme-btn active" data-theme="light" aria-label="Switch to light mode">
-                            <i class="fas fa-sun"></i><span>Light</span>
-                        </button>
-                        <button class="theme-btn" data-theme="dark" aria-label="Switch to dark mode">
-                            <i class="fas fa-moon"></i><span>Dark</span>
-                        </button>
-                    </div>
+                    <div class="theme-toggle"><button class="theme-btn active" data-theme="light"
+                            aria-label="Switch to light mode"><i class="fas fa-sun"
+                                aria-hidden="true"></i><span>Light</span></button><button class="theme-btn"
+                            data-theme="dark" aria-label="Switch to dark mode"><i class="fas fa-moon"
+                                aria-hidden="true"></i><span>Dark</span></button></div>
                 </div>
                 <div class="control-group">
                     <h4>Text Size</h4>
-                    <div class="text-size-controls">
-                        <button class="size-btn" id="decreaseFont" aria-label="Decrease text size"><i
-                                class="fas fa-minus"></i></button>
-                        <span class="size-label" id="currentFontSize">100%</span>
-                        <button class="size-btn" id="increaseFont" aria-label="Increase text size"><i
-                                class="fas fa-plus"></i></button>
-                    </div>
+                    <div class="text-size-controls"><button class="size-btn" id="decreaseFont"
+                            aria-label="Decrease text size"><i class="fas fa-minus"></i></button><span
+                            class="size-label" id="currentFontSize">Medium</span><button class="size-btn"
+                            id="increaseFont" aria-label="Increase text size"><i class="fas fa-plus"></i></button></div>
                 </div>
                 <div class="control-group">
-                    <h4>Contrast Mode</h4>
-                    <button class="contrast-btn" id="toggleContrast" aria-pressed="false">
-                        <span class="btn-label">High Contrast</span>
-                        <span class="toggle-switch"></span>
-                    </button>
+                    <h4>Contrast Mode</h4><button class="contrast-btn" id="toggleContrast" aria-pressed="false"><span
+                            class="btn-label">High Contrast</span><span class="toggle-switch"></span></button>
                 </div>
                 <div class="control-group">
-                    <h4>Focus Enhancement</h4>
-                    <button class="focus-btn" id="toggleFocus" aria-pressed="false">
-                        <span class="btn-label">Highlight Focus</span>
-                        <span class="toggle-switch"></span>
-                    </button>
+                    <h4>Focus Enhancement</h4><button class="focus-btn" id="toggleFocus" aria-pressed="false"><span
+                            class="btn-label">Highlight Focus</span><span class="toggle-switch"></span></button>
                 </div>
                 <div class="control-group">
-                    <h4>Reset All</h4>
-                    <button class="reset-btn" id="resetAccessibility" aria-label="Reset all accessibility settings">
-                        <i class="fas fa-redo"></i> Reset to Default
-                    </button>
+                    <h4>Reset All</h4><button class="reset-btn" id="resetAccessibility"
+                        aria-label="Reset all accessibility settings"><i class="fas fa-redo"></i> Reset to
+                        Default</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- MASTER SCRIPT – BURGER + FULL ACCESSIBILITY with THEME TOGGLE, CONTRAST, FOCUS, TEXT SIZE, RESET -->
-    <script>
-        (function () {
-            'use strict';
-
-            // ---------- MOBILE NAVIGATION (burger) – fully working ----------
-            const mobileToggle = document.getElementById('mobileToggle');
-            const primaryNav = document.getElementById('primaryNav');
-
-            if (mobileToggle && primaryNav) {
-                mobileToggle.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    const isVisible = primaryNav.getAttribute('data-visible') === 'true';
-                    primaryNav.setAttribute('data-visible', !isVisible);
-                    mobileToggle.setAttribute('aria-expanded', !isVisible);
-                    const icon = mobileToggle.querySelector('i');
-                    if (icon) {
-                        if (!isVisible) {
-                            icon.classList.remove('fa-bars');
-                            icon.classList.add('fa-times');
-                        } else {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                    }
-                });
-
-                const navLinks = primaryNav.querySelectorAll('.nav-link, .btn-login');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function () {
-                        primaryNav.setAttribute('data-visible', 'false');
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        const icon = mobileToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                    });
-                });
-
-                document.addEventListener('keydown', function (e) {
-                    if (e.key === 'Escape' && primaryNav.getAttribute('data-visible') === 'true') {
-                        primaryNav.setAttribute('data-visible', 'false');
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        const icon = mobileToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                    }
-                });
-
-                document.addEventListener('click', function (e) {
-                    if (!primaryNav.contains(e.target) && !mobileToggle.contains(e.target)) {
-                        if (primaryNav.getAttribute('data-visible') === 'true') {
-                            primaryNav.setAttribute('data-visible', 'false');
-                            mobileToggle.setAttribute('aria-expanded', 'false');
-                            const icon = mobileToggle.querySelector('i');
-                            if (icon) {
-                                icon.classList.remove('fa-times');
-                                icon.classList.add('fa-bars');
-                            }
-                        }
-                    }
-                });
-            }
-
-            // ---------- ACCESSIBILITY MENU – COMPLETE FIX with all features ----------
-            const accessToggle = document.getElementById('accessibilityToggle');
-            const accessPanel = document.getElementById('accessibilityPanel');
-            const closeAccess = document.getElementById('closeAccessibility');
-            const body = document.body;
-
-            // Toggle panel
-            if (accessToggle && accessPanel) {
-                accessToggle.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    const expanded = accessToggle.getAttribute('aria-expanded') === 'true' ? false : true;
-                    accessPanel.classList.toggle('open');
-                    accessToggle.setAttribute('aria-expanded', expanded);
-                });
-
-                if (closeAccess) {
-                    closeAccess.addEventListener('click', function () {
-                        accessPanel.classList.remove('open');
-                        accessToggle.setAttribute('aria-expanded', 'false');
-                    });
-                }
-
-                document.addEventListener('keydown', function (e) {
-                    if (e.key === 'Escape' && accessPanel.classList.contains('open')) {
-                        accessPanel.classList.remove('open');
-                        accessToggle.setAttribute('aria-expanded', 'false');
-                    }
-                });
-
-                // Close when clicking outside
-                document.addEventListener('click', function (e) {
-                    if (!accessPanel.contains(e.target) && !accessToggle.contains(e.target)) {
-                        if (accessPanel.classList.contains('open')) {
-                            accessPanel.classList.remove('open');
-                            accessToggle.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-            }
-
-            // ---------- THEME TOGGLE (Light/Dark) ----------
-            const themeBtns = document.querySelectorAll('.theme-btn');
-            function setTheme(theme) {
-                if (theme === 'dark') {
-                    body.classList.add('dark-theme');
-                    body.classList.remove('high-contrast'); // contrast off when theme changes
-                } else {
-                    body.classList.remove('dark-theme');
-                }
-                // update active button
-                themeBtns.forEach(btn => {
-                    const btnTheme = btn.getAttribute('data-theme');
-                    if (btnTheme === theme) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-            }
-
-            themeBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const theme = this.getAttribute('data-theme');
-                    setTheme(theme);
-                });
-            });
-
-            // ---------- HIGH CONTRAST TOGGLE ----------
-            const contrastBtn = document.getElementById('toggleContrast');
-            if (contrastBtn) {
-                contrastBtn.addEventListener('click', function () {
-                    const isPressed = this.getAttribute('aria-pressed') === 'true';
-                    this.setAttribute('aria-pressed', !isPressed);
-                    this.classList.toggle('active');
-
-                    if (!isPressed) {
-                        body.classList.add('high-contrast');
-                        // if dark theme is active, keep it, high-contrast works with both
-                    } else {
-                        body.classList.remove('high-contrast');
-                    }
-                });
-            }
-
-            // ---------- FOCUS ENHANCEMENT (highlight focus) ----------
-            const focusBtn = document.getElementById('toggleFocus');
-            if (focusBtn) {
-                focusBtn.addEventListener('click', function () {
-                    const isPressed = this.getAttribute('aria-pressed') === 'true';
-                    this.setAttribute('aria-pressed', !isPressed);
-                    this.classList.toggle('active');
-
-                    if (!isPressed) {
-                        body.classList.add('focus-highlight');
-                    } else {
-                        body.classList.remove('focus-highlight');
-                    }
-                });
-            }
-
-            // ---------- TEXT SIZE ADJUSTMENT (increments on html font-size) ----------
-            const increaseBtn = document.getElementById('increaseFont');
-            const decreaseBtn = document.getElementById('decreaseFont');
-            const sizeLabel = document.getElementById('currentFontSize');
-            let currentFontPercent = 100;
-            const htmlEl = document.documentElement;
-
-            function updateFontSize(percent) {
-                // convert percent to rem base: 100% = 16px (1rem = 16px)
-                const baseSize = 16; // px
-                const newSize = (baseSize * percent) / 100;
-                htmlEl.style.fontSize = newSize + 'px';
-                sizeLabel.textContent = percent + '%';
-            }
-
-            if (increaseBtn) {
-                increaseBtn.addEventListener('click', function () {
-                    if (currentFontPercent < 180) {
-                        currentFontPercent += 10;
-                        updateFontSize(currentFontPercent);
-                    }
-                });
-            }
-            if (decreaseBtn) {
-                decreaseBtn.addEventListener('click', function () {
-                    if (currentFontPercent > 60) {
-                        currentFontPercent -= 10;
-                        updateFontSize(currentFontPercent);
-                    }
-                });
-            }
-
-            // ---------- RESET ALL ACCESSIBILITY SETTINGS ----------
-            const resetBtn = document.getElementById('resetAccessibility');
-            if (resetBtn) {
-                resetBtn.addEventListener('click', function () {
-                    // reset theme to light
-                    setTheme('light');
-
-                    // reset high contrast
-                    body.classList.remove('high-contrast');
-                    if (contrastBtn) {
-                        contrastBtn.setAttribute('aria-pressed', 'false');
-                        contrastBtn.classList.remove('active');
-                    }
-
-                    // reset focus highlight
-                    body.classList.remove('focus-highlight');
-                    if (focusBtn) {
-                        focusBtn.setAttribute('aria-pressed', 'false');
-                        focusBtn.classList.remove('active');
-                    }
-
-                    // reset font size to 100%
-                    currentFontPercent = 100;
-                    updateFontSize(100);
-
-                    // close accessibility panel
-                    if (accessPanel) accessPanel.classList.remove('open');
-                    if (accessToggle) accessToggle.setAttribute('aria-expanded', 'false');
-                });
-            }
-
-            // initialize: set default font label
-            if (sizeLabel) sizeLabel.textContent = '100%';
-        })();
-    </script>
 </body>
 
 </html>
