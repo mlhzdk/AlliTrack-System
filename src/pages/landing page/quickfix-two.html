@@ -9,16 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/styles/shared/landing-style.css">
-    <link rel="stylesheet" href="/src/styles/shared/quickfix-one.css">
-    <link rel="stylesheet" href="/src/styles/landing page/quickfix-two.css">
-    <script src="/src/scripts/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="../../styles/shared/landing-style.css">
+    <link rel="stylesheet" href="../../styles/shared/quickfix-one.css">
+    <link rel="stylesheet" href="../../styles/landing page/quickfix-two.css">
+    <script src="../../scripts/landing-accessibility.js"></script>
 </head>
 
 <body>
     <div class="document-wrapper">
         <div class="back-home-wrapper">
-            <a href="/index.html#home-section" class="back-home-link">
+            <a href="../../../index.html#home-section" class="back-home-link">
                 <i class="fas fa-arrow-left"></i> Back to AlliTrack Home
             </a>
         </div>
@@ -362,17 +362,14 @@
             function setFocus(v) { focusHighlight = v; applyFocus(); }
             function resetAll() { setFontSize(1); setTheme('light'); setHighContrast(false); setFocus(false); }
 
-            // initial apply
             applyFontSize(); applyTheme(); applyContrast(); applyFocus();
 
             document.addEventListener('DOMContentLoaded', function () {
-                // ---------- ACCESSIBILITY PANEL EVENT LISTENERS ----------
                 const toggleBtn = document.getElementById('accessibilityToggle');
                 const panel = document.getElementById('accessibilityPanel');
                 const closeBtn = document.getElementById('closeAccessibility');
 
                 if (toggleBtn && panel) {
-                    // remove any existing listeners to avoid duplicates, then add
                     toggleBtn.replaceWith(toggleBtn.cloneNode(true));
                     const newToggle = document.getElementById('accessibilityToggle');
 
@@ -391,7 +388,6 @@
                         });
                     }
 
-                    // click outside to close
                     document.addEventListener('click', function (e) {
                         if (panel.classList.contains('open') && !panel.contains(e.target) && !newToggle.contains(e.target)) {
                             panel.classList.remove('open');
@@ -400,7 +396,6 @@
                     });
                 }
 
-                // theme buttons
                 document.querySelectorAll('.theme-btn').forEach(btn => {
                     btn.replaceWith(btn.cloneNode(true));
                 });
@@ -411,7 +406,6 @@
                     });
                 });
 
-                // font controls
                 const decreaseBtn = document.getElementById('decreaseFont');
                 if (decreaseBtn) {
                     decreaseBtn.replaceWith(decreaseBtn.cloneNode(true));
@@ -441,7 +435,6 @@
                     document.getElementById('resetAccessibility').addEventListener('click', resetAll);
                 }
 
-                // ---------- MODAL CONTROLS (same as quickfix-one) ----------
                 const modal = document.getElementById('feedbackModal');
                 const triggerBtn = document.getElementById('submitTicketBtn');
                 const closeModalBtn = document.getElementById('closeModalBtn');
@@ -468,13 +461,10 @@
                     submitRating.replaceWith(submitRating.cloneNode(true));
                     document.getElementById('submitRating').addEventListener('click', function () {
                         closeModal();
-                        // Simulated redirect – replace with actual login URL
-                        alert('Redirecting to login page (simulated). In production, replace window.location.href with actual login URL.');
-                        // window.location.href = '/login';
+                        window.location.href = '../../pages/landing page/unified-auth-modal.html';
                     });
                 }
 
-                // rating button interaction (visual selection)
                 document.querySelectorAll('.rating-btn').forEach(btn => {
                     btn.replaceWith(btn.cloneNode(true));
                 });
@@ -496,7 +486,6 @@
                     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
                 }
 
-                // escape key
                 document.addEventListener('keydown', function (e) {
                     if (e.key === 'Escape') {
                         const panel = document.getElementById('accessibilityPanel');
@@ -510,7 +499,7 @@
                         }
                     }
                 });
-            }); // DOMContentLoaded
+            }); 
         })();
     </script>
 </body>

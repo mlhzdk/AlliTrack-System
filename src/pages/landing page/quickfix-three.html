@@ -10,15 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/styles/shared/landing-style.css">
-    <link rel="stylesheet" href="/src/styles/landing page/quickfix-three.css">
-    <script src="/src/scripts/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="../../styles/shared/landing-style.css">
+    <link rel="stylesheet" href="../../styles/landing page/quickfix-three.css">
+    <script src="../../scripts/landing-accessibility.js"></script>
 </head>
 
 <body>
     <div class="document-wrapper">
         <div class="back-home-wrapper">
-            <a href="/index.html#home-section" class="back-home-link">
+            <a href="../../../index.html#home-section" class="back-home-link">
                 <i class="fas fa-arrow-left"></i> Back to AlliTrack Home
             </a>
         </div>
@@ -28,7 +28,6 @@
             <h1>GSM Alarm · Quick Fix</h1>
         </div>
 
-        <!-- meta info -->
         <div class="doc-meta">
             <span><i class="fas fa-sim-card"></i> FIELD GUIDE v3.1</span>
             <span><i class="fas fa-shield"></i> AlliTrack security response</span>
@@ -39,7 +38,6 @@
             This guide covers signal integrity, SIM registration, and communication failures for 2G/3G/4G alarm panels.
         </p>
 
-        <!-- signal & connectivity -->
         <div class="section-title">
             <i class="fas fa-signal"></i> Signal & network registration
         </div>
@@ -68,7 +66,6 @@
             </div>
         </div>
 
-        <!-- SMS & communication -->
         <div class="section-title">
             <i class="fas fa-comment-sms"></i> SMS / voice / data failures
         </div>
@@ -101,7 +98,6 @@
             Force network re‑registration: AT+COPS=2 &nbsp;→&nbsp; AT+COPS=0
         </div>
 
-        <!-- tamper & power -->
         <div class="section-title">
             <i class="fas fa-shield-halved"></i> Tamper / battery / AC fail
         </div>
@@ -112,7 +108,6 @@
             <li><span class="step-num">4</span> <strong>Power supply ripple</strong> – use oscilloscope; >500mVpp may reset GSM module.</li>
         </ul>
 
-        <!-- advanced two col -->
         <div class="two-col-grid">
             <div style="background: var(--blue-50); padding: 20px; border-radius: 20px;">
                 <i class="fas fa-map-pin" style="color: var(--blue-500); font-size: 1.6rem; margin-bottom: 10px; display: block;"></i>
@@ -126,7 +121,6 @@
             </div>
         </div>
 
-        <!-- 30 sec resolution -->
         <div style="margin: 32px 0 16px;">
             <span class="badge"><i class="fas fa-toolbox"></i> 30‑second resolution</span>
         </div>
@@ -141,7 +135,6 @@
             </div>
         </div>
 
-        <!-- error matrix -->
         <hr style="border: none; border-top: 1px solid var(--border-color); margin: 32px 0 24px;">
         <div style="margin-top: 24px;">
             <h3 style="font-weight: 600; font-size: 1.1rem; display: flex; gap: 8px; margin-bottom: 16px;">
@@ -182,7 +175,6 @@
             </div>
         </div>
 
-        <!-- ---------- SUBMIT A TICKET BUTTON (Open ticket) – triggers modal then login ---------- -->
         <div class="open-ticket-section">
             <button class="btn-open-ticket" id="submitTicketBtn">
                 <i class="fas fa-ticket-alt"></i> Still having trouble? Submit a ticket
@@ -197,7 +189,6 @@
         </div>
     </div>
 
-    <!-- ======== MODAL: "How was the system?" appears when Open ticket is clicked ======== -->
     <div class="modal-overlay" id="feedbackModal">
         <div class="modal-card">
             <button class="close-modal-x" id="closeModalX" aria-label="Close modal">&times;</button>
@@ -223,12 +214,10 @@
         </div>
     </div>
 
-    <!-- ========== ACCESSIBILITY JS + MODAL & LOGIN REDIRECT ========= -->
     <script>
         (function () {
             'use strict';
 
-            // ---------- ACCESSIBILITY ENGINE – SYNCED WITH LANDING (alliTrack_) ----------
             const STORAGE_PREFIX = 'alliTrack_';
             let fontSizeLevel = 1;
             let highContrast = false;
@@ -291,9 +280,7 @@
 
             applyFontSize(); applyTheme(); applyContrast(); applyFocus();
 
-            // ---------- EVENT LISTENERS (DOM ready) ----------
             document.addEventListener('DOMContentLoaded', function () {
-                // accessibility panel
                 const toggleBtn = document.getElementById('accessibilityToggle');
                 const panel = document.getElementById('accessibilityPanel');
                 const closeBtn = document.getElementById('closeAccessibility');
@@ -328,9 +315,8 @@
                 document.getElementById('toggleFocus')?.addEventListener('click', function () { setFocus(!focusHighlight); });
                 document.getElementById('resetAccessibility')?.addEventListener('click', resetAll);
 
-                // ---------- MODAL CONTROLS: Open ticket → show modal → submit → redirect to login ----------
                 const modal = document.getElementById('feedbackModal');
-                const triggerBtn = document.getElementById('submitTicketBtn');  // "Open ticket" button
+                const triggerBtn = document.getElementById('submitTicketBtn');
                 const closeModalBtn = document.getElementById('closeModalBtn');
                 const closeModalX = document.getElementById('closeModalX');
                 const submitRating = document.getElementById('submitRating');
@@ -342,25 +328,18 @@
                     if (modal) modal.classList.remove('active');
                 }
 
-                // Open modal when "Open ticket" is clicked
                 if (triggerBtn) {
                     triggerBtn.addEventListener('click', openModal);
                 }
 
-                // Close via Cancel / X
                 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
                 if (closeModalX) closeModalX.addEventListener('click', closeModal);
 
-                // Submit rating: capture rating, then redirect to LOGIN PAGE
                 if (submitRating) {
                     submitRating.addEventListener('click', function () {
-                        // (Optional) capture selected rating – but we just proceed to login
                         const selectedRating = document.querySelector('.rating-btn[style*="background: var(--blue-500)"]');
                         closeModal();
-                        window.location.href = '#';  // Placeholder – CHANGE to real login page
-                        alert('Redirecting to login page (simulated). In production, replace window.location.href with actual login URL.');
-                        // Uncomment the line below for actual redirect:
-                        // window.location.href = '/login'; 
+                        window.location.href = '../../pages/landing page/unified-auth-modal.html';
                     });
                 }
 

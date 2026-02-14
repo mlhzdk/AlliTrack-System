@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/styles/landing page/unified-auth-modal.css">
-    <script src="/src/scripts/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="../../styles/landing page/unified-auth-modal.css">
+    <script src="../../scripts/landing-accessibility.js"></script>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
         <div class="modal-content">
             <div class="compact-header">
                 <div>
-                    <a href="/index.html#home-section" aria-label="AlliTrack Home">
-                        <img src="/src/assets/images/AlliTrack Logo.png" alt="AlliTrack" width="140" height="40">
+                    <a href="../../../index.html#home-section" aria-label="AlliTrack Home">
+                        <img src="../../assets/images/AlliTrack Logo.png" alt="AlliTrack" width="140" height="40">
                     </a>
                     <div class="compact-tagline">support that flows · frictionless</div>
                 </div>
@@ -78,7 +78,7 @@
                         <i class="fab fa-facebook"></i> Continue with Facebook
                     </div>
                     <p class="footer-text">
-                        Don't have an account? <a href="/src/pages/landing page/unified-auth-modal.html" id="switchToSignupLink">Sign up</a>
+                        Don't have an account? <a href="../../pages/landing page/unified-auth-modal.html" id="switchToSignupLink">Sign up</a>
                     </p>
                 </div>
 
@@ -137,7 +137,7 @@
                         <div class="terms-container">
                             <div class="terms">
                                 <input type="checkbox" id="modalTerms">
-                                <label for="modalTerms">I agree to the <a href="/src/pages/landing page/terms.html">Terms</a> and <a href="/src/pages/landing page/privacy.html">Privacy
+                                <label for="modalTerms">I agree to the <a href="../../pages/landing page/terms.html">Terms</a> and <a href="../../pages/landing page/privacy.html">Privacy
                                         Policy</a></label>
                             </div>
                             <p id="modalTermsError" class="error-text"></p>
@@ -158,7 +158,7 @@
                         <i class="fab fa-facebook"></i> Sign up with Facebook
                     </div>
                     <p class="footer-text">
-                        Already have an account? <a href="/src/pages/landing page/unified-auth-modal.html" id="switchToLoginLink">Log in</a>
+                        Already have an account? <a href="../../pages/landing page/unified-auth-modal.html" id="switchToLoginLink">Log in</a>
                     </p>
                 </div>
             </div>
@@ -204,7 +204,6 @@
             if (switchToSignupLink) switchToSignupLink.addEventListener('click', (e) => { e.preventDefault(); activateSignup(); });
             if (switchToLoginLink) switchToLoginLink.addEventListener('click', (e) => { e.preventDefault(); activateLogin(); });
 
-            // ----- PASSWORD VISIBILITY TOGGLE -----
             function setupToggle(toggleId, inputId) {
                 const toggle = document.getElementById(toggleId);
                 const input = document.getElementById(inputId);

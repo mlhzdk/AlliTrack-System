@@ -9,15 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/styles/shared/landing-style.css">
-    <link rel="stylesheet" href="/src/styles/landing page/quickfix-four.css">
-    <script src="/src/scripts/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="../../styles/shared/landing-style.css">
+    <link rel="stylesheet" href="../../styles/landing page/quickfix-four.css">
+    <script src="../../scripts/landing-accessibility.js"></script>
 </head>
 
 <body>
     <div class="document-wrapper">
         <div class="back-home-wrapper">
-            <a href="/index.html#home-section" class="back-home-link">
+            <a href="../../../index.html#home-section" class="back-home-link">
                 <i class="fas fa-arrow-left"></i> Back to AlliTrack Home
             </a>
         </div>
@@ -322,9 +322,8 @@
                 document.getElementById('toggleFocus')?.addEventListener('click', function () { setFocus(!focusHighlight); });
                 document.getElementById('resetAccessibility')?.addEventListener('click', resetAll);
 
-                // ---------- MODAL CONTROLS: Open ticket → show modal → submit → redirect to login ----------
                 const modal = document.getElementById('feedbackModal');
-                const triggerBtn = document.getElementById('submitTicketBtn');  // "Open ticket" button
+                const triggerBtn = document.getElementById('submitTicketBtn');
                 const closeModalBtn = document.getElementById('closeModalBtn');
                 const closeModalX = document.getElementById('closeModalX');
                 const submitRating = document.getElementById('submitRating');
@@ -336,25 +335,18 @@
                     if (modal) modal.classList.remove('active');
                 }
 
-                // Open modal when "Open ticket" is clicked
                 if (triggerBtn) {
                     triggerBtn.addEventListener('click', openModal);
                 }
 
-                // Close via Cancel / X
                 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
                 if (closeModalX) closeModalX.addEventListener('click', closeModal);
 
-                // Submit rating: capture rating, then redirect to LOGIN PAGE
                 if (submitRating) {
                     submitRating.addEventListener('click', function () {
-                        // (Optional) capture selected rating – but we just proceed to login
                         const selectedRating = document.querySelector('.rating-btn[style*="background: var(--blue-500)"]');
                         closeModal();
-                        window.location.href = '#';  // Placeholder – CHANGE to real login page
-                        alert('Redirecting to login page (simulated). In production, replace window.location.href with actual login URL.');
-                        // Uncomment the line below for actual redirect:
-                        // window.location.href = '/login'; 
+                        window.location.href = '../../pages/landing page/unified-auth-modal.html';
                     });
                 }
 

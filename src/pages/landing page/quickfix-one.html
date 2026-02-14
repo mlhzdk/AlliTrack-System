@@ -10,16 +10,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/styles/shared/landing-style.css">
-    <link rel="stylesheet" href="/src/styles/shared/quickfix-one.css">
-    <script src="/src/scripts/landing-accessibility.js"></script>
+    <link rel="stylesheet" href="../../styles/shared/landing-style.css">
+    <link rel="stylesheet" href="../../styles/shared/quickfix-one.css">
+    <script src="../../scripts/landing-accessibility.js"></script>
 
 </head>
 
 <body>
     <div class="document-wrapper">
         <div class="back-home-wrapper">
-            <a href="/index.html#home-section" class="back-home-link">
+            <a href="../../../index.html#home-section" class="back-home-link">
                 <i class="fas fa-arrow-left"></i> Back to AlliTrack Home
             </a>
         </div>
@@ -194,7 +194,6 @@
             </div>
         </div>
 
-        <!-- ---------- SUBMIT A TICKET BUTTON (Open ticket) – triggers modal then login ---------- -->
         <div class="open-ticket-section">
             <button class="btn-open-ticket" id="submitTicketBtn">
                 <i class="fas fa-ticket-alt"></i> Still having trouble? Submit a ticket </button>
@@ -208,7 +207,6 @@
         </div>
     </div>
 
-    <!-- ======== MODAL: "How was the system?" appears when Open ticket is clicked ======== -->
     <div class="modal-overlay" id="feedbackModal">
         <div class="modal-card">
             <button class="close-modal-x" id="closeModalX" aria-label="Close modal">&times;</button>
@@ -234,12 +232,10 @@
         </div>
     </div>
 
-    <!-- ========== ACCESSIBILITY JS + MODAL & LOGIN REDIRECT ========= -->
     <script>
         (function () {
             'use strict';
 
-            // ---------- ACCESSIBILITY ENGINE – SYNCED WITH LANDING (alliTrack_) ----------
             const STORAGE_PREFIX = 'alliTrack_';
             let fontSizeLevel = 1;
             let highContrast = false;
@@ -302,7 +298,6 @@
 
             applyFontSize(); applyTheme(); applyContrast(); applyFocus();
 
-            // ---------- EVENT LISTENERS (DOM ready) ----------
             document.addEventListener('DOMContentLoaded', function () {
                 // accessibility panel
                 const toggleBtn = document.getElementById('accessibilityToggle');
@@ -339,9 +334,8 @@
                 document.getElementById('toggleFocus')?.addEventListener('click', function () { setFocus(!focusHighlight); });
                 document.getElementById('resetAccessibility')?.addEventListener('click', resetAll);
 
-                // ---------- MODAL CONTROLS: Open ticket → show modal → submit → redirect to login ----------
                 const modal = document.getElementById('feedbackModal');
-                const triggerBtn = document.getElementById('submitTicketBtn');  // "Open ticket" button
+                const triggerBtn = document.getElementById('submitTicketBtn');
                 const closeModalBtn = document.getElementById('closeModalBtn');
                 const closeModalX = document.getElementById('closeModalX');
                 const submitRating = document.getElementById('submitRating');
@@ -353,38 +347,24 @@
                     if (modal) modal.classList.remove('active');
                 }
 
-                // Open modal when "Open ticket" is clicked
                 if (triggerBtn) {
                     triggerBtn.addEventListener('click', openModal);
                 }
 
-                // Close via Cancel / X
                 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
                 if (closeModalX) closeModalX.addEventListener('click', closeModal);
 
-                // Submit rating: capture rating, then redirect to LOGIN PAGE
                 if (submitRating) {
                     submitRating.addEventListener('click', function () {
-                        // (Optional) capture selected rating – but we just proceed to login
-                        // You could store rating in localStorage or send analytics; here we simply redirect.
-                        // For demonstration, we also show a brief message (redirecting...)
                         const selectedRating = document.querySelector('.rating-btn[style*="background: var(--blue-500)"]');
-                        // We'll still close modal and redirect
                         closeModal();
-                        // Redirect to login page (update with your actual login URL)
-                        window.location.href = '#';  // Placeholder – CHANGE to real login page
-                        // In real implementation, use: window.location.href = '/login' or '/landing/pages/login.html'
-                        // For demo, we use an alert to simulate then redirect.
-                        alert('Redirecting to login page (simulated). In production, replace window.location.href with actual login URL.');
-                        // Uncomment the line below for actual redirect:
-                        // window.location.href = '/login'; 
+                        window.location.href = '../../pages/landing page/unified-auth-modal.html';  
                     });
                 }
 
                 // rating button interaction (visual selection)
                 document.querySelectorAll('.rating-btn').forEach(btn => {
                     btn.addEventListener('click', function () {
-                        // remove selected style from all
                         document.querySelectorAll('.rating-btn').forEach(b => {
                             b.style.background = '';
                             b.style.color = '';
@@ -392,7 +372,6 @@
                             const icon = b.querySelector('i');
                             if (icon) icon.style.color = '';
                         });
-                        // apply selected style
                         this.style.background = 'var(--blue-500)';
                         this.style.color = 'white';
                         this.style.borderColor = 'var(--blue-500)';
@@ -401,16 +380,14 @@
                     });
                 });
 
-                // close modal when clicking overlay
                 if (modal) {
                     modal.addEventListener('click', function (e) {
                         if (e.target === modal) closeModal();
                     });
                 }
 
-            }); // DOMContentLoaded
+            });
 
-            // escape key for accessibility panel + modal
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     const panel = document.getElementById('accessibilityPanel');
