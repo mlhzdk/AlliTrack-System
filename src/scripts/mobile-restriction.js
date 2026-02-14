@@ -9,209 +9,127 @@
         enableLogging: true 
     };
 
-    // Logging utility
-    const log = {
-        info: function(msg) {
-            if (config.enableLogging) console.log('📱 [MobileRestriction] ' + msg);
-        },
-        warn: function(msg) {
-            if (config.enableLogging) console.warn('⚠️ [MobileRestriction] ' + msg);
-        },
-        error: function(msg) {
-            if (config.enableLogging) console.error('❌ [MobileRestriction] ' + msg);
-        }
-    };
-
-    // Mobile detection function - STRICT detection
+    // Ultra-fast mobile detection
     function isMobileDevice() {
         try {
-            // Check screen width (mobile screens are typically <= 768px)
+            // Check screen width (fastest check)
             const isMobileWidth = window.innerWidth <= config.mobileBreakpoint;
             
-            // Check user agent for mobile devices
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const mobileRegex = /android|webos|iphone|ipod|blackberry|iemobile|opera mini|mobile|phone|tablet/i;
-            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            // Quick user agent check
+            const ua = navigator.userAgent || navigator.vendor || '';
+            const isMobileUA = /android|iphone|ipod|blackberry|iemobile|opera mini|mobile/i.test(ua.toLowerCase());
             
-            // Check touch capability (mobile devices have touch)
-            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            // Touch check
+            const hasTouch = 'ontouchstart' in window;
             
-            // Consider it mobile if ANY of these conditions are true
-            const result = isMobileWidth || isMobileUA || hasTouch;
-            
-            log.info(`Detection: width=${window.innerWidth}, isMobileUA=${isMobileUA}, hasTouch=${hasTouch}, result=${result}`);
-            
-            return result;
-        } catch (error) {
-            log.error('Error detecting mobile device: ' + error);
-            return true; // Fail safe - BLOCK access on error
-        }
-    }
-
-    // Show modal and block access completely
-    function showModal() {
-        const modal = document.getElementById(config.modalId);
-        if (!modal) {
-            log.error('Modal element not found! Redirecting to login...');
-            window.location.href = config.loginPageUrl;
-            return;
-        }
-        
-        // Hide main content
-        const mainContent = document.querySelector('.app') || document.querySelector('main') || document.body;
-        if (mainContent) {
-            mainContent.style.opacity = '0.3';
-            mainContent.style.pointerEvents = 'none';
-            mainContent.style.filter = 'blur(3px)';
-        }
-        
-        // Show modal
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
-        
-        // Remove any existing event listeners that might allow bypass
-        const continueBtn = document.getElementById('mobileContinueBtn');
-        if (continueBtn) {
-            continueBtn.style.display = 'none'; // Hide the continue button completely
-        }
-        
-        log.info('Modal shown - mobile access blocked');
-    }
-
-    // Block all navigation attempts
-    function blockNavigation() {
-        // Override all link clicks
-        document.addEventListener('click', function(e) {
-            const target = e.target.closest('a');
-            if (target && target.getAttribute('href') !== config.loginPageUrl) {
-                e.preventDefault();
-                e.stopPropagation();
-                log.warn('Navigation blocked on mobile');
-                return false;
-            }
-        }, true); // Use capture phase to catch all clicks
-
-        // Block form submissions
-        document.addEventListener('submit', function(e) {
-            e.preventDefault();
-            log.warn('Form submission blocked on mobile');
+            // Block if clearly mobile
+            return isMobileWidth || isMobileUA || hasTouch;
+        } catch (e) {
             return false;
-        }, true);
-
-        // Block back/forward navigation
-        history.pushState(null, null, location.href);
-        window.addEventListener('popstate', function() {
-            history.pushState(null, null, location.href);
-        });
-    }
-
-    // Completely block access
-    function blockAccess() {
-        log.warn('🚫 BLOCKING MOBILE ACCESS');
-        
-        // Show the modal
-        showModal();
-        
-        // Block all navigation
-        blockNavigation();
-        
-        // Block keyboard shortcuts (F5, Ctrl+R, etc.)
-        document.addEventListener('keydown', function(e) {
-            // Block F5, Ctrl+R, Ctrl+Shift+R, Cmd+R
-            if (e.key === 'F5' || 
-                (e.ctrlKey && e.key === 'r') || 
-                (e.metaKey && e.key === 'r') ||
-                (e.ctrlKey && e.shiftKey && e.key === 'r')) {
-                e.preventDefault();
-                log.warn('Refresh blocked on mobile');
-                return false;
-            }
-            
-            // Block Ctrl+Shift+I (DevTools), Ctrl+U (View Source)
-            if ((e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.key === 'u')) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Periodically check if user is still on mobile
-        setInterval(function() {
-            if (isMobileDevice()) {
-                // Re-apply block if somehow bypassed
-                showModal();
-            }
-        }, 1000);
-    }
-
-    // Main initialization function
-    function init() {
-        log.info('Initializing mobile restriction - NO BYPASS MODE');
-
-        try {
-            if (isMobileDevice()) {
-                log.warn('🚫 MOBILE DEVICE DETECTED - ACCESS DENIED');
-                blockAccess();
-                return true; // Mobile detected and blocked
-            }
-
-            log.info('Desktop device detected - access granted');
-            
-            // Hide modal if it exists (in case of resize)
-            const modal = document.getElementById(config.modalId);
-            if (modal) {
-                modal.style.display = 'none';
-            }
-            
-            // Restore main content
-            const mainContent = document.querySelector('.app') || document.querySelector('main');
-            if (mainContent) {
-                mainContent.style.opacity = '';
-                mainContent.style.pointerEvents = '';
-                mainContent.style.filter = '';
-            }
-            
-            document.body.style.overflow = '';
-            document.body.style.position = '';
-            document.body.style.width = '';
-            
-            return false; // Desktop, no blocking
-        } catch (error) {
-            log.error('Initialization error: ' + error);
-            blockAccess(); // Block on error
-            return true;
         }
     }
 
-    // Run immediately BEFORE DOMContentLoaded
+    // IMMEDIATE EXECUTION - Runs before anything else
     if (isMobileDevice()) {
-        // If mobile detected, block immediately
-        document.write('<style>body { visibility: hidden; }</style>');
-        setTimeout(function() {
-            window.location.href = config.loginPageUrl;
-        }, 100);
+        // Clear the page instantly
+        if (document.documentElement) {
+            document.documentElement.innerHTML = '';
+        }
+        
+        // Show minimal blocking message
+        document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width,initial-scale=1">
+                <title>Access Denied</title>
+                <style>
+                    body { 
+                        margin: 0;
+                        background: #0a0a0f;
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    }
+                    .block-card {
+                        background: #1a1a2e;
+                        border-radius: 24px;
+                        padding: 32px 24px;
+                        max-width: 340px;
+                        width: 90%;
+                        text-align: center;
+                        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                        border: 1px solid rgba(255,255,255,0.1);
+                        animation: fadeIn 0.3s ease;
+                    }
+                    .icon {
+                        font-size: 56px;
+                        margin-bottom: 20px;
+                        color: #ff6b6b;
+                    }
+                    h2 {
+                        color: white;
+                        font-size: 24px;
+                        margin-bottom: 12px;
+                        font-weight: 700;
+                    }
+                    p {
+                        color: #a0a0b0;
+                        font-size: 15px;
+                        line-height: 1.5;
+                        margin-bottom: 28px;
+                    }
+                    .btn {
+                        background: #4a6cf7;
+                        color: white;
+                        border: none;
+                        padding: 14px 28px;
+                        border-radius: 50px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-decoration: none;
+                        display: inline-block;
+                        transition: background 0.2s;
+                    }
+                    .btn:hover {
+                        background: #3a5ce5;
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="block-card">
+                    <div class="icon">📱</div>
+                    <h2>Mobile Access Restricted</h2>
+                    <p>This admin area requires a desktop computer.<br>Redirecting to login page...</p>
+                    <a href="${config.loginPageUrl}" class="btn">Return to Login</a>
+                </div>
+                <script>
+                    // Auto-redirect after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = '${config.loginPageUrl}';
+                    }, 2000);
+                <\/script>
+            </body>
+            </html>
+        `);
+        
+        // Stop all JavaScript execution
+        throw new Error('Mobile access blocked - page cleared');
     }
 
-    // Also run on DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', init);
-    
-    // Run on page load
-    window.addEventListener('load', init);
-    
-    // Run on resize (re-check)
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(init, 100);
-    });
+    // If we get here, it's desktop - continue normally
+    console.log('📱 [MobileRestriction] Desktop detected - loading dashboard');
 
-    // Export for debugging (but no override function)
+    // Export for debugging
     window.mobileRestriction = {
-        checkNow: function() {
-            return isMobileDevice();
-        }
+        isMobile: isMobileDevice
     };
-
 })();
