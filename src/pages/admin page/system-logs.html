@@ -17,22 +17,14 @@
 
 <body>
     <!-- Mobile Access Denied Modal -->
-    <div class="mobile-block-modal" id="mobileBlockModal">
-        <div class="mobile-block-content">
-            <div class="mobile-block-icon">
-                <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h2 class="mobile-block-title">Mobile Access Restricted</h2>
-            <p class="mobile-block-message">
-                The Admin Dashboard is optimized for desktop use only.
-                Please access this page from a desktop or laptop computer
-                for the best experience and full functionality.
-            </p>
-            <div class="mobile-block-buttons">
-                <a href="../../../index.html" class="mobile-block-btn primary" id="mobileLogoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Return to Login
-                </a>
-            </div>
+    <div class="mobile-block-overlay">
+        <div class="mobile-block-card">
+            <i class="fas fa-laptop"></i>
+            <h2 data-translate="mobile_restricted">Desktop only</h2>
+            <p data-translate="mobile_block_message">Admin dashboard is optimized for larger screens. Please open on a
+                desktop or tablet in landscape mode.</p>
+            <button class="btn" onclick="window.location.href='../../../index.html'" data-translate="go_back">Back to
+                Home</button>
         </div>
     </div>
 
