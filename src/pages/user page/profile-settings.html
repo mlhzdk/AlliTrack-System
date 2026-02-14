@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title data-translate="profile_settings_page_title">Profile Settings - AlliTrack Admin</title>
+    <title data-translate="profile_settings_page_title">Profile Settings - AlliTrack</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="../../styles/shared/admin-side-head.css" />
-    <link rel="stylesheet" href="../../styles/admin page/profile-settings.css" />
+    <link rel="stylesheet" href="../../styles/shared/user-side-head.css" />
+    <link rel="stylesheet" href="../../styles/user page/profile-settings.css" />
     <link rel="stylesheet" href="../../styles/shared/mobile-restriction.css" />
     <script src="../../scripts/mobile-restriction.js"></script>
-    <script src="../../scripts/admin-preference-manager.js"></script>
-    <script src="../../scripts/admin-data-manager.js"></script>
+    <script src="../../scripts/user-preference-manager.js"></script>
+    <script src="../../scripts/user-data-manager.js"></script>
 </head>
 
 <body>
@@ -20,61 +20,60 @@
         <div class="mobile-block-card">
             <i class="fas fa-laptop"></i>
             <h2 data-translate="mobile_restricted">Desktop only</h2>
-            <p data-translate="mobile_block_message">Admin dashboard is optimized for larger screens. Please open on a
+            <p data-translate="mobile_block_message">User dashboard is optimized for larger screens. Please open on a
                 desktop or tablet in landscape mode.</p>
             <button class="btn" onclick="window.location.href='../../../index.html'" data-translate="go_back">Back to
                 Home</button>
         </div>
     </div>
-    
+
     <div class="app">
         <div class="shell">
             <!-- Sidebar -->
             <aside class="sidebar" role="navigation" aria-label="Main Sidebar">
                 <div class="brand">
                     <div class="logo">
-                        <img src="../../../src/assets/images/AlliTrack Icon.png" alt="AlliTrack Logo" class="logo-img"
+                        <img src="../../assets/images/AlliTrack Icon.png" alt="AlliTrack Logo" class="logo-img"
                             style="width: 32px; height: 32px;">
                     </div>
                     <div>
                         <div class="title">AlliTrack</div>
-                        <div class="subtitle" data-translate="admin_dashboard">Admin Dashboard</div>
+                        <div class="subtitle" data-translate="user_dashboard">User Dashboard</div>
                     </div>
                 </div>
                 <nav class="nav">
-                    <a href="../../pages/admin page/index-admin.html" data-section="dashboard">
+                    <a href="../../pages/user page/index-user.html" data-section="dashboard">
                         <i class="fas fa-chart-line"></i> <span data-translate="dashboard">Dashboard</span>
                     </a>
 
-                    <div class="nav-section" data-translate="ticket_management">Ticket Management</div>
-                    <a href="../../pages/admin page/all-tickets.html" data-section="tickets">
-                        <i class="fas fa-ticket-alt"></i> <span data-translate="all_tickets">All Tickets</span>
+                    <div class="nav-section" data-translate="support">Support</div>
+                    <a href="../../pages/user page/my-tickets.html" data-section="tickets">
+                        <i class="fas fa-ticket-alt"></i> <span data-translate="my_tickets">Ticket</span>
                     </a>
-                    <a href="../../pages/admin page/staff-management.html" data-section="users">
-                        <i class="fas fa-users"></i> <span data-translate="users_management">Staff Management</span>
+                    <a href="../../pages/user page/notifications.html" data-section="notifications">
+                        <i class="fas fa-bell"></i> <span data-translate="notifications">Alert</span>
                     </a>
-                    <a href="../../pages/admin page/announcements.html" data-section="announcements">
-                        <i class="fas fa-bullhorn"></i> <span data-translate="announcements">Announcements</span>
-                    </a>
-
-                    <div class="nav-section" data-translate="system_management">System Management</div>
-                    <a href="../../pages/admin page/system-settings.html" data-section="system-settings">
-                        <i class="fas fa-cogs"></i> <span data-translate="system_settings">System Settings</span>
-                    </a>
-                    <a href="../../pages/admin page/system-analytics.html" data-section="analytics">
-                        <i class="fas fa-chart-bar"></i> <span data-translate="analytics">Analytics</span>
-                    </a>
-                    <a href="../../pages/admin page/system-logs.html" data-section="logs">
-                        <i class="fas fa-clipboard-list"></i> <span data-translate="system_logs">System Logs</span>
+                    <a href="../../pages/user page/submit-ticket.html" data-section="submit-ticket">
+                        <i class="fas fa-plus-circle"></i> <span data-translate="submit_ticket">New</span>
                     </a>
 
-                    <div class="nav-section" data-translate="admin_tools">Admin Tools</div>
-                    <a href="../../pages/admin page/preferences.html" data-section="preferences">
-                        <i class="fas fa-sliders-h"></i> <span data-translate="preferences">Preferences</span>
+                    <div class="nav-section" data-translate="management">Manage</div>
+                    <a href="../../pages/user page/preferences.html" data-section="preferences">
+                        <i class="fas fa-sliders-h"></i> <span data-translate="preferences">Settings</span>
                     </a>
-                    <a href="../../pages/admin page/profile-settings.html" class="active"
-                        data-section="profile-settings">
-                        <i class="fas fa-user-cog"></i> <span data-translate="profile_settings">Profile Settings</span>
+                    <a href="../../pages/user page/profile-settings.html" class="active" data-section="profile-settings">
+                        <i class="fas fa-user-cog"></i> <span data-translate="profile_settings">Profile</span>
+                    </a>
+                    <a href="../../pages/user page/announcements.html" data-section="announcements">
+                        <i class="fas fa-bullhorn"></i> <span data-translate="announcements">Anunsyo</span>
+                    </a>
+
+                    <div class="nav-section" data-translate="system">System</div>
+                    <a href="../../pages/user page/account-security.html" data-section="account-security">
+                        <i class="fas fa-shield-alt"></i> <span data-translate="account_security">Security</span>
+                    </a>
+                    <a href="../../pages/user page/system-information.html" data-section="system-information">
+                        <i class="fas fa-info-circle"></i> <span data-translate="system_information">Info</span>
                     </a>
                 </nav>
                 <div class="sidebar-footer">
@@ -94,17 +93,17 @@
                     </div>
                     <div class="header-actions">
                         <div style="text-align:right">
-                            <div id="userName" style="font-weight:700">Admin</div>
-                            <div id="userEmail" style="font-size:.82rem;color:var(--muted)">admin@allitrack.com</div>
+                            <div id="userName" style="font-weight:700">User</div>
+                            <div id="userEmail" style="font-size:.82rem;color:var(--muted)">user@example.com</div>
                         </div>
                         <div class="account" id="accountBtn" aria-haspopup="true" aria-expanded="false">
-                            <div id="userAvatar" class="avatar">A</div>
+                            <div id="userAvatar" class="avatar">U</div>
                             <i class="fas fa-chevron-down" style="opacity:.85"></i>
                         </div>
                         <div class="account-menu" id="accountMenu">
                             <div class="arrow"></div>
-                            <a href="../../pages/admin page/profile-settings.html" data-translate="profile">Profile</a>
-                            <a href="../../pages/admin page/preferences.html" data-translate="settings">Settings</a>
+                            <a href="../../pages/user page/profile-settings.html" data-translate="profile">Profile</a>
+                            <a href="../../pages/user page/preferences.html" data-translate="settings">Settings</a>
                             <a href="#" id="logoutBtn" data-translate="logout">Logout</a>
                         </div>
                     </div>
@@ -118,6 +117,15 @@
                             <div class="profile-header">
                                 <h1><i class="fas fa-user-cog"></i> <span
                                         data-translate="profile_settings_title">Profile Settings</span></h1>
+                            </div>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div class="success-message" id="successMessage">
+                            <div class="success-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="success-text" data-translate="profile_updated">Profile updated successfully!
                             </div>
                         </div>
 
@@ -138,7 +146,7 @@
 
                                 <div class="profile-photo-section">
                                     <div class="profile-photo" id="profilePhoto">
-                                        <div id="profileInitials">A</div>
+                                        <div id="profileInitials">U</div>
                                         <img id="profileImage" style="display: none;" alt="Profile Photo">
                                         <div class="profile-photo-overlay">
                                             <i class="fas fa-camera"></i>
@@ -230,33 +238,9 @@
                                                 <i class="fas fa-building"></i> <span
                                                     data-translate="department">Department</span>
                                             </label>
-                                            <select id="department" class="form-input">
-                                                <option value="" data-translate="select_department">Select Department
-                                                </option>
-                                                <option value="it" data-translate="it_department">IT Department</option>
-                                                <option value="hr" data-translate="hr_department">Human Resources
-                                                </option>
-                                                <option value="finance" data-translate="finance_department">Finance
-                                                </option>
-                                                <option value="operations" data-translate="operations_department">
-                                                    Operations</option>
-                                                <option value="marketing" data-translate="marketing_department">
-                                                    Marketing</option>
-                                                <option value="sales" data-translate="sales_department">Sales</option>
-                                                <option value="support" data-translate="support_department">Customer
-                                                    Support</option>
-                                                <option value="other" data-translate="other_department">Other</option>
-                                            </select>
+                                            <input type="text" id="department" class="form-input"
+                                                placeholder="Enter your department" />
                                             <div class="form-hint" data-translate="optional">Optional</div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="form-label" for="role">
-                                                <i class="fas fa-user-shield"></i> <span
-                                                    data-translate="role">Role</span>
-                                            </label>
-                                            <input type="text" id="role" class="form-input" value="Administrator"
-                                                readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -344,7 +328,7 @@
                 <!-- Footer -->
                 <footer class="site-footer">
                     <div>&copy; 2025 Business Alliance Inc.</div>
-                    <div data-translate="admin_dashboard_template">AlliTrack Admin Dashboard</div>
+                    <div data-translate="dashboard_template">Dashboard Template</div>
                 </footer>
             </main>
         </div>
@@ -419,11 +403,11 @@
             console.log('✅ Account dropdown setup complete');
         }
 
-        // Translation dictionary for admin profile settings page
+        // Translation dictionary for profile settings page
         const translations = {
             'en': {
                 // PAGE-SPECIFIC translations only:
-                'profile_settings_page_title': 'Profile Settings - AlliTrack Admin',
+                'profile_settings_page_title': 'Profile Settings - AlliTrack',
                 'profile_settings_title': 'Profile Settings',
                 'search_tickets': 'Search tickets, users, IDs...',
                 'profile_updated': 'Profile updated successfully!',
@@ -443,16 +427,6 @@
                 'enter_valid_email': 'Please enter a valid email address',
                 'phone_number': 'Phone Number',
                 'department': 'Department',
-                'select_department': 'Select Department',
-                'it_department': 'IT Department',
-                'hr_department': 'Human Resources',
-                'finance_department': 'Finance',
-                'operations_department': 'Operations',
-                'marketing_department': 'Marketing',
-                'sales_department': 'Sales',
-                'support_department': 'Customer Support',
-                'other_department': 'Other',
-                'role': 'Role',
                 'optional': 'Optional',
                 'change_password': 'Change Password',
                 'update_password_security': 'Update your password to keep your account secure',
@@ -470,27 +444,27 @@
                 'cancel': 'Cancel',
                 'save_changes': 'Save Changes',
 
-                // Navigation (admin specific)
-                'admin_dashboard': 'Admin Dashboard',
+                // Navigation (shared with dashboard)
+                'user_dashboard': 'User Dashboard',
                 'dashboard': 'Dashboard',
-                'ticket_management': 'Ticket Management',
-                'all_tickets': 'All Tickets',
-                'users_management': 'Users Management',
-                'announcements': 'Announcements',
-                'system_management': 'System Management',
-                'system_settings': 'System Settings',
-                'analytics': 'Analytics',
-                'system_logs': 'System Logs',
-                'admin_tools': 'Admin Tools',
-                'preferences': 'Preferences',
-                'profile_settings': 'Profile Settings',
+                'support': 'Support',
+                'my_tickets': 'Ticket',
+                'notifications': 'Alert',
+                'submit_ticket': 'New',
+                'management': 'Manage',
+                'preferences': 'Settings',
+                'profile_settings': 'Profile',
+                'announcements': 'Anunsyo',
+                'system': 'System',
+                'account_security': 'Security',
+                'system_information': 'Info',
                 'profile': 'Profile',
                 'settings': 'Settings',
                 'logout': 'Logout',
-                'admin_dashboard_template': 'AlliTrack Admin Dashboard'
+                'dashboard_template': 'Dashboard Template'
             },
             'fil': {
-                'profile_settings_page_title': 'Mga Setting ng Profile - AlliTrack Admin',
+                'profile_settings_page_title': 'Mga Setting ng Profile - AlliTrack',
                 'profile_settings_title': 'Mga Setting ng Profile',
                 'search_tickets': 'Maghanap...',
                 'profile_updated': 'Na-update ang profile!',
@@ -510,16 +484,6 @@
                 'enter_valid_email': 'Ilagay ang tamang email',
                 'phone_number': 'Telepono',
                 'department': 'Department',
-                'select_department': 'Pumili ng Department',
-                'it_department': 'IT Department',
-                'hr_department': 'Human Resources',
-                'finance_department': 'Finance',
-                'operations_department': 'Operations',
-                'marketing_department': 'Marketing',
-                'sales_department': 'Sales',
-                'support_department': 'Customer Support',
-                'other_department': 'Iba Pa',
-                'role': 'Tungkulin',
                 'optional': 'Opsyonal',
                 'change_password': 'Palitan ang Password',
                 'update_password_security': 'I-update ang password',
@@ -537,51 +501,35 @@
                 'cancel': 'Kanselahin',
                 'save_changes': 'I-save',
 
-                // Navigation (admin specific)
-                'admin_dashboard': 'Admin Dashboard',
+                // Navigation (shared with dashboard)
+                'user_dashboard': 'Dashboard',
                 'dashboard': 'Dashboard',
-                'ticket_management': 'Pamamahala ng Ticket',
-                'all_tickets': 'Lahat ng Ticket',
-                'users_management': 'Pamamahala ng User',
+                'support': 'Suporta',
+                'my_tickets': 'Ticket',
+                'notifications': 'Alert',
+                'submit_ticket': 'New',
+                'management': 'Pamahalaan',
+                'preferences': 'Mga Setting',
+                'profile_settings': 'Profile',
                 'announcements': 'Mga Anunsyo',
-                'system_management': 'Pamamahala ng Sistema',
-                'system_settings': 'Mga Setting ng Sistema',
-                'analytics': 'Analitika',
-                'system_logs': 'Mga Log ng Sistema',
-                'admin_tools': 'Mga Tool ng Admin',
-                'preferences': 'Mga Kagustuhan',
-                'profile_settings': 'Mga Setting ng Profile',
+                'system': 'Sistema',
+                'account_security': 'Seguridad',
+                'system_information': 'Impormasyon',
                 'profile': 'Profile',
                 'settings': 'Mga Setting',
                 'logout': 'Logout',
-                'admin_dashboard_template': 'AlliTrack Admin Dashboard'
+                'dashboard_template': 'Dashboard'
             }
         };
 
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
-            console.log('🚀 Admin Profile Settings: Starting initialization...');
-
-            // Add Toast HTML element to body
-            const toast = document.createElement('div');
-            toast.id = 'toast';
-            toast.className = 'toast';
-            document.body.appendChild(toast);
+            console.log('🚀 Profile Settings: Starting initialization...');
 
             // Initialize user data manager FIRST
             if (window.userDataManager) {
                 console.log('👤 Initializing User Data Manager...');
                 window.userDataManager.initializeUserDisplay();
-
-                // Set admin-specific default data
-                const userData = window.userDataManager.getUserData();
-                if (!userData.name) {
-                    window.userDataManager.updateUserData({
-                        name: 'Admin User',
-                        email: 'admin@allitrack.com',
-                        role: 'Administrator'
-                    });
-                }
             } else {
                 console.error('❌ User Data Manager not found!');
             }
@@ -624,7 +572,7 @@
                 setupAccountDropdown();
             }, 50);
 
-            console.log('✅ Admin Profile Settings page loaded');
+            console.log('✅ Profile Settings page loaded');
         });
 
         // Setup theme listener
@@ -658,15 +606,7 @@
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (dict[key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
-                        if (element.type !== 'text' && element.type !== 'email' && element.type !== 'password' && element.type !== 'tel') {
-                            element.textContent = dict[key];
-                        }
-                    } else if (element.tagName === 'OPTION') {
-                        element.textContent = dict[key];
-                    } else {
-                        element.textContent = dict[key];
-                    }
+                    element.textContent = dict[key];
                 }
             });
 
@@ -700,18 +640,11 @@
             const profileInitials = document.getElementById('profileInitials');
 
             // Set form values
-            document.getElementById('firstName').value = userData.firstName || userData.name?.split(' ')[0] || 'Admin';
-            document.getElementById('lastName').value = userData.lastName || userData.name?.split(' ').slice(1).join(' ') || 'User';
-            document.getElementById('email').value = userData.email || 'admin@allitrack.com';
+            document.getElementById('firstName').value = userData.firstName || userData.name?.split(' ')[0] || 'User';
+            document.getElementById('lastName').value = userData.lastName || userData.name?.split(' ').slice(1).join(' ') || '';
+            document.getElementById('email').value = userData.email || 'user@example.com';
             document.getElementById('phone').value = userData.phone || '';
-
-            // Set department dropdown value
-            const departmentSelect = document.getElementById('department');
-            if (departmentSelect && userData.department) {
-                departmentSelect.value = userData.department;
-            }
-
-            document.getElementById('role').value = userData.role || 'Administrator';
+            document.getElementById('department').value = userData.department || '';
 
             // Update profile photo if exists
             if (userData.photo && profileImage && profileInitials) {
@@ -731,7 +664,7 @@
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
             const initials = (firstName.charAt(0) + (lastName.charAt(0) || '')).toUpperCase();
-            profileInitials.textContent = initials || 'A';
+            profileInitials.textContent = initials;
         }
 
         // Logout functionality - FIXED VERSION
@@ -760,13 +693,13 @@
                     // Clear user data from localStorage
                     localStorage.removeItem('userData');
                     localStorage.removeItem('userProfile');
-                    localStorage.removeItem('adminPreferences');
+                    localStorage.removeItem('userTickets');
                     localStorage.removeItem('preferredTheme');
                     localStorage.removeItem('preferredLanguage');
 
                     console.log('🧹 Cleared localStorage, redirecting to login...');
 
-                    // Redirect to admin login page
+                    // Redirect to login page
                     window.location.href = '../../../index.html';
                 };
 
@@ -819,12 +752,12 @@
 
             const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
             if (!validTypes.includes(file.type)) {
-                showToast('Please select a valid image file (JPG, PNG, or GIF)', 'error');
+                alert('Please select a valid image file (JPG, PNG, or GIF)');
                 return;
             }
 
             if (file.size > 5 * 1024 * 1024) {
-                showToast('File size must be less than 5MB', 'error');
+                alert('File size must be less than 5MB');
                 return;
             }
 
@@ -846,13 +779,11 @@
                         lastName: document.getElementById('lastName').value
                     });
                 }
-
-                showToast('Profile photo uploaded successfully', 'success');
             };
             reader.readAsDataURL(file);
         }
 
-        // Remove profile photo - FIXED to show user's initials
+        // Remove profile photo
         function removePhoto() {
             const profileImage = document.getElementById('profileImage');
             const profileInitials = document.getElementById('profileInitials');
@@ -860,9 +791,6 @@
             if (profileImage && profileInitials) {
                 profileImage.style.display = 'none';
                 profileInitials.style.display = 'block';
-
-                // Update the initials based on current form values
-                updateProfileInitials();
             }
 
             if (window.userDataManager) {
@@ -871,8 +799,6 @@
                 localStorage.setItem('userProfile', JSON.stringify(userProfile));
                 window.userDataManager.dispatchUserDataChanged();
             }
-
-            showToast('Profile photo removed', 'success');
         }
 
         // Password strength checker
@@ -1002,8 +928,7 @@
                     lastName: document.getElementById('lastName').value,
                     email: document.getElementById('email').value,
                     phone: document.getElementById('phone').value,
-                    department: document.getElementById('department').value,
-                    role: document.getElementById('role').value
+                    department: document.getElementById('department').value
                 };
 
                 if (profileImage && profileImage.style.display === 'block') {
@@ -1013,17 +938,20 @@
                 window.userDataManager.updateUserProfile(profileData);
                 window.userDataManager.updateUserData({
                     name: `${profileData.firstName} ${profileData.lastName}`,
-                    email: profileData.email,
-                    role: profileData.role
+                    email: profileData.email
                 });
 
-                // Show toast notification instead of inline success message
-                showToast('Profile updated successfully', 'success');
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.classList.add('show');
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
+                }
 
-                console.log('Admin profile saved:', profileData);
+                console.log('Profile saved:', profileData);
             } catch (error) {
-                console.error('Error saving admin profile:', error);
-                showToast('Error saving profile', 'error');
+                console.error('Error saving profile:', error);
             }
         }
 
@@ -1035,15 +963,14 @@
                 }
 
                 const userData = window.userDataManager.getUserData();
-                let firstName = 'Admin';
-                let lastName = 'User';
-                let email = userData.email || 'admin@allitrack.com';
-                let role = userData.role || 'Administrator';
+                let firstName = 'User';
+                let lastName = '';
+                let email = userData.email || 'user@example.com';
 
                 if (userData.name) {
                     const nameParts = userData.name.split(' ');
-                    firstName = nameParts[0] || 'Admin';
-                    lastName = nameParts.slice(1).join(' ') || 'User';
+                    firstName = nameParts[0] || 'User';
+                    lastName = nameParts.slice(1).join(' ') || '';
                 }
 
                 document.getElementById('firstName').value = firstName;
@@ -1051,7 +978,6 @@
                 document.getElementById('email').value = email;
                 document.getElementById('phone').value = '';
                 document.getElementById('department').value = '';
-                document.getElementById('role').value = role;
 
                 const currentPassword = document.getElementById('currentPassword');
                 const newPassword = document.getElementById('newPassword');
@@ -1081,29 +1007,9 @@
                 }
 
                 updateProfileInitials();
-
-                showToast('Form reset to saved values', 'success');
             } catch (error) {
                 console.error('Error resetting form:', error);
-                showToast('Error resetting form', 'error');
             }
-        }
-
-        // Show toast message (same as preferences page)
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            if (!toast) {
-                console.error('Toast element not found');
-                return;
-            }
-
-            toast.textContent = message;
-            toast.className = `toast ${type}`;
-            toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         }
     </script>
 </body>
