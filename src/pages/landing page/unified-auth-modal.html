@@ -117,9 +117,9 @@
                         <div class="password-requirements">
                             <div class="requirement invalid" id="reqLength"><i class="far fa-circle"></i> 8+ characters
                             </div>
-                            <div class="requirement invalid" id="reqUppercase"><i class="far fa-circle"></i> Uppercase &
+                            <div class="requirement invalid" id="reqUppercase"><i class="far fa-circle"></i> Uppercase &amp;
                                 lowercase</div>
-                            <div class="requirement invalid" id="reqNumber"><i class="far fa-circle"></i> Number &
+                            <div class="requirement invalid" id="reqNumber"><i class="far fa-circle"></i> Number &amp;
                                 special char</div>
                         </div>
                         <p id="modalSignupPasswordError" class="error-text"></p>
@@ -177,6 +177,12 @@
         (function () {
             "use strict";
 
+            // ========== CONFIGURATION ==========
+            const ADMIN_EMAIL_DOMAIN = '@allitrack.com';
+            const USER_DASHBOARD_PATH = '#';
+            const ADMIN_DASHBOARD_PATH = '../../pages/admin page/index-admin.html';
+
+            // ========== DOM ELEMENTS ==========
             const tabLogin = document.getElementById('tabLoginBtn');
             const tabSignup = document.getElementById('tabSignupBtn');
             const loginFormDiv = document.getElementById('loginFormContainer');
@@ -184,84 +190,15 @@
             const switchToSignupLink = document.getElementById('switchToSignupLink');
             const switchToLoginLink = document.getElementById('switchToLoginLink');
 
-            function activateLogin() {
-                tabLogin.classList.add('active');
-                tabSignup.classList.remove('active');
-                loginFormDiv.classList.add('active');
-                signupFormDiv.classList.remove('active');
-            }
-
-            function activateSignup() {
-                tabSignup.classList.add('active');
-                tabLogin.classList.remove('active');
-                signupFormDiv.classList.add('active');
-                loginFormDiv.classList.remove('active');
-            }
-
-            tabLogin.addEventListener('click', activateLogin);
-            tabSignup.addEventListener('click', activateSignup);
-
-            if (switchToSignupLink) switchToSignupLink.addEventListener('click', (e) => { e.preventDefault(); activateSignup(); });
-            if (switchToLoginLink) switchToLoginLink.addEventListener('click', (e) => { e.preventDefault(); activateLogin(); });
-
-            function setupToggle(toggleId, inputId) {
-                const toggle = document.getElementById(toggleId);
-                const input = document.getElementById(inputId);
-                if (toggle && input) {
-                    toggle.addEventListener('click', function () {
-                        const type = input.type === 'password' ? 'text' : 'password';
-                        input.type = type;
-                        this.querySelector('i').classList.toggle('fa-eye');
-                        this.querySelector('i').classList.toggle('fa-eye-slash');
-                    });
-                }
-            }
-            setupToggle('toggleModalPassword', 'modalPassword');
-            setupToggle('toggleModalSignupPassword', 'modalSignupPassword');
-            setupToggle('toggleModalConfirmPassword', 'modalConfirmPassword');
-
-            // ----- LOADING OVERLAY -----
-            const loadingOverlay = document.getElementById('modalLoadingOverlay');
-            const loadingText = document.getElementById('modalLoadingText');
-
-            function showLoading(msg) {
-                loadingText.textContent = msg || 'Processing...';
-                loadingOverlay.style.display = 'flex';
-            }
-
-            function hideLoading() {
-                loadingOverlay.style.display = 'none';
-            }
-
-            // ----- LOGIN VALIDATION -----
+            // Login elements
             const loginEmail = document.getElementById('modalEmail');
             const loginPass = document.getElementById('modalPassword');
             const loginEmailError = document.getElementById('modalEmailError');
             const loginPassError = document.getElementById('modalPasswordError');
             const modalLoginBtn = document.getElementById('modalLoginBtn');
+            const loginForm = document.getElementById('modalLoginForm');
 
-            function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-
-            function validateLoginForm() {
-                let valid = true;
-                const emailVal = loginEmail.value.trim();
-                const passVal = loginPass.value.trim();
-
-                if (!emailVal) { loginEmailError.textContent = 'Email is required.'; loginEmail.classList.add('error-input'); valid = false; }
-                else if (!validateEmail(emailVal)) { loginEmailError.textContent = 'Valid email required.'; loginEmail.classList.add('error-input'); valid = false; }
-                else { loginEmailError.textContent = ''; loginEmail.classList.remove('error-input'); }
-
-                if (!passVal) { loginPassError.textContent = 'Password required.'; loginPass.classList.add('error-input'); valid = false; }
-                else { loginPassError.textContent = ''; loginPass.classList.remove('error-input'); }
-
-                modalLoginBtn.disabled = !valid;
-                return valid;
-            }
-
-            if (loginEmail) loginEmail.addEventListener('input', validateLoginForm);
-            if (loginPass) loginPass.addEventListener('input', validateLoginForm);
-
-            // ----- SIGNUP VALIDATION -----
+            // Signup elements
             const firstName = document.getElementById('modalFirstName');
             const lastName = document.getElementById('modalLastName');
             const signupEmail = document.getElementById('modalSignupEmail');
@@ -281,6 +218,111 @@
             const reqUppercase = document.getElementById('reqUppercase');
             const reqNumber = document.getElementById('reqNumber');
 
+            // Loading overlay
+            const loadingOverlay = document.getElementById('modalLoadingOverlay');
+            const loadingText = document.getElementById('modalLoadingText');
+
+            // ========== UTILITY FUNCTIONS ==========
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function isAdminUser(userEmail) {
+                return userEmail.toLowerCase().endsWith(ADMIN_EMAIL_DOMAIN.toLowerCase());
+            }
+
+            function preventSpaces(e) {
+                if (e.key === ' ') e.preventDefault();
+            }
+
+            function cleanPaste(e) {
+                const data = (e.clipboardData || window.clipboardData).getData('text');
+                if (data.includes(' ')) {
+                    e.preventDefault();
+                    document.execCommand('insertText', false, data.replace(/\s/g, ''));
+                }
+            }
+
+            // ========== LOADING OVERLAY FUNCTIONS ==========
+            function showLoading(msg) {
+                loadingText.textContent = msg || 'Processing...';
+                loadingOverlay.style.display = 'flex';
+            }
+
+            function hideLoading() {
+                loadingOverlay.style.display = 'none';
+            }
+
+            // ========== AUTHENTICATION FUNCTIONS ==========
+            async function simulateLoginAPI(email, password) {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            user: {
+                                id: Math.random().toString(36).substr(2, 9),
+                                name: email.split('@')[0],
+                                email: email,
+                                role: isAdminUser(email) ? 'admin' : 'user',
+                                lastLogin: new Date().toISOString()
+                            }
+                        });
+                    }, 1500);
+                });
+            }
+
+            function handleLoginSuccess(userData) {
+                localStorage.setItem('userData', JSON.stringify(userData));
+                localStorage.setItem('authToken', 'simulated_token_' + Date.now());
+
+                const redirectPath = userData.role === 'admin'
+                    ? ADMIN_DASHBOARD_PATH
+                    : USER_DASHBOARD_PATH;
+
+                console.log(`Login successful. Redirecting ${userData.role} to: ${redirectPath}`);
+                window.location.href = redirectPath;
+            }
+
+            function handleLoginFailure(errorMessage) {
+                hideLoading();
+                modalLoginBtn.disabled = false;
+                alert(`Login failed: ${errorMessage}`);
+                console.error('Login error:', errorMessage);
+            }
+
+            // ========== LOGIN VALIDATION ==========
+            function validateLoginForm() {
+                let valid = true;
+                const emailVal = loginEmail.value.trim();
+                const passVal = loginPass.value.trim();
+
+                if (!emailVal) {
+                    loginEmailError.textContent = 'Email is required.';
+                    loginEmail.classList.add('error-input');
+                    valid = false;
+                } else if (!validateEmail(emailVal)) {
+                    loginEmailError.textContent = 'Valid email required.';
+                    loginEmail.classList.add('error-input');
+                    valid = false;
+                } else {
+                    loginEmailError.textContent = '';
+                    loginEmail.classList.remove('error-input');
+                }
+
+                if (!passVal) {
+                    loginPassError.textContent = 'Password required.';
+                    loginPass.classList.add('error-input');
+                    valid = false;
+                } else {
+                    loginPassError.textContent = '';
+                    loginPass.classList.remove('error-input');
+                }
+
+                modalLoginBtn.disabled = !valid;
+                return valid;
+            }
+
+            // ========== SIGNUP VALIDATION ==========
             function updateRequirement(el, isValid) {
                 if (isValid) {
                     el.classList.remove('invalid');
@@ -310,122 +352,264 @@
             function validateSignup() {
                 let isValid = true;
 
-                if (!firstName?.value.trim()) { firstNameErr.textContent = 'First name required'; firstName?.classList.add('error-input'); isValid = false; }
-                else { firstNameErr.textContent = ''; firstName?.classList.remove('error-input'); }
+                if (!firstName?.value.trim()) {
+                    firstNameErr.textContent = 'First name required';
+                    firstName?.classList.add('error-input');
+                    isValid = false;
+                } else {
+                    firstNameErr.textContent = '';
+                    firstName?.classList.remove('error-input');
+                }
 
-                if (!lastName?.value.trim()) { lastNameErr.textContent = 'Last name required'; lastName?.classList.add('error-input'); isValid = false; }
-                else { lastNameErr.textContent = ''; lastName?.classList.remove('error-input'); }
+                if (!lastName?.value.trim()) {
+                    lastNameErr.textContent = 'Last name required';
+                    lastName?.classList.add('error-input');
+                    isValid = false;
+                } else {
+                    lastNameErr.textContent = '';
+                    lastName?.classList.remove('error-input');
+                }
 
                 const semail = signupEmail?.value.trim();
-                if (!semail) { signupEmailErr.textContent = 'Email required'; signupEmail?.classList.add('error-input'); isValid = false; }
-                else if (!validateEmail(semail)) { signupEmailErr.textContent = 'Valid email required'; signupEmail?.classList.add('error-input'); isValid = false; }
-                else { signupEmailErr.textContent = ''; signupEmail?.classList.remove('error-input'); }
+                if (!semail) {
+                    signupEmailErr.textContent = 'Email required';
+                    signupEmail?.classList.add('error-input');
+                    isValid = false;
+                } else if (!validateEmail(semail)) {
+                    signupEmailErr.textContent = 'Valid email required';
+                    signupEmail?.classList.add('error-input');
+                    isValid = false;
+                } else {
+                    signupEmailErr.textContent = '';
+                    signupEmail?.classList.remove('error-input');
+                }
 
                 const pwd = signupPwdField?.value || '';
-                if (!pwd) { signupPwdErr.textContent = 'Password required'; signupPwdField?.classList.add('error-input'); isValid = false; }
-                else if (!checkPasswordRequirements(pwd)) { signupPwdErr.textContent = 'Requirements not met'; signupPwdField?.classList.add('error-input'); isValid = false; }
-                else { signupPwdErr.textContent = ''; signupPwdField?.classList.remove('error-input'); }
+                if (!pwd) {
+                    signupPwdErr.textContent = 'Password required';
+                    signupPwdField?.classList.add('error-input');
+                    isValid = false;
+                } else if (!checkPasswordRequirements(pwd)) {
+                    signupPwdErr.textContent = 'Requirements not met';
+                    signupPwdField?.classList.add('error-input');
+                    isValid = false;
+                } else {
+                    signupPwdErr.textContent = '';
+                    signupPwdField?.classList.remove('error-input');
+                }
 
-                if (!confirmPwdField?.value) { confirmErr.textContent = 'Please confirm password'; confirmPwdField?.classList.add('error-input'); isValid = false; }
-                else if (confirmPwdField.value !== pwd) { confirmErr.textContent = 'Passwords do not match'; confirmPwdField?.classList.add('error-input'); isValid = false; }
-                else { confirmErr.textContent = ''; confirmPwdField?.classList.remove('error-input'); }
+                if (!confirmPwdField?.value) {
+                    confirmErr.textContent = 'Please confirm password';
+                    confirmPwdField?.classList.add('error-input');
+                    isValid = false;
+                } else if (confirmPwdField.value !== pwd) {
+                    confirmErr.textContent = 'Passwords do not match';
+                    confirmPwdField?.classList.add('error-input');
+                    isValid = false;
+                } else {
+                    confirmErr.textContent = '';
+                    confirmPwdField?.classList.remove('error-input');
+                }
 
-                if (!termsCheck?.checked) { termsErr.textContent = 'You must accept the terms'; isValid = false; }
-                else { termsErr.textContent = ''; }
+                if (!termsCheck?.checked) {
+                    termsErr.textContent = 'You must accept the terms';
+                    isValid = false;
+                } else {
+                    termsErr.textContent = '';
+                }
 
                 if (signupBtn) signupBtn.disabled = !isValid;
                 return isValid;
             }
 
-            if (firstName) firstName.addEventListener('input', validateSignup);
-            if (lastName) lastName.addEventListener('input', validateSignup);
-            if (signupEmail) signupEmail.addEventListener('input', validateSignup);
-            if (signupPwdField) {
-                signupPwdField.addEventListener('input', function () {
-                    checkPasswordRequirements(this.value);
-                    validateSignup();
-                });
-            }
-            if (confirmPwdField) confirmPwdField.addEventListener('input', validateSignup);
-            if (termsCheck) termsCheck.addEventListener('change', validateSignup);
-
-            // Prevent spaces
-            function preventSpaces(e) { if (e.key === ' ') e.preventDefault(); }
-
-            ['modalFirstName', 'modalLastName', 'modalSignupEmail', 'modalSignupPassword', 'modalConfirmPassword', 'modalEmail', 'modalPassword'].forEach(id => {
-                const f = document.getElementById(id);
-                if (f) f.addEventListener('keydown', preventSpaces);
-            });
-
-            // ----- LOGIN SUBMIT -----
-            const loginForm = document.getElementById('modalLoginForm');
-            if (loginForm) {
-                loginForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    if (!validateLoginForm()) return;
-                    showLoading('Logging in...');
-                    modalLoginBtn.disabled = true;
-                    setTimeout(() => {
-                        hideLoading();
-                        alert('✅ Login successful – redirecting to dashboard');
-                        modalLoginBtn.disabled = false;
-                        validateLoginForm();
-                    }, 1500);
-                });
+            // ========== EVENT HANDLERS ==========
+            function activateLogin() {
+                tabLogin.classList.add('active');
+                tabSignup.classList.remove('active');
+                loginFormDiv.classList.add('active');
+                signupFormDiv.classList.remove('active');
             }
 
-            // ----- SIGNUP SUBMIT -----
-            const signupForm = document.getElementById('modalSignupForm');
-            if (signupForm) {
-                signupForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    if (!validateSignup()) return;
-                    showLoading('Creating your account...');
-                    signupBtn.disabled = true;
-                    setTimeout(() => {
-                        hideLoading();
-                        alert('✅ Account created! Please log in.');
-                        activateLogin();
-                        signupForm.reset();
-                        checkPasswordRequirements('');
-                        validateSignup();
-                    }, 1600);
-                });
+            function activateSignup() {
+                tabSignup.classList.add('active');
+                tabLogin.classList.remove('active');
+                signupFormDiv.classList.add('active');
+                loginFormDiv.classList.remove('active');
             }
 
-            // ----- SOCIAL LOGIN SIMULATION -----
-            function socialHandler(provider, isLogin = true) {
-                return function () {
-                    showLoading(`Connecting to ${provider}...`);
-                    setTimeout(() => {
-                        hideLoading();
-                        alert(`✨ ${provider} ${isLogin ? 'login' : 'signup'} successful (demo)`);
-                    }, 1200);
-                };
-            }
+            async function handleEmailLogin(e) {
+                e.preventDefault();
 
-            document.getElementById('modalGoogleLogin')?.addEventListener('click', socialHandler('Google', true));
-            document.getElementById('modalFacebookLogin')?.addEventListener('click', socialHandler('Facebook', true));
-            document.getElementById('modalGoogleSignup')?.addEventListener('click', socialHandler('Google', false));
-            document.getElementById('modalFacebookSignup')?.addEventListener('click', socialHandler('Facebook', false));
+                if (!validateLoginForm()) {
+                    return;
+                }
 
-            // Initial validation
-            validateLoginForm();
-            validateSignup();
+                const emailValue = loginEmail.value.trim();
+                const passwordValue = loginPass.value.trim();
 
-            // Clean spaces on paste
-            function cleanPaste(e) {
-                const data = (e.clipboardData || window.clipboardData).getData('text');
-                if (data.includes(' ')) {
-                    e.preventDefault();
-                    document.execCommand('insertText', false, data.replace(/\s/g, ''));
+                showLoading('Logging in...');
+                modalLoginBtn.disabled = true;
+
+                try {
+                    const response = await simulateLoginAPI(emailValue, passwordValue);
+
+                    if (response.success) {
+                        handleLoginSuccess(response.user);
+                    } else {
+                        handleLoginFailure('Invalid credentials');
+                    }
+                } catch (error) {
+                    handleLoginFailure('Network error. Please try again.');
                 }
             }
 
-            ['modalEmail', 'modalPassword', 'modalSignupEmail', 'modalSignupPassword', 'modalConfirmPassword', 'modalFirstName', 'modalLastName'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.addEventListener('paste', cleanPaste);
-            });
+            async function handleSocialLogin(provider, isLogin = true) {
+                showLoading(`Connecting to ${provider}...`);
+
+                try {
+                    const response = await new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve({
+                                success: true,
+                                user: {
+                                    id: Math.random().toString(36).substr(2, 9),
+                                    name: `${provider} User`,
+                                    email: `user@${provider.toLowerCase()}.com`,
+                                    provider: provider,
+                                    role: 'user', // Social logins default to user role
+                                    lastLogin: new Date().toISOString()
+                                }
+                            });
+                        }, 1500);
+                    });
+
+                    if (response.success) {
+                        handleLoginSuccess(response.user);
+                    } else {
+                        handleLoginFailure(`${provider} login failed`);
+                    }
+                } catch (error) {
+                    handleLoginFailure(`${provider} login error`);
+                }
+            }
+
+            async function handleSignupSubmit(e) {
+                e.preventDefault();
+                if (!validateSignup()) return;
+
+                showLoading('Creating your account...');
+                signupBtn.disabled = true;
+
+                try {
+                    // Simulate signup API call
+                    await new Promise(resolve => setTimeout(resolve, 1600));
+
+                    hideLoading();
+                    alert('✅ Account created! Please log in.');
+                    activateLogin();
+
+                    // Reset form
+                    signupForm.reset();
+                    checkPasswordRequirements('');
+                    validateSignup();
+
+                } catch (error) {
+                    hideLoading();
+                    alert('Signup failed. Please try again.');
+                    signupBtn.disabled = false;
+                }
+            }
+
+            // ========== SETUP FUNCTIONS ==========
+            function setupToggle(toggleId, inputId) {
+                const toggle = document.getElementById(toggleId);
+                const input = document.getElementById(inputId);
+                if (toggle && input) {
+                    toggle.addEventListener('click', function () {
+                        const type = input.type === 'password' ? 'text' : 'password';
+                        input.type = type;
+                        this.querySelector('i').classList.toggle('fa-eye');
+                        this.querySelector('i').classList.toggle('fa-eye-slash');
+                    });
+                }
+            }
+
+            // ========== INITIALIZATION ==========
+            function init() {
+                // Tab switching
+                tabLogin.addEventListener('click', activateLogin);
+                tabSignup.addEventListener('click', activateSignup);
+
+                if (switchToSignupLink) switchToSignupLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    activateSignup();
+                });
+                
+                if (switchToLoginLink) switchToLoginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    activateLogin();
+                });
+
+                // Password toggle
+                setupToggle('toggleModalPassword', 'modalPassword');
+                setupToggle('toggleModalSignupPassword', 'modalSignupPassword');
+                setupToggle('toggleModalConfirmPassword', 'modalConfirmPassword');
+
+                // Login validation
+                if (loginEmail) loginEmail.addEventListener('input', validateLoginForm);
+                if (loginPass) loginPass.addEventListener('input', validateLoginForm);
+
+                // Signup validation
+                if (firstName) firstName.addEventListener('input', validateSignup);
+                if (lastName) lastName.addEventListener('input', validateSignup);
+                if (signupEmail) signupEmail.addEventListener('input', validateSignup);
+                if (signupPwdField) {
+                    signupPwdField.addEventListener('input', function () {
+                        checkPasswordRequirements(this.value);
+                        validateSignup();
+                    });
+                }
+                if (confirmPwdField) confirmPwdField.addEventListener('input', validateSignup);
+                if (termsCheck) termsCheck.addEventListener('change', validateSignup);
+
+                // Prevent spaces in inputs
+                ['modalFirstName', 'modalLastName', 'modalSignupEmail', 'modalSignupPassword', 'modalConfirmPassword', 'modalEmail', 'modalPassword'].forEach(id => {
+                    const f = document.getElementById(id);
+                    if (f) f.addEventListener('keydown', preventSpaces);
+                });
+
+                // Clean spaces on paste
+                ['modalEmail', 'modalPassword', 'modalSignupEmail', 'modalSignupPassword', 'modalConfirmPassword', 'modalFirstName', 'modalLastName'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.addEventListener('paste', cleanPaste);
+                });
+
+                // Login form submit
+                if (loginForm) {
+                    loginForm.addEventListener('submit', handleEmailLogin);
+                }
+
+                // Signup form submit
+                const signupForm = document.getElementById('modalSignupForm');
+                if (signupForm) {
+                    signupForm.addEventListener('submit', handleSignupSubmit);
+                }
+
+                // Social login handlers
+                document.getElementById('modalGoogleLogin')?.addEventListener('click', () => handleSocialLogin('Google', true));
+                document.getElementById('modalFacebookLogin')?.addEventListener('click', () => handleSocialLogin('Facebook', true));
+                document.getElementById('modalGoogleSignup')?.addEventListener('click', () => handleSocialLogin('Google', false));
+                document.getElementById('modalFacebookSignup')?.addEventListener('click', () => handleSocialLogin('Facebook', false));
+
+                // Initial validation
+                validateLoginForm();
+                validateSignup();
+
+                console.log('Login page initialized with authentication support');
+            }
+
+            // Start the application
+            init();
         })();
     </script>
 </body>
